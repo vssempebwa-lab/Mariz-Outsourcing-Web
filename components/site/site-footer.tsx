@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Mail, Phone, MapPin, ArrowUpRight, Lock } from 'lucide-react';
 import { SITE, SERVICES } from '@/lib/data';
+import { staffAccessPath } from '@/lib/portal-routes';
 
 export function SiteFooter() {
   return (
@@ -105,11 +106,13 @@ export function SiteFooter() {
             </Link>
             <div className="mt-6 pt-6 border-t border-white/10">
               <Link
-                href="/admin"
-                className="inline-flex items-center gap-1.5 text-xs text-white/50 hover:text-white/80 transition-colors"
+                href={staffAccessPath}
+                aria-label="Staff access"
+                title="Staff access"
+                className="inline-flex items-center gap-1.5 text-xs text-white/35 hover:text-white/70 transition-colors"
               >
                 <Lock className="h-3 w-3" />
-                Admin Login
+                Staff Access
               </Link>
             </div>
           </div>
