@@ -73,6 +73,37 @@
   html {
     scroll-behavior: smooth;
   }
+  .public-theme {
+    --background: 0 0% 0%;
+    --foreground: 210 100% 99%;
+    --card: 240 9% 4%;
+    --card-foreground: 210 100% 99%;
+    --popover: 240 9% 4%;
+    --popover-foreground: 210 100% 99%;
+    --primary: 210 100% 99%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 240 6% 7%;
+    --secondary-foreground: 210 100% 99%;
+    --muted: 240 6% 7%;
+    --muted-foreground: 190 2% 64%;
+    --accent: 207 100% 62%;
+    --accent-foreground: 0 0% 0%;
+    --border: 240 5% 14%;
+    --input: 240 5% 18%;
+    --ring: 210 100% 99%;
+    --gold: 43 100% 62%;
+    --navy: 0 0% 0%;
+  }
+  .public-theme .font-display {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-feature-settings: "ss01" 1, "liga" 1;
+  }
+  .public-theme .shadow-sm,
+  .public-theme .shadow-lg,
+  .public-theme .shadow-xl,
+  .public-theme .shadow-2xl {
+    box-shadow: none;
+  }
 }
 
 @layer utilities {
@@ -87,6 +118,18 @@
   }
   .bg-radial-fade {
     background: radial-gradient(ellipse at center, hsl(var(--primary) / 0.12), transparent 70%);
+  }
+  .public-hairline {
+    border-color: rgb(255 255 255 / 0.14);
+  }
+  .public-glow-blue {
+    background: radial-gradient(circle at 50% 0%, rgb(0 117 255 / 0.34), transparent 55%);
+  }
+  .public-glow-orange {
+    background: radial-gradient(circle at 50% 0%, rgb(255 89 0 / 0.22), transparent 55%);
+  }
+  .public-glow-green {
+    background: radial-gradient(circle at 50% 0%, rgb(34 255 153 / 0.18), transparent 55%);
   }
 }
 
@@ -110,11 +153,24 @@
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
 }
+@keyframes service-slide {
+  from { transform: translateX(0); }
+  to { transform: translateX(calc(-50% - 0.5rem)); }
+}
+@keyframes hero-service-slide {
+  0% { opacity: 0; transform: scale(1.02); }
+  4% { opacity: 1; transform: scale(1); }
+  18% { opacity: 1; transform: scale(1.035); }
+  23% { opacity: 0; transform: scale(1.05); }
+  100% { opacity: 0; transform: scale(1.05); }
+}
 
 .animate-float { animation: float 6s ease-in-out infinite; }
 .animate-fade-up { animation: fade-up 0.6s ease-out both; }
 .animate-scale-in { animation: scale-in 0.5s ease-out both; }
 .animate-marquee { animation: marquee 30s linear infinite; }
+.animate-service-slide { animation: service-slide 32s linear infinite; }
+.animate-hero-service-slide { animation: hero-service-slide 30s ease-in-out infinite; }
 
 .shimmer-text {
   background: linear-gradient(90deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 50%, hsl(var(--primary)) 100%);

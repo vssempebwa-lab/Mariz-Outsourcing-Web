@@ -12,9 +12,15 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
 
   return (
     <>
-      {!isStaffArea ? <SiteHeader /> : null}
-      <main className="flex-1">{children}</main>
-      {!isStaffArea ? <SiteFooter /> : null}
+      {!isStaffArea ? (
+        <div className="public-theme min-h-screen bg-background text-foreground">
+          <SiteHeader />
+          <main className="flex-1">{children}</main>
+          <SiteFooter />
+        </div>
+      ) : (
+        <main className="flex-1">{children}</main>
+      )}
     </>
   );
 }

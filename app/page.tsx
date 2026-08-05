@@ -2,18 +2,15 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { SectionHeading } from '@/components/site/section-heading';
-import { Icon } from '@/components/site/icon';
 import { LeadForm } from '@/components/site/lead-form';
-import { METRICS, SERVICES, WORK_CYCLE, TESTIMONIALS } from '@/lib/data';
-import { ArrowRight, CheckCircle2, Star, TrendingUp } from 'lucide-react';
+import { METRICS, SERVICES, TESTIMONIALS } from '@/lib/data';
+import { ArrowRight, CheckCircle2, Star } from 'lucide-react';
 
 export default function Home() {
   return (
     <>
       <Hero />
       <Metrics />
-      <Services />
-      <WorkCycle />
       <Testimonials />
       <LeadCapture />
     </>
@@ -22,109 +19,65 @@ export default function Home() {
 
 function Hero() {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-primary/5 via-background to-background pt-12 lg:pt-20 pb-20 lg:pb-28">
-      <div className="absolute inset-0 bg-grid opacity-40" />
-      <div className="absolute inset-0 bg-radial-fade" />
-      <div className="absolute top-20 right-0 w-72 h-72 bg-accent/10 rounded-full blur-3xl animate-float" />
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
-
-      <div className="container relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          <div className="animate-fade-up">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-accent/10 border border-accent/20 mb-6">
-              <span className="flex h-2 w-2 rounded-full bg-accent animate-pulse" />
-              <span className="text-xs font-semibold text-accent">
-                Trusted BPO Partner in East Africa
-              </span>
-            </div>
-
-            <h1 className="font-display font-bold text-4xl sm:text-5xl lg:text-6xl xl:text-[4rem] leading-[1.05] tracking-tight text-balance text-foreground">
-              Streamline Your Business With{' '}
-              <span className="shimmer-text">Strategic Outsourcing</span>
-            </h1>
-
-            <p className="mt-6 text-lg text-muted-foreground leading-relaxed max-w-xl text-balance">
-              End-to-end human capital, 24/7 call center operations, and custom
-              software development built to scale your business.
-            </p>
-
-            <div className="mt-8 flex flex-col sm:flex-row gap-3">
-              <Button asChild size="lg" className="group">
-                <Link href="/contact">
-                  Request Consultation
-                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </Link>
-              </Button>
-              <Button asChild size="lg" variant="outline">
-                <Link href="/services">Explore Our Services</Link>
-              </Button>
-            </div>
-
-            <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-muted-foreground">
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="h-4 w-4 text-accent" />
-                24/7 Operations
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="h-4 w-4 text-accent" />
-                200+ Agent Capacity
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="h-4 w-4 text-accent" />
-                ISO-Standard QA
-              </div>
-            </div>
+    <section className="relative isolate flex min-h-[720px] overflow-hidden bg-navy py-20 lg:min-h-[760px] lg:py-24">
+      {SERVICES.map((service, index) => (
+        <div
+          key={service.slug}
+          className="absolute inset-0 opacity-0 animate-hero-service-slide"
+          style={{ animationDelay: `${index * 6}s` }}
+        >
+          <img
+            src={service.image}
+            alt=""
+            className="h-full w-full object-cover"
+            aria-hidden="true"
+          />
+          <div className="absolute inset-0 bg-navy/72" />
+          <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/76 to-navy/30" />
+        </div>
+      ))}
+      <div className="container relative z-10 mx-auto flex max-w-6xl items-center px-4 sm:px-6 lg:px-8">
+        <div className="max-w-3xl animate-fade-up text-white">
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 backdrop-blur">
+            <span className="flex h-2 w-2 rounded-full bg-accent animate-pulse" />
+            <span className="text-xs font-semibold text-white/80">
+              Trusted BPO Partner in East Africa
+            </span>
           </div>
 
-          <div className="relative animate-scale-in">
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-4">
-                <div className="overflow-hidden rounded-2xl shadow-xl aspect-[4/5]">
-                  <img
-                    src="https://images.pexels.com/photos/7709179/pexels-photo-7709179.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
-                    alt="Call center agents with headsets"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="rounded-2xl bg-navy p-5 text-white shadow-xl">
-                  <div className="flex items-center gap-2 mb-2">
-                    <TrendingUp className="h-5 w-5 text-accent" />
-                    <span className="text-xs font-semibold uppercase tracking-wide text-white/60">
-                      Live Operations
-                    </span>
-                  </div>
-                  <p className="text-2xl font-display font-bold">99.9%</p>
-                  <p className="text-xs text-white/60">Uptime this quarter</p>
-                </div>
-              </div>
-              <div className="space-y-4 pt-8">
-                <div className="rounded-2xl bg-primary p-5 text-white shadow-xl">
-                  <div className="flex items-center gap-2 mb-2">
-                    <Star className="h-5 w-5 text-gold" />
-                    <span className="text-xs font-semibold uppercase tracking-wide text-white/70">
-                      Client Retention
-                    </span>
-                  </div>
-                  <p className="text-2xl font-display font-bold">98%</p>
-                  <p className="text-xs text-white/70">Annual retention rate</p>
-                </div>
-                <div className="overflow-hidden rounded-2xl shadow-xl aspect-[4/5]">
-                  <img
-                    src="https://images.pexels.com/photos/6804068/pexels-photo-6804068.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
-                    alt="Software development team"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              </div>
+          <h1 className="font-display text-5xl font-normal leading-none text-balance sm:text-6xl lg:text-[5.75rem]">
+            One agency for the services that keep your business moving.
+          </h1>
+
+          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/78 text-balance">
+            Recruitment, customer support, software, branding, and media production
+            delivered through one coordinated outsourcing partner.
+          </p>
+
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <Button asChild size="lg" className="group">
+              <Link href="/contact">
+                Request Consultation
+                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </Link>
+            </Button>
+            <Button asChild size="lg" variant="outline" className="border-white/35 bg-white/10 text-white hover:bg-white hover:text-navy">
+              <Link href="/services">Explore Our Services</Link>
+            </Button>
+          </div>
+
+          <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-white/75">
+            <div className="flex items-center gap-2">
+              <CheckCircle2 className="h-4 w-4 text-accent" />
+              24/7 Operations
             </div>
-            <div className="absolute -bottom-4 -left-4 lg:-left-8 bg-background rounded-xl shadow-lg border border-border p-4 flex items-center gap-3 max-w-[200px]">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10">
-                <Icon name="Headset" className="h-5 w-5 text-accent" />
-              </div>
-              <div>
-                <p className="text-xs font-semibold text-foreground">Omnichannel</p>
-                <p className="text-[11px] text-muted-foreground">Voice, Chat, Email</p>
-              </div>
+            <div className="flex items-center gap-2">
+              <CheckCircle2 className="h-4 w-4 text-accent" />
+              200+ Agent Capacity
+            </div>
+            <div className="flex items-center gap-2">
+              <CheckCircle2 className="h-4 w-4 text-accent" />
+              ISO-Standard QA
             </div>
           </div>
         </div>
@@ -135,130 +88,15 @@ function Hero() {
 
 function Metrics() {
   return (
-    <section className="border-y border-border bg-navy py-12 lg:py-16">
+    <section className="border-y border-white/10 bg-background py-12 lg:py-16">
       <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
           {METRICS.map((m) => (
             <div key={m.label} className="text-center">
-              <p className="font-display font-bold text-4xl lg:text-5xl text-white">
+              <p className="font-display text-4xl font-normal text-foreground lg:text-5xl">
                 {m.value}
               </p>
-              <p className="mt-2 text-sm text-white/60 font-medium">{m.label}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function Services() {
-  return (
-    <section className="py-20 lg:py-28">
-      <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <SectionHeading
-          eyebrow="Core Divisions"
-          title="Four divisions. One integrated outsourcing partner."
-          description="From talent acquisition to custom software and brand production, MOA operates as a direct extension of your team — optimizing workflows, reducing costs, and improving efficiency."
-        />
-
-        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-2">
-          {SERVICES.slice(0, 4).map((s, i) => (
-            <Card
-              key={s.slug}
-              className="group relative overflow-hidden border-border hover:border-primary/30 transition-all hover:shadow-xl"
-            >
-              <CardContent className="p-0">
-                <div className="grid sm:grid-cols-5 gap-0">
-                  <div className="sm:col-span-2 relative overflow-hidden aspect-video sm:aspect-auto min-h-[200px]">
-                    <img
-                      src={s.image}
-                      alt={s.title}
-                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-r from-navy/60 to-transparent" />
-                    <div className="absolute top-4 left-4 flex h-11 w-11 items-center justify-center rounded-xl bg-white/90 backdrop-blur shadow-lg">
-                      <Icon name={s.icon} className="h-5 w-5 text-primary" />
-                    </div>
-                  </div>
-                  <div className="sm:col-span-3 p-6 lg:p-8 flex flex-col justify-between">
-                    <div>
-                      <span className="text-xs font-semibold text-accent uppercase tracking-wider">
-                        0{i + 1}
-                      </span>
-                      <h3 className="mt-2 font-display font-bold text-xl lg:text-2xl text-foreground leading-tight">
-                        {s.title}
-                      </h3>
-                      <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
-                        {s.short}
-                      </p>
-                    </div>
-                    <Link
-                      href={`/services/${s.slug}`}
-                      className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:gap-2.5 transition-all"
-                    >
-                      Learn More
-                      <ArrowRight className="h-4 w-4" />
-                    </Link>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-
-        <div className="mt-10 text-center">
-          <Button asChild variant="outline" size="lg">
-            <Link href="/services">
-              View All Services
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
-          </Button>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function WorkCycle() {
-  return (
-    <section className="py-20 lg:py-28 bg-muted/30 border-y border-border">
-      <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <SectionHeading
-          eyebrow="The MOA Work Cycle"
-          title="A proven process from assessment to reporting"
-          description="Every engagement follows a structured five-phase cycle designed to deliver measurable outcomes with full transparency."
-        />
-
-        <div className="mt-14 grid gap-6 md:grid-cols-3 lg:grid-cols-5">
-          {WORK_CYCLE.map((step, i) => (
-            <div
-              key={step.step}
-              className="relative group"
-            >
-              <Card className="h-full border-border hover:border-accent/40 hover:shadow-lg transition-all">
-                <CardContent className="p-6">
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary group-hover:bg-accent group-hover:text-accent-foreground transition-colors">
-                      <Icon name={step.icon} className="h-6 w-6" />
-                    </div>
-                    <span className="font-display font-bold text-2xl text-border group-hover:text-accent/30 transition-colors">
-                      {step.step}
-                    </span>
-                  </div>
-                  <h3 className="font-display font-semibold text-lg text-foreground">
-                    {step.title}
-                  </h3>
-                  <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
-                    {step.description}
-                  </p>
-                </CardContent>
-              </Card>
-              {i < WORK_CYCLE.length - 1 && (
-                <div className="hidden lg:block absolute top-1/2 -right-3 -translate-y-1/2 z-10">
-                  <ArrowRight className="h-5 w-5 text-border" />
-                </div>
-              )}
+              <p className="mt-2 text-sm font-medium text-muted-foreground">{m.label}</p>
             </div>
           ))}
         </div>
@@ -269,7 +107,8 @@ function WorkCycle() {
 
 function Testimonials() {
   return (
-    <section className="py-20 lg:py-28 bg-muted/30 border-y border-border">
+    <section className="relative overflow-hidden border-y border-white/10 bg-background py-20 lg:py-28">
+      <div className="public-glow-orange pointer-events-none absolute inset-x-0 top-0 h-[520px] opacity-55" />
       <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           eyebrow="Client Trust"
@@ -279,7 +118,7 @@ function Testimonials() {
 
         <div className="mt-14 grid gap-6 lg:grid-cols-3">
           {TESTIMONIALS.map((t, i) => (
-            <Card key={i} className="border-border">
+            <Card key={i} className="border-white/10 bg-card/95 shadow-none">
               <CardContent className="p-6 lg:p-8">
                 <div className="flex gap-1 mb-4">
                   {[...Array(5)].map((_, j) => (
@@ -292,8 +131,8 @@ function Testimonials() {
                 <blockquote className="text-foreground leading-relaxed text-balance">
                   &ldquo;{t.quote}&rdquo;
                 </blockquote>
-                <div className="mt-6 pt-6 border-t border-border">
-                  <p className="font-display font-semibold text-sm text-foreground">
+                <div className="mt-6 border-t border-white/10 pt-6">
+                  <p className="text-sm font-medium text-foreground">
                     {t.author}
                   </p>
                   <p className="text-xs text-muted-foreground mt-0.5">
@@ -311,7 +150,7 @@ function Testimonials() {
           </p>
           <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4 opacity-60">
             {['Corporate Enterprise', 'Hospitality Group', 'Manufacturing', 'Healthcare', 'Construction', 'Retail'].map((c) => (
-              <span key={c} className="font-display font-bold text-sm text-foreground/50">
+              <span key={c} className="text-sm font-medium text-foreground/50">
                 {c}
               </span>
             ))}
@@ -324,10 +163,8 @@ function Testimonials() {
 
 function LeadCapture() {
   return (
-    <section id="lead-capture" className="py-20 lg:py-28 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-accent/5" />
-      <div className="absolute top-0 right-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
+    <section id="lead-capture" className="relative overflow-hidden py-20 lg:py-28">
+      <div className="public-glow-blue pointer-events-none absolute inset-x-0 top-0 h-[560px] opacity-70" />
 
       <div className="container relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
@@ -352,7 +189,7 @@ function LeadCapture() {
             </div>
           </div>
 
-          <Card className="border-border shadow-xl">
+          <Card className="border-white/10 bg-card/95 shadow-none">
             <CardContent className="p-6 lg:p-8">
               <LeadForm />
             </CardContent>

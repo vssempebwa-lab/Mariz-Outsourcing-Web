@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Menu, X, Phone } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { BrandLogo } from '@/components/site/brand-logo';
 import { cn } from '@/lib/utils';
 import { NAV_LINKS, SITE } from '@/lib/data';
 
@@ -29,16 +30,14 @@ export function SiteHeader() {
       className={cn(
         'sticky top-0 z-50 w-full transition-all duration-300',
         scrolled
-          ? 'bg-background/85 backdrop-blur-lg border-b border-border shadow-sm'
+          ? 'border-b border-white/10 bg-background/88 backdrop-blur-lg'
           : 'bg-transparent'
       )}
     >
       <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 lg:h-20 items-center justify-between">
           <Link href="/" className="flex items-center gap-2.5 group">
-            <div className="flex h-10 w-10 lg:h-11 lg:w-11 items-center justify-center rounded-xl bg-primary text-primary-foreground font-display font-bold text-lg shadow-md transition-transform group-hover:scale-105">
-              M
-            </div>
+            <BrandLogo className="h-10 w-10 transition-transform group-hover:scale-105 lg:h-11 lg:w-11" />
             <div className="flex flex-col leading-none">
               <span className="font-display font-bold text-base lg:text-lg text-foreground">
                 Mariz
@@ -59,13 +58,13 @@ export function SiteHeader() {
                   className={cn(
                     'relative px-3.5 py-2 text-sm font-medium rounded-md transition-colors',
                     active
-                      ? 'text-primary'
-                      : 'text-foreground/70 hover:text-foreground hover:bg-muted/60'
+                      ? 'text-foreground'
+                      : 'text-foreground/68 hover:text-foreground hover:bg-white/5'
                   )}
                 >
                   {link.label}
                   {active && (
-                    <span className="absolute bottom-0 left-3.5 right-3.5 h-0.5 bg-primary rounded-full" />
+                    <span className="absolute bottom-0 left-3.5 right-3.5 h-px rounded-full bg-foreground" />
                   )}
                 </Link>
               );
@@ -75,7 +74,7 @@ export function SiteHeader() {
           <div className="hidden lg:flex items-center gap-3">
             <a
               href={`tel:${SITE.phoneHref}`}
-              className="flex items-center gap-2 text-sm font-medium text-foreground/70 hover:text-primary transition-colors"
+              className="flex items-center gap-2 text-sm font-medium text-foreground/68 transition-colors hover:text-foreground"
             >
               <Phone className="h-4 w-4" />
               {SITE.phone}
@@ -96,7 +95,7 @@ export function SiteHeader() {
       </div>
 
       {open && (
-        <div className="lg:hidden border-t border-border bg-background animate-fade-up">
+        <div className="lg:hidden border-t border-white/10 bg-background animate-fade-up">
           <nav className="container mx-auto max-w-6xl px-4 py-4 flex flex-col gap-1">
             {NAV_LINKS.map((link) => (
               <Link
@@ -106,7 +105,7 @@ export function SiteHeader() {
                   'px-4 py-3 text-sm font-medium rounded-lg transition-colors',
                   pathname === link.href
                     ? 'bg-primary/10 text-primary'
-                    : 'text-foreground/70 hover:bg-muted'
+                    : 'text-foreground/70 hover:bg-white/5'
                 )}
               >
                 {link.label}

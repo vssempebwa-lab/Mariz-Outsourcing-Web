@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Mail, Phone, MapPin, ArrowUpRight, Lock, UserRound } from 'lucide-react';
+import { BrandLogo } from '@/components/site/brand-logo';
 import { SITE, SERVICES } from '@/lib/data';
 import { staffAccessPath, staffWorkspacePath } from '@/lib/portal-routes';
 
@@ -13,9 +14,7 @@ export function SiteFooter() {
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-4">
             <Link href="/" className="flex items-center gap-2.5 mb-5">
-              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary text-primary-foreground font-display font-bold text-lg">
-                M
-              </div>
+              <BrandLogo className="h-11 w-11 ring-white/10" />
               <div className="flex flex-col leading-none">
                 <span className="font-display font-bold text-lg">Mariz</span>
                 <span className="text-xs text-white/60 font-medium tracking-wide">

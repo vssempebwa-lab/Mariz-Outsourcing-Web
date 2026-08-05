@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
+import { BrandLogo } from '@/components/site/brand-logo';
 import { getOpsModulesForRole } from '@/lib/ops-modules';
 import type { StaffRole } from '@/lib/auth';
 import { cn } from '@/lib/utils';
@@ -14,7 +15,8 @@ export function OpsSidebar({ role }: { role: StaffRole }) {
 
   return (
     <aside className="hidden min-h-screen w-72 shrink-0 border-r bg-navy text-white lg:block">
-      <div className="flex h-20 items-center border-b border-white/10 px-6">
+      <div className="flex h-20 items-center gap-3 border-b border-white/10 px-6">
+        <BrandLogo className="h-10 w-10 ring-white/10" />
         <div>
           <p className="font-display text-lg font-semibold">Mariz Operations</p>
           <p className="text-xs text-white/55">
