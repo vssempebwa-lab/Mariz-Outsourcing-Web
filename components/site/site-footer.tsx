@@ -1,12 +1,15 @@
 import Link from 'next/link';
-import { Mail, Phone, MapPin, ArrowUpRight, Lock } from 'lucide-react';
+import { Mail, Phone, MapPin, ArrowUpRight, Lock, UserRound } from 'lucide-react';
 import { SITE, SERVICES } from '@/lib/data';
-import { staffAccessPath } from '@/lib/portal-routes';
+import { staffAccessPath, staffWorkspacePath } from '@/lib/portal-routes';
+
+const staffPreviewHref = `${staffWorkspacePath}?preview=super_admin`;
+const employeePreviewHref = `${staffWorkspacePath}?preview=employee`;
 
 export function SiteFooter() {
   return (
     <footer className="bg-navy text-white">
-      <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
+      <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-4">
             <Link href="/" className="flex items-center gap-2.5 mb-5">
@@ -104,15 +107,24 @@ export function SiteFooter() {
               Request Consultation
               <ArrowUpRight className="h-4 w-4" />
             </Link>
-            <div className="mt-6 pt-6 border-t border-white/10">
+            <div className="mt-6 flex flex-col items-start gap-2 border-t border-white/10 pt-6">
               <Link
-                href={staffAccessPath}
+                href={process.env.STAFF_AUTH_ENABLED === 'true' ? staffAccessPath : staffPreviewHref}
                 aria-label="Staff access"
                 title="Staff access"
                 className="inline-flex items-center gap-1.5 text-xs text-white/35 hover:text-white/70 transition-colors"
               >
                 <Lock className="h-3 w-3" />
                 Staff Access
+              </Link>
+              <Link
+                href={process.env.STAFF_AUTH_ENABLED === 'true' ? staffAccessPath : employeePreviewHref}
+                aria-label="Employee access"
+                title="Employee access"
+                className="inline-flex items-center gap-1.5 text-xs text-white/35 hover:text-white/70 transition-colors"
+              >
+                <UserRound className="h-3 w-3" />
+                Employee Access
               </Link>
             </div>
           </div>

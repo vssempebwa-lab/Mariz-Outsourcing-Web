@@ -1,4 +1,5 @@
 import { getServerSession } from 'next-auth';
+import { cookies } from 'next/headers';
 
 import { authOptions, type StaffRole } from '@/lib/auth';
 import { staffAuthEnabled } from '@/lib/staff-auth-mode';
@@ -12,6 +13,16 @@ export type CurrentStaff = {
 
 export async function getCurrentStaff(): Promise<CurrentStaff | null> {
   if (!staffAuthEnabled) {
+    const previewRole = cookies().get('moa_staff_preview_role')?.value;
+
+    if (previewRole === 'employee') {
+      return {
+        id: 'employee-preview',
+        name: 'Employee Preview',
+        role: 'employee',
+      };
+    }
+
     return {
       name: 'Super Admin',
       role: 'super_admin',

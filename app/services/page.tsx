@@ -17,7 +17,7 @@ export default function ServicesPage() {
     <>
       <section className="relative overflow-hidden bg-gradient-to-b from-primary/5 to-background pt-16 lg:pt-24 pb-16 lg:pb-20">
         <div className="absolute inset-0 bg-grid opacity-30" />
-        <div className="container relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="container relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-accent/10 border border-accent/20 mb-6">
               <span className="text-xs font-semibold text-accent uppercase tracking-wider">
@@ -37,7 +37,7 @@ export default function ServicesPage() {
       </section>
 
       <section className="py-20 lg:py-24">
-        <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-8 lg:grid-cols-2">
             {SERVICES.map((s, i) => (
               <Card
@@ -92,7 +92,7 @@ export default function ServicesPage() {
       </section>
 
       <section className="py-20 lg:py-28 bg-muted/30 border-y border-border">
-        <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <SectionHeading
             eyebrow="How We Work"
             title="The MOA Work Cycle"

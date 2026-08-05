@@ -123,7 +123,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
       </section>
 
       <section className="py-16 lg:py-20 bg-muted/30 border-t border-border">
-        <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <h2 className="font-display font-bold text-2xl text-foreground mb-8">
             More articles
           </h2>

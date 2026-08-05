@@ -17,6 +17,11 @@ const createEmployeeSchema = z.object({
   profilePhotoUrl: z.string().trim().url().optional().or(z.literal('')).nullable(),
 });
 
+const updateEmployeeSchema = z.object({
+  accountId: z.string().uuid(),
+  action: z.enum(['revoke', 'restore']),
+});
+
 const attempts = new Map<string, { count: number; resetAt: number }>();
 
 function isRateLimited(key: string) {
@@ -52,12 +57,47 @@ function friendlyDatabaseError(error: Error) {
   return error.message;
 }
 
+async function requireSuperAdmin() {
+  const session = staffAuthEnabled ? await getServerSession(authOptions) : null;
+
+  if (staffAuthEnabled && session?.user?.role !== 'super_admin') {
+    return { session, response: NextResponse.json({ error: 'Forbidden' }, { status: 403 }) };
+  }
+
+  return { session, response: null };
+}
+
+export async function GET() {
+  try {
+    const { response } = await requireSuperAdmin();
+
+    if (response) {
+      return response;
+    }
+
+    const { data, error } = await getSupabaseAdmin()
+      .from('staff_accounts')
+      .select('id, name, email, role, business_role, employee_id, status, revoked_at, created_at')
+      .eq('role', 'employee')
+      .order('created_at', { ascending: false });
+
+    if (error) {
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+
+    return NextResponse.json({ employees: data || [] });
+  } catch (error) {
+    const message = error instanceof Error ? friendlyDatabaseError(error) : 'Employee accounts could not be loaded.';
+    return NextResponse.json({ error: message }, { status: 500 });
+  }
+}
+
 export async function POST(request: Request) {
   try {
-    const session = staffAuthEnabled ? await getServerSession(authOptions) : null;
+    const { session, response } = await requireSuperAdmin();
 
-    if (staffAuthEnabled && session?.user?.role !== 'super_admin') {
-      return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
+    if (response) {
+      return response;
     }
 
     const forwardedFor = request.headers.get('x-forwarded-for');
@@ -114,6 +154,48 @@ export async function POST(request: Request) {
     });
   } catch (error) {
     const message = error instanceof Error ? friendlyDatabaseError(error) : 'Employee account could not be created.';
+    return NextResponse.json({ error: message }, { status: 500 });
+  }
+}
+
+export async function PATCH(request: Request) {
+  try {
+    const { response } = await requireSuperAdmin();
+
+    if (response) {
+      return response;
+    }
+
+    const forwardedFor = request.headers.get('x-forwarded-for');
+    const rateLimitKey = `employee-update:${forwardedFor || 'unknown'}`;
+
+    if (isRateLimited(rateLimitKey)) {
+      return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
+    }
+
+    const parsed = updateEmployeeSchema.safeParse(await request.json());
+
+    if (!parsed.success) {
+      return NextResponse.json({ error: 'Invalid employee action' }, { status: 400 });
+    }
+
+    const revokedAt = parsed.data.action === 'revoke' ? new Date().toISOString() : null;
+    const status = parsed.data.action === 'revoke' ? 'inactive' : 'active';
+    const { data, error } = await getSupabaseAdmin()
+      .from('staff_accounts')
+      .update({ revoked_at: revokedAt, status })
+      .eq('id', parsed.data.accountId)
+      .eq('role', 'employee')
+      .select('id, name, email, role, business_role, employee_id, status, revoked_at, created_at')
+      .single();
+
+    if (error) {
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+
+    return NextResponse.json({ employee: data });
+  } catch (error) {
+    const message = error instanceof Error ? friendlyDatabaseError(error) : 'Employee access could not be updated.';
     return NextResponse.json({ error: message }, { status: 500 });
   }
 }

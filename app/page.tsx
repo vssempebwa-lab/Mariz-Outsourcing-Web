@@ -5,7 +5,7 @@ import { SectionHeading } from '@/components/site/section-heading';
 import { Icon } from '@/components/site/icon';
 import { LeadForm } from '@/components/site/lead-form';
 import { METRICS, SERVICES, WORK_CYCLE, TESTIMONIALS } from '@/lib/data';
-import { ArrowRight, ArrowUpRight, CheckCircle2, Star, TrendingUp } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Star, TrendingUp } from 'lucide-react';
 
 export default function Home() {
   return (
@@ -14,7 +14,6 @@ export default function Home() {
       <Metrics />
       <Services />
       <WorkCycle />
-      <DashboardShowcase />
       <Testimonials />
       <LeadCapture />
     </>
@@ -29,7 +28,7 @@ function Hero() {
       <div className="absolute top-20 right-0 w-72 h-72 bg-accent/10 rounded-full blur-3xl animate-float" />
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
 
-      <div className="container relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="container relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <div className="animate-fade-up">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-accent/10 border border-accent/20 mb-6">
@@ -137,7 +136,7 @@ function Hero() {
 function Metrics() {
   return (
     <section className="border-y border-border bg-navy py-12 lg:py-16">
-      <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
           {METRICS.map((m) => (
             <div key={m.label} className="text-center">
@@ -156,7 +155,7 @@ function Metrics() {
 function Services() {
   return (
     <section className="py-20 lg:py-28">
-      <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           eyebrow="Core Divisions"
           title="Four divisions. One integrated outsourcing partner."
@@ -224,7 +223,7 @@ function Services() {
 function WorkCycle() {
   return (
     <section className="py-20 lg:py-28 bg-muted/30 border-y border-border">
-      <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           eyebrow="The MOA Work Cycle"
           title="A proven process from assessment to reporting"
@@ -268,135 +267,10 @@ function WorkCycle() {
   );
 }
 
-function DashboardShowcase() {
-  const features = [
-    { label: 'Lead Conversion Tracking', icon: 'TrendingUp' },
-    { label: 'Support Ticket Management', icon: 'Headset' },
-    { label: 'Staff & HR Directory', icon: 'Users2' },
-    { label: 'Content Management', icon: 'FileText' },
-    { label: 'Audit & Security Logs', icon: 'ShieldCheck' },
-    { label: 'Performance Analytics', icon: 'BarChart3' },
-  ];
-
-  return (
-    <section className="py-20 lg:py-28">
-      <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          <div>
-            <SectionHeading
-              eyebrow="Internal Portal"
-              title="The MOA Management Dashboard"
-              description="Our internal web portal gives your team real-time visibility into leads, support performance, HR, and operations — all behind role-based access control."
-              align="left"
-            />
-            <div className="mt-8 grid sm:grid-cols-2 gap-3">
-              {features.map((f) => (
-                <div
-                  key={f.label}
-                  className="flex items-center gap-3 p-3 rounded-xl bg-muted/50 border border-border"
-                >
-                  <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 shrink-0">
-                    <Icon name={f.icon} className="h-4 w-4 text-primary" />
-                  </div>
-                  <span className="text-sm font-medium text-foreground">
-                    {f.label}
-                  </span>
-                </div>
-              ))}
-            </div>
-            <div className="mt-8">
-              <Button asChild variant="outline">
-                <Link href="/admin">
-                  Portal Login
-                  <ArrowUpRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-            </div>
-          </div>
-
-          <div className="relative">
-            <div className="rounded-2xl border border-border shadow-2xl overflow-hidden bg-navy">
-              <div className="flex items-center gap-2 px-4 py-3 bg-navy/80 border-b border-white/10">
-                <div className="flex gap-1.5">
-                  <span className="h-3 w-3 rounded-full bg-red-400/80" />
-                  <span className="h-3 w-3 rounded-full bg-yellow-400/80" />
-                  <span className="h-3 w-3 rounded-full bg-green-400/80" />
-                </div>
-                <span className="ml-2 text-xs text-white/40 font-mono">
-                  portal.moa.co.ug/dashboard
-                </span>
-              </div>
-              <div className="p-6 bg-gradient-to-br from-navy to-primary/20">
-                <div className="grid grid-cols-3 gap-3 mb-4">
-                  {[
-                    { label: 'New Leads', value: '24', change: '+12%' },
-                    { label: 'Open Tickets', value: '8', change: '-5%' },
-                    { label: 'Active Agents', value: '142', change: '+3%' },
-                  ].map((stat) => (
-                    <div
-                      key={stat.label}
-                      className="rounded-xl bg-white/5 border border-white/10 p-3"
-                    >
-                      <p className="text-[10px] text-white/50 uppercase tracking-wide">
-                        {stat.label}
-                      </p>
-                      <p className="text-xl font-display font-bold text-white mt-1">
-                        {stat.value}
-                      </p>
-                      <p className="text-[10px] text-accent">{stat.change}</p>
-                    </div>
-                  ))}
-                </div>
-                <div className="rounded-xl bg-white/5 border border-white/10 p-4">
-                  <div className="flex items-center justify-between mb-3">
-                    <span className="text-xs text-white/70 font-medium">
-                      Lead Conversion (30 days)
-                    </span>
-                    <span className="text-xs text-accent font-semibold">68%</span>
-                  </div>
-                  <div className="flex items-end gap-1.5 h-24">
-                    {[40, 55, 45, 70, 60, 85, 75, 90, 80, 95].map((h, i) => (
-                      <div
-                        key={i}
-                        className="flex-1 rounded-t bg-gradient-to-t from-accent/40 to-accent"
-                        style={{ height: `${h}%` }}
-                      />
-                    ))}
-                  </div>
-                </div>
-                <div className="mt-3 grid grid-cols-2 gap-3">
-                  <div className="rounded-xl bg-white/5 border border-white/10 p-3">
-                    <p className="text-[10px] text-white/50 uppercase tracking-wide mb-2">
-                      SLA Compliance
-                    </p>
-                    <div className="flex items-center gap-2">
-                      <div className="flex-1 h-2 rounded-full bg-white/10 overflow-hidden">
-                        <div className="h-full w-[96%] bg-accent rounded-full" />
-                      </div>
-                      <span className="text-xs text-white font-semibold">96%</span>
-                    </div>
-                  </div>
-                  <div className="rounded-xl bg-white/5 border border-white/10 p-3">
-                    <p className="text-[10px] text-white/50 uppercase tracking-wide mb-2">
-                      Avg Response
-                    </p>
-                    <p className="text-sm text-white font-semibold">2.4 min</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="absolute -top-3 -right-3 h-24 w-24 bg-accent/20 rounded-full blur-2xl" />
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
 function Testimonials() {
   return (
     <section className="py-20 lg:py-28 bg-muted/30 border-y border-border">
-      <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           eyebrow="Client Trust"
           title="What our clients say"
@@ -455,7 +329,7 @@ function LeadCapture() {
       <div className="absolute top-0 right-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl" />
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
 
-      <div className="container relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="container relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <div>
             <SectionHeading

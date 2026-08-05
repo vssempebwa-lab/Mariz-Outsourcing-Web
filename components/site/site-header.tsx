@@ -33,7 +33,7 @@ export function SiteHeader() {
           : 'bg-transparent'
       )}
     >
-      <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 lg:h-20 items-center justify-between">
           <Link href="/" className="flex items-center gap-2.5 group">
             <div className="flex h-10 w-10 lg:h-11 lg:w-11 items-center justify-center rounded-xl bg-primary text-primary-foreground font-display font-bold text-lg shadow-md transition-transform group-hover:scale-105">
@@ -97,7 +97,7 @@ export function SiteHeader() {
 
       {open && (
         <div className="lg:hidden border-t border-border bg-background animate-fade-up">
-          <nav className="container mx-auto max-w-7xl px-4 py-4 flex flex-col gap-1">
+          <nav className="container mx-auto max-w-6xl px-4 py-4 flex flex-col gap-1">
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.href}

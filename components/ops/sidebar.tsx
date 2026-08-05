@@ -3,22 +3,23 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import { opsModules } from '@/lib/ops-modules';
+import { getOpsModulesForRole } from '@/lib/ops-modules';
 import type { StaffRole } from '@/lib/auth';
 import { cn } from '@/lib/utils';
 
 export function OpsSidebar({ role }: { role: StaffRole }) {
   const pathname = usePathname();
-  const visibleModules = opsModules.filter(
-    (item) => !('superAdminOnly' in item) || role === 'super_admin'
-  );
+  const visibleModules = getOpsModulesForRole(role);
+  const isEmployee = role === 'employee';
 
   return (
     <aside className="hidden min-h-screen w-72 shrink-0 border-r bg-navy text-white lg:block">
       <div className="flex h-20 items-center border-b border-white/10 px-6">
         <div>
           <p className="font-display text-lg font-semibold">Mariz Operations</p>
-          <p className="text-xs text-white/55">MOA Management Dashboard</p>
+          <p className="text-xs text-white/55">
+            {isEmployee ? 'Employee Workspace' : 'MOA Management Dashboard'}
+          </p>
         </div>
       </div>
       <nav className="space-y-1 px-3 py-5">

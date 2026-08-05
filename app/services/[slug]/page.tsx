@@ -35,7 +35,7 @@ export default function ServiceDetailPage({
     <>
       <section className="relative overflow-hidden bg-gradient-to-b from-primary/5 to-background pt-16 lg:pt-24 pb-16 lg:pb-20">
         <div className="absolute inset-0 bg-grid opacity-30" />
-        <div className="container relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="container relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <Link
             href="/services"
             className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-primary transition-colors mb-8"
@@ -77,7 +77,7 @@ export default function ServiceDetailPage({
       </section>
 
       <section className="py-20 lg:py-24">
-        <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-3 gap-12">
             <div className="lg:col-span-2">
               <SectionHeading
@@ -119,7 +119,7 @@ export default function ServiceDetailPage({
       </section>
 
       <section className="py-20 lg:py-24 bg-muted/30 border-y border-border">
-        <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <SectionHeading
             eyebrow="Explore More"
             title="Other services you may need"

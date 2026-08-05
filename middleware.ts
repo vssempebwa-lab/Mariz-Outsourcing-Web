@@ -19,6 +19,7 @@ function isStaticAsset(pathname: string) {
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
+  const previewRole = request.nextUrl.searchParams.get('preview');
 
   if (isStaticAsset(pathname)) {
     return NextResponse.next();
@@ -35,6 +36,22 @@ export async function middleware(request: NextRequest) {
 
   if (pathname === staffAccessPath && (!staffAuthEnabled || token)) {
     return NextResponse.redirect(new URL(staffWorkspacePath, request.url));
+  }
+
+  if (
+    !staffAuthEnabled &&
+    pathname.startsWith(staffWorkspacePath) &&
+    (previewRole === 'employee' || previewRole === 'super_admin')
+  ) {
+    const target = request.nextUrl.clone();
+    target.searchParams.delete('preview');
+    const response = NextResponse.redirect(target);
+    response.cookies.set('moa_staff_preview_role', previewRole, {
+      httpOnly: true,
+      sameSite: 'lax',
+      path: staffWorkspacePath,
+    });
+    return response;
   }
 
   if (staffAuthEnabled && pathname.startsWith(staffWorkspacePath) && !token) {
