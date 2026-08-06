@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
-import { Activity, BriefcaseBusiness, CalendarClock, CheckSquare, PhoneCall, StickyNote, Target } from 'lucide-react';
+import Link from 'next/link';
+import { Activity, BriefcaseBusiness, CalendarClock, CheckSquare, Palette, PhoneCall, StickyNote, Target } from 'lucide-react';
 
-import { staffAccessPath } from '@/lib/portal-routes';
+import { staffAccessPath, staffWorkspacePath } from '@/lib/portal-routes';
 import { getOpsOverviewMetrics } from '@/lib/ops-data';
 import { CreateEmployeeForm } from '@/components/staff/create-employee-form';
 import { getCurrentStaff } from '@/lib/staff-session';
@@ -47,6 +48,15 @@ export default async function StaffWorkspacePage() {
         <h1 className="mt-1 font-display text-3xl font-semibold">
           {isSuperAdmin ? 'The MOA Management Dashboard' : 'My Dashboard'}
         </h1>
+        {isSuperAdmin && (
+          <Link
+            href={`${staffWorkspacePath}/site-customization`}
+            className="mt-4 inline-flex h-10 items-center gap-2 rounded-md bg-primary px-4 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+          >
+            <Palette className="h-4 w-4" />
+            Site Customization
+          </Link>
+        )}
       </div>
 
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">

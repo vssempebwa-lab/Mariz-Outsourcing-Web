@@ -7,6 +7,7 @@ import {
   FileText,
   FolderKanban,
   Home,
+  Palette,
   PhoneCall,
   PieChart,
   Users,
@@ -23,6 +24,7 @@ export const opsModules = [
   { title: 'Calls', href: `${staffWorkspacePath}/calls`, icon: PhoneCall },
   { title: 'Documents', href: `${staffWorkspacePath}/documents`, icon: FileText },
   { title: 'Projects', href: `${staffWorkspacePath}/projects`, icon: BriefcaseBusiness },
+  { title: 'Site Customization', href: `${staffWorkspacePath}/site-customization`, icon: Palette, superAdminOnly: true },
   { title: 'Employees', href: `${staffWorkspacePath}/employees`, icon: Users, superAdminOnly: true },
   { title: 'Pipeline', href: `${staffWorkspacePath}/pipeline`, icon: FolderKanban },
 ] as const;

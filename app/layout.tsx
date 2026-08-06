@@ -2,6 +2,8 @@ import './globals.css';
 import type { Metadata } from 'next';
 import { Inter, Plus_Jakarta_Sans } from 'next/font/google';
 import { SiteChrome } from '@/components/site/site-chrome';
+import { Toaster } from '@/components/ui/sonner';
+import { getPublishedSiteTheme, siteThemeToCssVars } from '@/lib/site-customization';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -48,15 +50,20 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const theme = await getPublishedSiteTheme();
+
   return (
     <html lang="en" className={`${inter.variable} ${jakarta.variable}`} suppressHydrationWarning>
       <body className="font-sans antialiased min-h-screen flex flex-col">
-        <SiteChrome>{children}</SiteChrome>
+        <SiteChrome publicThemeStyle={siteThemeToCssVars(theme)}>
+          {children}
+        </SiteChrome>
+        <Toaster />
       </body>
     </html>
   );

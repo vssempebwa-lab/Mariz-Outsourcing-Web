@@ -4,20 +4,25 @@ import { Card, CardContent } from '@/components/ui/card';
 import { SectionHeading } from '@/components/site/section-heading';
 import { LeadForm } from '@/components/site/lead-form';
 import { METRICS, SERVICES, TESTIMONIALS } from '@/lib/data';
+import { getPublishedPageSections, type PageSection } from '@/lib/site-customization';
 import { ArrowRight, CheckCircle2, Star } from 'lucide-react';
 
-export default function Home() {
+export default async function Home() {
+  const sections = await getPublishedPageSections('home');
+  const heroContent = sections.find((section) => section.section_type === 'hero')?.content;
+  const ctaContent = sections.find((section) => section.section_type === 'cta')?.content;
+
   return (
     <>
-      <Hero />
+      <Hero content={heroContent} />
       <Metrics />
       <Testimonials />
-      <LeadCapture />
+      <LeadCapture content={ctaContent} />
     </>
   );
 }
 
-function Hero() {
+function Hero({ content }: { content?: PageSection['content'] }) {
   return (
     <section className="relative isolate flex min-h-[720px] overflow-hidden bg-navy py-20 lg:min-h-[760px] lg:py-24">
       {SERVICES.map((service, index) => (
@@ -41,23 +46,23 @@ function Hero() {
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 backdrop-blur">
             <span className="flex h-2 w-2 rounded-full bg-accent animate-pulse" />
             <span className="text-xs font-semibold text-white/80">
-              Trusted BPO Partner in East Africa
+              {content?.eyebrow || 'Trusted BPO Partner in East Africa'}
             </span>
           </div>
 
           <h1 className="font-display text-5xl font-normal leading-none text-balance sm:text-6xl lg:text-[5.75rem]">
-            One agency for the services that keep your business moving.
+            {content?.heading || 'One agency for the services that keep your business moving.'}
           </h1>
 
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/78 text-balance">
-            Recruitment, customer support, software, branding, and media production
-            delivered through one coordinated outsourcing partner.
+            {content?.body ||
+              'Recruitment, customer support, software, branding, and media production delivered through one coordinated outsourcing partner.'}
           </p>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Button asChild size="lg" className="group">
-              <Link href="/contact">
-                Request Consultation
+              <Link href={content?.buttonHref || '/contact'}>
+                {content?.buttonLabel || 'Request Consultation'}
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
             </Button>
@@ -161,7 +166,7 @@ function Testimonials() {
   );
 }
 
-function LeadCapture() {
+function LeadCapture({ content }: { content?: PageSection['content'] }) {
   return (
     <section id="lead-capture" className="relative overflow-hidden py-20 lg:py-28">
       <div className="public-glow-blue pointer-events-none absolute inset-x-0 top-0 h-[560px] opacity-70" />
@@ -170,9 +175,12 @@ function LeadCapture() {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <div>
             <SectionHeading
-              eyebrow="Get Started"
-              title="Ready to Scale Your Operations?"
-              description="Tell us about your business and the challenges you are facing. Our team will reach out within one business day to schedule a consultation."
+              eyebrow={content?.eyebrow || 'Get Started'}
+              title={content?.heading || 'Ready to Scale Your Operations?'}
+              description={
+                content?.body ||
+                'Tell us about your business and the challenges you are facing. Our team will reach out within one business day to schedule a consultation.'
+              }
               align="left"
             />
             <div className="mt-8 space-y-4">
