@@ -43,20 +43,29 @@ export async function PATCH(request: Request) {
     const payload = payloadSchema.parse(await request.json());
     const supabase = getSupabaseAdmin();
 
-    const { error: revisionError } = await supabase
+    const { data: revision, error: revisionError } = await supabase
       .from('site_revisions')
       .update({
         theme: payload.theme,
         updated_at: new Date().toISOString(),
       })
       .eq('id', payload.revisionId)
-      .eq('status', 'draft');
+      .eq('status', 'draft')
+      .select('id')
+      .maybeSingle();
 
     if (revisionError) {
       throw revisionError;
     }
 
-    await Promise.all(
+    if (!revision) {
+      return NextResponse.json(
+        { error: 'This draft is no longer editable. Refresh the customization page and try again.' },
+        { status: 409 }
+      );
+    }
+
+    const sectionResults = await Promise.all(
       payload.sections.map((section) =>
         supabase
           .from('page_sections')
@@ -66,8 +75,25 @@ export async function PATCH(request: Request) {
           })
           .eq('id', section.id)
           .eq('revision_id', payload.revisionId)
+          .select('id')
+          .maybeSingle()
       )
     );
+
+    const sectionError = sectionResults.find((result) => result.error)?.error;
+
+    if (sectionError) {
+      throw sectionError;
+    }
+
+    const missingSection = sectionResults.some((result) => !result.data);
+
+    if (missingSection) {
+      return NextResponse.json(
+        { error: 'One or more sections could not be saved. Refresh the customization page and try again.' },
+        { status: 409 }
+      );
+    }
 
     return NextResponse.json({ ok: true });
   } catch (error) {

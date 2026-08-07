@@ -4,6 +4,8 @@
 
 @layer base {
   :root {
+    --font-inter: Arial, Helvetica, sans-serif;
+    --font-jakarta: Arial, Helvetica, sans-serif;
     --background: 210 40% 98%;
     --foreground: 222 47% 11%;
     --card: 0 0% 100%;

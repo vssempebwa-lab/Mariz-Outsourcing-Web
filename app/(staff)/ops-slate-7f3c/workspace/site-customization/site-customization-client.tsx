@@ -65,11 +65,13 @@ export function SiteCustomizationClient({ workspace }: { workspace: Workspace })
       });
 
       if (!response.ok) {
-        toast.error('Could not publish changes.');
+        const payload = await response.json().catch(() => null);
+        toast.error(payload?.error || 'Could not publish changes.');
         return;
       }
 
       toast.success('Site changes published.');
+      window.location.reload();
     });
   }
 
@@ -83,7 +85,8 @@ export function SiteCustomizationClient({ workspace }: { workspace: Workspace })
     });
 
     if (!response.ok) {
-      toast.error('Upload failed.');
+      const payload = await response.json().catch(() => null);
+      toast.error(payload?.error || 'Upload failed.');
       return;
     }
 
@@ -237,8 +240,12 @@ function ThemeEditor({
         disabled={isPending}
         onClick={() =>
           startTransition(async () => {
-            await onSave(localTheme);
-            toast.success('Theme draft saved.');
+            try {
+              await onSave(localTheme);
+              toast.success('Theme draft saved.');
+            } catch (error) {
+              toast.error(error instanceof Error ? error.message : 'Unable to save theme draft.');
+            }
           })
         }
       >
@@ -282,8 +289,12 @@ function PageSectionEditor({
     });
 
     startTransition(async () => {
-      await onSave(nextSections);
-      toast.success('Content draft saved.');
+      try {
+        await onSave(nextSections);
+        toast.success('Content draft saved.');
+      } catch (error) {
+        toast.error(error instanceof Error ? error.message : 'Unable to save content draft.');
+      }
     });
   }
 
@@ -409,6 +420,7 @@ async function saveCustomization(payload: {
   });
 
   if (!response.ok) {
-    throw new Error('Unable to save customization draft.');
+    const payload = await response.json().catch(() => null);
+    throw new Error(payload?.error || 'Unable to save customization draft.');
   }
 }

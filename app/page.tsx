@@ -3,9 +3,30 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { SectionHeading } from '@/components/site/section-heading';
 import { LeadForm } from '@/components/site/lead-form';
-import { METRICS, SERVICES, TESTIMONIALS } from '@/lib/data';
+import { METRICS, TESTIMONIALS } from '@/lib/data';
 import { getPublishedPageSections, type PageSection } from '@/lib/site-customization';
 import { ArrowRight, CheckCircle2, Star } from 'lucide-react';
+
+const HERO_IMAGE_BUCKET = 'Project images';
+const HERO_IMAGE_FILES = [
+  'ABOUT US-27.jpg',
+  'CALL-28.jpg',
+  'PC-26.jpg',
+  'RR-25.jpg',
+];
+
+function getPublicStorageUrl(bucket: string, path: string) {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL?.replace(/\/$/, '');
+
+  if (!supabaseUrl) {
+    return '';
+  }
+
+  const encodedBucket = encodeURIComponent(bucket);
+  const encodedPath = path.split('/').map(encodeURIComponent).join('/');
+
+  return `${supabaseUrl}/storage/v1/object/public/${encodedBucket}/${encodedPath}`;
+}
 
 export default async function Home() {
   const sections = await getPublishedPageSections('home');
@@ -23,16 +44,22 @@ export default async function Home() {
 }
 
 function Hero({ content }: { content?: PageSection['content'] }) {
+  const heroImages = HERO_IMAGE_FILES.map((file) => ({
+    file,
+    src: getPublicStorageUrl(HERO_IMAGE_BUCKET, file),
+  })).filter((image) => image.src);
+  const animationDuration = `${heroImages.length * 6}s`;
+
   return (
-    <section className="relative isolate flex min-h-[720px] overflow-hidden bg-navy py-20 lg:min-h-[760px] lg:py-24">
-      {SERVICES.map((service, index) => (
+    <section className="relative isolate flex min-h-[560px] overflow-hidden bg-navy py-16 sm:min-h-[620px] lg:min-h-[680px] lg:py-20">
+      {heroImages.map((image, index) => (
         <div
-          key={service.slug}
+          key={image.file}
           className="absolute inset-0 opacity-0 animate-hero-service-slide"
-          style={{ animationDelay: `${index * 6}s` }}
+          style={{ animationDelay: `${index * 6}s`, animationDuration }}
         >
           <img
-            src={service.image}
+            src={image.src}
             alt=""
             className="h-full w-full object-cover"
             aria-hidden="true"
@@ -41,25 +68,25 @@ function Hero({ content }: { content?: PageSection['content'] }) {
           <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/76 to-navy/30" />
         </div>
       ))}
-      <div className="container relative z-10 mx-auto flex max-w-6xl items-center px-4 sm:px-6 lg:px-8">
-        <div className="max-w-3xl animate-fade-up text-white">
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 backdrop-blur">
+      <div className="container relative z-10 mx-auto flex max-w-6xl items-end px-4 pb-10 pt-24 sm:px-6 sm:pb-12 lg:px-8 lg:pb-14">
+        <div className="max-w-2xl animate-fade-up text-white">
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 backdrop-blur">
             <span className="flex h-2 w-2 rounded-full bg-accent animate-pulse" />
             <span className="text-xs font-semibold text-white/80">
               {content?.eyebrow || 'Trusted BPO Partner in East Africa'}
             </span>
           </div>
 
-          <h1 className="font-display text-5xl font-normal leading-none text-balance sm:text-6xl lg:text-[5.75rem]">
+          <h1 className="font-display text-3xl font-normal leading-tight text-balance sm:text-4xl lg:text-5xl">
             {content?.heading || 'One agency for the services that keep your business moving.'}
           </h1>
 
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/78 text-balance">
+          <p className="mt-4 max-w-xl text-sm leading-relaxed text-white/78 text-balance sm:text-base">
             {content?.body ||
               'Recruitment, customer support, software, branding, and media production delivered through one coordinated outsourcing partner.'}
           </p>
 
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+          <div className="mt-6 flex flex-col gap-3 sm:flex-row">
             <Button asChild size="lg" className="group">
               <Link href={content?.buttonHref || '/contact'}>
                 {content?.buttonLabel || 'Request Consultation'}
@@ -71,7 +98,7 @@ function Hero({ content }: { content?: PageSection['content'] }) {
             </Button>
           </div>
 
-          <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-white/75">
+          <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-white/75 sm:text-sm">
             <div className="flex items-center gap-2">
               <CheckCircle2 className="h-4 w-4 text-accent" />
               24/7 Operations
