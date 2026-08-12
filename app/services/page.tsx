@@ -9,7 +9,7 @@ import { ArrowRight, CheckCircle2 } from 'lucide-react';
 export const metadata = {
   title: 'Our Services',
   description:
-    'Strategic recruitment, 24/7 call center operations, custom software development, corporate branding, and cinematic media production — integrated outsourcing solutions from Mariz Outsourcing Agency.',
+    'Revenue operations, strategic recruitment, 24/7 call center operations, custom software development, corporate branding, and cinematic media production from Mariz Outsourcing Agency.',
 };
 
 export default function ServicesPage() {
@@ -28,9 +28,10 @@ export default function ServicesPage() {
               Integrated outsourcing solutions for every operational need
             </h1>
             <p className="mt-6 text-lg text-muted-foreground leading-relaxed max-w-2xl text-balance">
-              Five specialized divisions working together as one partner. From
-              talent acquisition to software, branding, and media — we cover the
-              full spectrum of your outsourcing requirements.
+              Six specialized divisions working together as one partner. From
+              revenue operations and talent acquisition to customer support,
+              software, branding, and media, we cover the full spectrum of your
+              outsourcing requirements.
             </p>
           </div>
         </div>
@@ -57,7 +58,7 @@ export default function ServicesPage() {
                     </div>
                     <div className="absolute bottom-4 left-4 right-4">
                       <span className="text-xs font-semibold text-white/80 uppercase tracking-wider">
-                        0{i + 1} / 05
+                        0{i + 1} / 06
                       </span>
                     </div>
                   </div>
@@ -91,7 +92,61 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <section className="py-20 lg:py-28 bg-muted/30 border-y border-border">
+      <section className="py-20 lg:py-24 bg-muted/30 border-y border-border">
+        <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <SectionHeading
+            eyebrow="Service Matrix"
+            title="What each division is built to achieve"
+            description="A quick operating view of the objective, success metric, and core audience for every Mariz service division."
+          />
+          <div className="mt-12 grid gap-4 lg:grid-cols-2">
+            {SERVICES.map((s) => (
+              <Card key={s.slug} className="border-border">
+                <CardContent className="p-6">
+                  <div className="flex items-start gap-4">
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                      <Icon name={s.icon} className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <h3 className="font-display text-lg font-semibold leading-tight text-foreground">
+                        {s.title}
+                      </h3>
+                      <dl className="mt-4 grid gap-3 text-sm">
+                        <div>
+                          <dt className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                            Objective
+                          </dt>
+                          <dd className="mt-1 text-foreground/80">
+                            {s.objective}
+                          </dd>
+                        </div>
+                        <div>
+                          <dt className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                            Target metric
+                          </dt>
+                          <dd className="mt-1 text-foreground/80">
+                            {s.targetMetric}
+                          </dd>
+                        </div>
+                        <div>
+                          <dt className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                            Best fit
+                          </dt>
+                          <dd className="mt-1 text-foreground/80">
+                            {s.targetAudience}
+                          </dd>
+                        </div>
+                      </dl>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 lg:py-28">
         <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <SectionHeading
             eyebrow="How We Work"

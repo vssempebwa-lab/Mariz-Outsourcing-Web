@@ -1,10 +1,23 @@
 import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
-import { Activity, BriefcaseBusiness, CalendarClock, CheckSquare, Palette, PhoneCall, StickyNote, Target } from 'lucide-react';
+import { formatDistanceToNow } from 'date-fns';
+import {
+  Activity,
+  BriefcaseBusiness,
+  CalendarClock,
+  CheckSquare,
+  FileText,
+  Palette,
+  PhoneCall,
+  StickyNote,
+  Target,
+  UserPlus,
+} from 'lucide-react';
 
 import { staffAccessPath, staffWorkspacePath } from '@/lib/portal-routes';
-import { getOpsOverviewMetrics } from '@/lib/ops-data';
+import { getOpsDashboardOverview } from '@/lib/ops-data';
+import { AdminRealtimeRefresh } from '@/components/ops/admin-realtime-refresh';
 import { CreateEmployeeForm } from '@/components/staff/create-employee-form';
 import { getCurrentStaff } from '@/lib/staff-session';
 
@@ -24,7 +37,7 @@ export default async function StaffWorkspacePage() {
     redirect(staffAccessPath);
   }
 
-  const metrics = await getOpsOverviewMetrics(staff);
+  const { metrics, recentActivity } = await getOpsDashboardOverview(staff);
   const isSuperAdmin = staff.role === 'super_admin';
   const widgets = isSuperAdmin
     ? [
@@ -41,6 +54,7 @@ export default async function StaffWorkspacePage() {
 
   return (
     <div className="space-y-6">
+      {isSuperAdmin ? <AdminRealtimeRefresh /> : null}
       <div>
         <p className="text-sm font-medium text-muted-foreground">
           {isSuperAdmin ? 'Mariz Operations' : 'Employee Workspace'}
@@ -87,15 +101,54 @@ export default async function StaffWorkspacePage() {
               </h2>
               <p className="text-sm text-muted-foreground">
                 {isSuperAdmin
-                  ? 'Activity events will appear here as modules grow.'
+                  ? 'Recent operational events from leads, employees, meetings, documents, projects, and pipeline updates.'
                   : 'Assigned tasks and meetings that need attention today.'}
               </p>
             </div>
           </div>
           {isSuperAdmin ? (
-            <div className="rounded-md border border-dashed p-6 text-sm text-muted-foreground">
-              No recent activity yet.
-            </div>
+            recentActivity.length ? (
+              <div className="divide-y rounded-md border">
+                {recentActivity.map((event) => {
+                  const Icon =
+                    event.event_type.startsWith('employee')
+                      ? UserPlus
+                      : event.event_type.includes('meeting')
+                        ? CalendarClock
+                        : event.event_type.includes('document')
+                          ? FileText
+                          : event.event_type.includes('call')
+                            ? PhoneCall
+                            : event.event_type.includes('deal') || event.event_type.includes('project')
+                              ? BriefcaseBusiness
+                              : Target;
+
+                  return (
+                    <div key={event.id} className="flex gap-3 p-4">
+                      <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-primary/10 text-primary">
+                        <Icon className="h-4 w-4" />
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
+                          <p className="font-medium text-foreground">{event.title}</p>
+                          <p className="text-xs text-muted-foreground">
+                            {formatDistanceToNow(new Date(event.created_at), { addSuffix: true })}
+                          </p>
+                        </div>
+                        {event.description ? (
+                          <p className="mt-1 text-sm text-muted-foreground">{event.description}</p>
+                        ) : null}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            ) : (
+              <div className="rounded-md border border-dashed p-6 text-sm text-muted-foreground">
+                No recent activity yet. New leads, employee changes, scheduled meetings,
+                call logs, documents, projects, and pipeline updates will appear here.
+              </div>
+            )
           ) : (
             <div className="grid gap-4 md:grid-cols-2">
               <div className="rounded-md border border-dashed p-5">
@@ -107,7 +160,7 @@ export default async function StaffWorkspacePage() {
                 </p>
               </div>
               <div className="rounded-md border border-dashed p-5">
-                <p className="text-sm font-medium">Today's Schedule</p>
+                <p className="text-sm font-medium">Today&apos;s Schedule</p>
                 <p className="mt-2 text-sm text-muted-foreground">
                   {metrics.upcomingMeetings
                     ? `${metrics.upcomingMeetings} upcoming assigned meeting${metrics.upcomingMeetings === 1 ? '' : 's'}.`

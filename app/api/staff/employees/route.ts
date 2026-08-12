@@ -1,10 +1,10 @@
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
-import { hash } from 'bcryptjs';
 import { z } from 'zod';
 
 import { authOptions } from '@/lib/auth';
-import { getSupabaseAdmin } from '@/lib/supabase-admin';
+import { inviteEmployee, listEmployees, updateEmployeeAccess } from '@/lib/employees';
+import { logOpsActivity } from '@/lib/ops-activity';
 import { staffAuthEnabled } from '@/lib/staff-auth-mode';
 
 const createEmployeeSchema = z.object({
@@ -15,6 +15,16 @@ const createEmployeeSchema = z.object({
   employmentDate: z.string().trim().min(1),
   status: z.enum(['active', 'inactive']).default('active'),
   profilePhotoUrl: z.string().trim().url().optional().or(z.literal('')).nullable(),
+  credentialMethod: z.enum(['invite', 'password']).default('invite'),
+  password: z.string().min(12).max(128).optional(),
+}).superRefine((value, context) => {
+  if (value.credentialMethod === 'password' && !value.password) {
+    context.addIssue({
+      code: z.ZodIssueCode.custom,
+      path: ['password'],
+      message: 'Enter a password with at least 12 characters.',
+    });
+  }
 });
 
 const updateEmployeeSchema = z.object({
@@ -37,12 +47,6 @@ function isRateLimited(key: string) {
   return current.count > 5;
 }
 
-function temporaryPassword() {
-  const bytes = new Uint8Array(18);
-  crypto.getRandomValues(bytes);
-  return Buffer.from(bytes).toString('base64url');
-}
-
 function employeeId() {
   const suffix = Date.now().toString().slice(-6);
   const random = Math.floor(Math.random() * 900 + 100);
@@ -52,6 +56,14 @@ function employeeId() {
 function friendlyDatabaseError(error: Error) {
   if (error.message.includes('Missing Supabase admin')) {
     return 'Supabase is not configured. Add NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY to .env.';
+  }
+
+  if (
+    error.message.toLowerCase().includes('already') ||
+    error.message.toLowerCase().includes('duplicate') ||
+    error.message.toLowerCase().includes('registered')
+  ) {
+    return 'An employee or login account already exists for this email address.';
   }
 
   return error.message;
@@ -75,17 +87,9 @@ export async function GET() {
       return response;
     }
 
-    const { data, error } = await getSupabaseAdmin()
-      .from('staff_accounts')
-      .select('id, name, email, role, business_role, employee_id, status, revoked_at, created_at')
-      .eq('role', 'employee')
-      .order('created_at', { ascending: false });
+    const employees = await listEmployees();
 
-    if (error) {
-      return NextResponse.json({ error: error.message }, { status: 500 });
-    }
-
-    return NextResponse.json({ employees: data || [] });
+    return NextResponse.json({ employees });
   } catch (error) {
     const message = error instanceof Error ? friendlyDatabaseError(error) : 'Employee accounts could not be loaded.';
     return NextResponse.json({ error: message }, { status: 500 });
@@ -110,57 +114,62 @@ export async function POST(request: Request) {
     const parsed = createEmployeeSchema.safeParse(await request.json());
 
     if (!parsed.success) {
-      return NextResponse.json({ error: 'Invalid employee details' }, { status: 400 });
+      const issue = parsed.error.issues[0];
+      const field = issue?.path[0] ? `${String(issue.path[0])}: ` : '';
+      return NextResponse.json(
+        { error: `${field}${issue?.message || 'Invalid employee details'}` },
+        { status: 400 }
+      );
     }
 
-    const tempPassword = temporaryPassword();
-    const passwordHash = await hash(tempPassword, 12);
     const parsedEmploymentDate = new Date(parsed.data.employmentDate);
 
     if (Number.isNaN(parsedEmploymentDate.getTime())) {
       return NextResponse.json({ error: 'Invalid employment date' }, { status: 400 });
     }
 
-    const { data, error } = await getSupabaseAdmin()
-      .from('staff_accounts')
-      .insert({
-        name: parsed.data.fullName,
-        email: parsed.data.email.toLowerCase(),
-        phone: parsed.data.phone || null,
-        role: 'employee',
-        business_role: parsed.data.businessRole,
-        employment_date: parsed.data.employmentDate,
-        employee_id: employeeId(),
-        profile_photo_url: parsed.data.profilePhotoUrl || null,
-        status: parsed.data.status,
-        password_hash: passwordHash,
-        created_by: session?.user?.id || null,
-      })
-      .select('id, name, email, phone, role, business_role, employment_date, employee_id, status, created_at')
-      .single();
+    const origin = new URL(request.url).origin;
+    const employee = await inviteEmployee({
+      name: parsed.data.fullName,
+      email: parsed.data.email,
+      phone: parsed.data.phone || null,
+      businessRole: parsed.data.businessRole,
+      employmentDate: parsed.data.employmentDate,
+      employeeId: employeeId(),
+      profilePhotoUrl: parsed.data.profilePhotoUrl || null,
+      status: parsed.data.status,
+      createdBy: session?.user?.id || null,
+      redirectTo: `${origin}/ops-slate-7f3c/setup-password`,
+      credentialMethod: parsed.data.credentialMethod,
+      password: parsed.data.password,
+    });
 
-    if (error) {
-      const status = error.code === '23505' ? 409 : 500;
-      const migrationHint = error.message.includes('business_role')
-        ? ' Run the latest Supabase migrations, especially expand_staff_accounts_for_employees.'
-        : '';
-
-      return NextResponse.json({ error: `${error.message}.${migrationHint}` }, { status });
-    }
+    await logOpsActivity({
+      eventType: 'employee_created',
+      title: `Employee created: ${employee.name}`,
+      description: `${employee.email} was added as ${employee.business_role}.`,
+      entityTable: 'staff_accounts',
+      entityId: employee.id,
+      actorId: session?.user?.id || null,
+    });
 
     return NextResponse.json({
-      employee: data,
-      tempPassword,
+      employee,
+      delivery: parsed.data.credentialMethod === 'invite' ? 'email' : 'password',
+      message: parsed.data.credentialMethod === 'invite'
+        ? `Credentials sent to ${employee.email}.`
+        : `Login created for ${employee.email}.`,
     });
   } catch (error) {
     const message = error instanceof Error ? friendlyDatabaseError(error) : 'Employee account could not be created.';
-    return NextResponse.json({ error: message }, { status: 500 });
+    const conflict = message.includes('already exists');
+    return NextResponse.json({ error: message }, { status: conflict ? 409 : 500 });
   }
 }
 
 export async function PATCH(request: Request) {
   try {
-    const { response } = await requireSuperAdmin();
+    const { session, response } = await requireSuperAdmin();
 
     if (response) {
       return response;
@@ -179,21 +188,18 @@ export async function PATCH(request: Request) {
       return NextResponse.json({ error: 'Invalid employee action' }, { status: 400 });
     }
 
-    const revokedAt = parsed.data.action === 'revoke' ? new Date().toISOString() : null;
-    const status = parsed.data.action === 'revoke' ? 'inactive' : 'active';
-    const { data, error } = await getSupabaseAdmin()
-      .from('staff_accounts')
-      .update({ revoked_at: revokedAt, status })
-      .eq('id', parsed.data.accountId)
-      .eq('role', 'employee')
-      .select('id, name, email, role, business_role, employee_id, status, revoked_at, created_at')
-      .single();
+    const employee = await updateEmployeeAccess(parsed.data.accountId, parsed.data.action);
 
-    if (error) {
-      return NextResponse.json({ error: error.message }, { status: 500 });
-    }
+    await logOpsActivity({
+      eventType: 'employee_status_changed',
+      title: `${parsed.data.action === 'revoke' ? 'Employee access revoked' : 'Employee access restored'}: ${employee.name}`,
+      description: `${employee.email} is now ${employee.status}.`,
+      entityTable: 'staff_accounts',
+      entityId: employee.id,
+      actorId: session?.user?.id || null,
+    });
 
-    return NextResponse.json({ employee: data });
+    return NextResponse.json({ employee });
   } catch (error) {
     const message = error instanceof Error ? friendlyDatabaseError(error) : 'Employee access could not be updated.';
     return NextResponse.json({ error: message }, { status: 500 });

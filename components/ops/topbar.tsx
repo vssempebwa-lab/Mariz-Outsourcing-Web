@@ -1,6 +1,13 @@
 'use client';
 
-import { Bell, Search, UserCircle } from 'lucide-react';
+import {
+  Bell,
+  Menu,
+  PanelLeftClose,
+  PanelLeftOpen,
+  Search,
+  UserCircle,
+} from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -13,13 +20,49 @@ import {
 } from '@/components/ui/select';
 import { SignOutButton } from '@/components/staff/sign-out-button';
 import type { StaffRole } from '@/lib/auth';
+import { employeeLoginPath } from '@/lib/portal-routes';
 
-export function OpsTopbar({ role, authEnabled }: { role: StaffRole; authEnabled: boolean }) {
+export function OpsTopbar({
+  role,
+  authEnabled,
+  onOpenSidebar,
+  sidebarCollapsed,
+  onToggleSidebar,
+}: {
+  role: StaffRole;
+  authEnabled: boolean;
+  onOpenSidebar: () => void;
+  sidebarCollapsed: boolean;
+  onToggleSidebar: () => void;
+}) {
   const isEmployee = role === 'employee';
 
   return (
     <header className="sticky top-0 z-20 border-b bg-background/95 px-4 py-3 backdrop-blur lg:px-6">
       <div className="flex items-center gap-3">
+        <Button
+          variant="outline"
+          size="icon"
+          className="shrink-0 lg:hidden"
+          onClick={onOpenSidebar}
+          aria-label="Open navigation"
+        >
+          <Menu className="h-4 w-4" />
+        </Button>
+        <Button
+          variant="outline"
+          size="icon"
+          className="hidden shrink-0 lg:inline-flex"
+          onClick={onToggleSidebar}
+          aria-label={sidebarCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+          title={sidebarCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+        >
+          {sidebarCollapsed ? (
+            <PanelLeftOpen className="h-4 w-4" />
+          ) : (
+            <PanelLeftClose className="h-4 w-4" />
+          )}
+        </Button>
         <div className="relative max-w-xl flex-1">
           <Search className="pointer-events-none absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
           <Input
@@ -46,7 +89,9 @@ export function OpsTopbar({ role, authEnabled }: { role: StaffRole; authEnabled:
           <UserCircle className="h-4 w-4 text-muted-foreground" />
           <span className="capitalize">{role.replace('_', ' ')}</span>
         </div>
-        {authEnabled ? <SignOutButton /> : null}
+        {authEnabled || isEmployee ? (
+          <SignOutButton callbackUrl={isEmployee ? employeeLoginPath : undefined} />
+        ) : null}
       </div>
     </header>
   );

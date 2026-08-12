@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useState, type FormEvent } from 'react';
+import { useEffect, useState, type FormEvent } from 'react';
 import { MoreHorizontal, Pencil, Plus, Trash2 } from 'lucide-react';
 
 import { DataTable, type DataTableColumn } from '@/components/ops/data-table';
@@ -30,7 +30,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import type { OpsLead, OpsLeadStatus } from '@/lib/ops-data';
+import type { StaffRole } from '@/lib/auth';
+import type { OpsEmployeeOption, OpsLead, OpsLeadStatus } from '@/lib/ops-data';
 
 const statuses: OpsLeadStatus[] = ['new', 'contacted', 'qualified', 'negotiation', 'won', 'lost'];
 
@@ -42,6 +43,7 @@ type LeadFormState = {
   phone: string;
   status: OpsLeadStatus;
   source: string;
+  assigned_to: string;
 };
 
 const emptyLead: LeadFormState = {
@@ -51,14 +53,37 @@ const emptyLead: LeadFormState = {
   phone: '',
   status: 'new',
   source: 'Website',
+  assigned_to: '',
 };
 
-export function LeadsClient({ leads, canManage }: { leads: OpsLead[]; canManage: boolean }) {
+export function LeadsClient({
+  leads,
+  employees,
+  role,
+}: {
+  leads: OpsLead[];
+  employees: OpsEmployeeOption[];
+  role: StaffRole;
+}) {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [form, setForm] = useState<LeadFormState>(emptyLead);
   const [error, setError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [employeeFilter, setEmployeeFilter] = useState('all');
+  const [visibleLeads, setVisibleLeads] = useState(leads);
+  const isSuperAdmin = role === 'super_admin';
+  const employeeById = new Map(employees.map((employee) => [employee.id, employee]));
+  const filteredLeads =
+    isSuperAdmin && employeeFilter !== 'all'
+      ? visibleLeads.filter(
+          (lead) => (lead.owner_id || lead.assigned_to || 'unassigned') === employeeFilter
+        )
+      : visibleLeads;
+
+  useEffect(() => {
+    setVisibleLeads(leads);
+  }, [leads]);
 
   const columns: DataTableColumn<OpsLead>[] = [
     { key: 'lead_name', header: 'Lead Name', sortable: true },
@@ -67,12 +92,34 @@ export function LeadsClient({ leads, canManage }: { leads: OpsLead[]; canManage:
     { key: 'phone', header: 'Phone' },
     { key: 'status', header: 'Status', sortable: true, render: (row) => <StatusBadge status={row.status} /> },
     { key: 'source', header: 'Source', sortable: true, render: (row) => row.source || 'Manual' },
+    ...(isSuperAdmin
+      ? [
+          {
+            key: 'assigned_employee',
+            header: 'Assigned Employee',
+            sortable: true,
+            value: (row: OpsLead) =>
+              employeeById.get(row.owner_id || row.assigned_to || '')?.name || 'Unassigned',
+            render: (row: OpsLead) => {
+              const employee = employeeById.get(row.owner_id || row.assigned_to || '');
+              return employee ? (
+                <div>
+                  <p className="font-medium">{employee.name}</p>
+                  <p className="text-xs text-muted-foreground">{employee.business_role || 'employee'}</p>
+                </div>
+              ) : (
+                'Unassigned'
+              );
+            },
+          } satisfies DataTableColumn<OpsLead>,
+        ]
+      : []),
     {
       key: 'actions',
       header: '',
       className: 'w-12 text-right',
       render: (row) =>
-        canManage ? (
+        (
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" size="icon" aria-label="Lead actions">
@@ -84,13 +131,15 @@ export function LeadsClient({ leads, canManage }: { leads: OpsLead[]; canManage:
                 <Pencil className="mr-2 h-4 w-4" />
                 Edit
               </DropdownMenuItem>
-              <DropdownMenuItem className="text-destructive" onClick={() => deleteLead(row.id)}>
-                <Trash2 className="mr-2 h-4 w-4" />
-                Delete
-              </DropdownMenuItem>
+              {isSuperAdmin ? (
+                <DropdownMenuItem className="text-destructive" onClick={() => deleteLead(row.id)}>
+                  <Trash2 className="mr-2 h-4 w-4" />
+                  Delete
+                </DropdownMenuItem>
+              ) : null}
             </DropdownMenuContent>
           </DropdownMenu>
-        ) : null,
+        ),
     },
   ];
 
@@ -104,6 +153,7 @@ export function LeadsClient({ leads, canManage }: { leads: OpsLead[]; canManage:
       phone: lead.phone || '',
       status: lead.status,
       source: lead.source || '',
+      assigned_to: lead.owner_id || lead.assigned_to || '',
     });
     setIsOpen(true);
   }
@@ -116,6 +166,7 @@ export function LeadsClient({ leads, canManage }: { leads: OpsLead[]; canManage:
     });
 
     if (response.ok) {
+      setVisibleLeads((current) => current.filter((lead) => lead.id !== id));
       router.refresh();
     }
   }
@@ -141,6 +192,11 @@ export function LeadsClient({ leads, canManage }: { leads: OpsLead[]; canManage:
 
     setIsOpen(false);
     setForm(emptyLead);
+    setVisibleLeads((current) => {
+      const savedLead = payload.lead as OpsLead;
+      const remaining = current.filter((lead) => lead.id !== savedLead.id);
+      return [savedLead, ...remaining];
+    });
     router.refresh();
   }
 
@@ -149,18 +205,36 @@ export function LeadsClient({ leads, canManage }: { leads: OpsLead[]; canManage:
       <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p className="text-sm font-medium text-muted-foreground">CRM</p>
-          <h1 className="font-display text-2xl font-semibold">Leads</h1>
+          <h1 className="font-display text-2xl font-semibold">
+            {isSuperAdmin ? 'Leads' : 'My Leads'}
+          </h1>
         </div>
-        {canManage ? (
+        <div className="flex flex-col gap-2 sm:flex-row">
+          {isSuperAdmin ? (
+            <Select value={employeeFilter} onValueChange={setEmployeeFilter}>
+              <SelectTrigger className="h-10 w-full sm:w-56" aria-label="Filter by employee">
+                <SelectValue placeholder="Filter by employee" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Employees</SelectItem>
+                <SelectItem value="unassigned">Unassigned</SelectItem>
+                {employees.map((employee) => (
+                  <SelectItem key={employee.id} value={employee.id}>
+                    {employee.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          ) : null}
           <Button onClick={() => setIsOpen(true)}>
             <Plus className="mr-2 h-4 w-4" />
             Add Lead
           </Button>
-        ) : null}
+        </div>
       </div>
 
       <DataTable
-        data={leads}
+        data={filteredLeads}
         columns={columns}
         searchPlaceholder="Search leads by name, company, email, status..."
       />
@@ -238,6 +312,29 @@ export function LeadsClient({ leads, canManage }: { leads: OpsLead[]; canManage:
                 />
               </div>
             </div>
+            {isSuperAdmin ? (
+              <div className="space-y-2">
+                <Label>Assigned Employee</Label>
+                <Select
+                  value={form.assigned_to || 'unassigned'}
+                  onValueChange={(value) =>
+                    setForm({ ...form, assigned_to: value === 'unassigned' ? '' : value })
+                  }
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Choose employee" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="unassigned">Unassigned</SelectItem>
+                    {employees.map((employee) => (
+                      <SelectItem key={employee.id} value={employee.id}>
+                        {employee.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+            ) : null}
             {error ? <p className="text-sm text-destructive">{error}</p> : null}
             <DialogFooter>
               <Button type="button" variant="outline" onClick={() => setIsOpen(false)}>

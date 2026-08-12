@@ -9,7 +9,7 @@ import { Target, Eye, Heart, ArrowRight, Award, Handshake, Lightbulb, Activity }
 export const metadata = {
   title: 'About Us',
   description:
-    'Mariz Outsourcing Agency (SMC) Ltd is a professional BPO and strategic consulting firm headquartered in Uganda, delivering end-to-end human capital solutions, call center operations, software development, and media production.',
+    'Mariz Outsourcing Agency (SMC) Ltd is a professional BPO and strategic consulting firm headquartered in Uganda, delivering revenue operations, talent acquisition, call center operations, software development, branding, and media production.',
 };
 
 const VALUES = [
@@ -56,9 +56,9 @@ export default function AboutPage() {
             </h1>
             <p className="mt-6 text-lg text-muted-foreground leading-relaxed max-w-2xl text-balance">
               {SITE.legalName} is a professional Business Process Outsourcing and
-              strategic consulting firm delivering end-to-end human capital
-              solutions, 24/7 call center support, software development, corporate
-              branding, and media production.
+              strategic consulting firm delivering revenue operations, talent
+              acquisition, 24/7 call center support, software development,
+              corporate branding, and media production.
             </p>
           </div>
         </div>
@@ -142,7 +142,7 @@ export default function AboutPage() {
               />
               <div className="mt-8 space-y-4">
                 {[
-                  'Integrated service divisions covering talent, technology, support, and creative under one roof',
+                  'Integrated service divisions covering revenue, talent, technology, support, and creative under one roof',
                   '24/7 operations with a 200+ seat call center and omnichannel support capabilities',
                   'Custom software development from ERPs to financial tracking platforms',
                   'Strategic branding and cinematic media production for corporate clients',

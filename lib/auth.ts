@@ -1,8 +1,10 @@
 import type { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { compare } from 'bcryptjs';
+import { createClient } from '@supabase/supabase-js';
 import { z } from 'zod';
 
+import { markEmployeeActive } from '@/lib/employees';
 import { staffWorkspacePath } from '@/lib/portal-routes';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
 
@@ -11,6 +13,7 @@ export type StaffRole = 'super_admin' | 'employee';
 const credentialsSchema = z.object({
   email: z.string().email(),
   password: z.string().min(8),
+  portal: z.enum(['employee']).optional(),
 });
 
 export const authOptions: NextAuthOptions = {
@@ -27,6 +30,7 @@ export const authOptions: NextAuthOptions = {
       credentials: {
         email: { label: 'Email', type: 'email' },
         password: { label: 'Password', type: 'password' },
+        portal: { label: 'Portal', type: 'hidden' },
       },
       async authorize(credentials) {
         const parsed = credentialsSchema.safeParse(credentials);
@@ -35,20 +39,43 @@ export const authOptions: NextAuthOptions = {
           return null;
         }
 
-        const { data: account, error } = await getSupabaseAdmin()
+        const admin = getSupabaseAdmin();
+        const { data: account, error } = await admin
           .from('staff_accounts')
-          .select('id, name, email, role, password_hash, revoked_at')
+          .select('id, name, email, role, password_hash, auth_user_id, auth_status, status, revoked_at')
           .eq('email', parsed.data.email.toLowerCase())
           .single();
 
-        if (error || !account || account.revoked_at) {
+        if (error || !account || account.revoked_at || account.status === 'inactive') {
           return null;
         }
 
-        const passwordIsValid = await compare(
-          parsed.data.password,
-          account.password_hash
-        );
+        if (parsed.data.portal === 'employee' && account.role !== 'employee') {
+          return null;
+        }
+
+        let passwordIsValid = false;
+
+        if (account.auth_user_id) {
+          const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+          const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+          if (!supabaseUrl || !anonKey) return null;
+
+          const authClient = createClient(supabaseUrl, anonKey, {
+            auth: { autoRefreshToken: false, persistSession: false },
+          });
+          const { data: authData, error: authError } = await authClient.auth.signInWithPassword({
+            email: parsed.data.email.toLowerCase(),
+            password: parsed.data.password,
+          });
+          passwordIsValid = !authError && authData.user?.id === account.auth_user_id;
+
+          if (passwordIsValid && account.auth_status !== 'active') {
+            await markEmployeeActive(account.auth_user_id);
+          }
+        } else if (account.role === 'super_admin') {
+          passwordIsValid = await compare(parsed.data.password, account.password_hash);
+        }
 
         if (!passwordIsValid) {
           return null;

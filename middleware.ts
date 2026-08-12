@@ -8,6 +8,13 @@ const appStaffWorkspacePath = `${appStaffAccessPath}/workspace`;
 const staffAccessPath =
   process.env.NEXT_PUBLIC_STAFF_ACCESS_PATH || appStaffAccessPath;
 const staffWorkspacePath = `${staffAccessPath}/workspace`;
+const employeeRestrictedPaths = [
+  'accounts',
+  'documents',
+  'employees',
+  'pipeline',
+  'site-customization',
+];
 
 function isStaticAsset(pathname: string) {
   return (
@@ -29,6 +36,16 @@ export async function middleware(request: NextRequest) {
     req: request,
     secret: process.env.NEXTAUTH_SECRET,
   });
+
+  const employeeEnteredAdminModule =
+    token?.role === 'employee' &&
+    employeeRestrictedPaths.some((segment) =>
+      pathname.startsWith(`${staffWorkspacePath}/${segment}`)
+    );
+
+  if (employeeEnteredAdminModule) {
+    return NextResponse.redirect(new URL(staffWorkspacePath, request.url));
+  }
 
   if (pathname === '/admin' || pathname.startsWith('/admin/')) {
     return NextResponse.rewrite(new URL('/404', request.url));

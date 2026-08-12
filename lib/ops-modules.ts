@@ -21,6 +21,7 @@ export const opsModules = [
   { title: 'Leads', href: `${staffWorkspacePath}/leads`, icon: BarChart3 },
   { title: 'Accounts', href: `${staffWorkspacePath}/accounts`, icon: Building2 },
   { title: 'Meetings', href: `${staffWorkspacePath}/meetings`, icon: CalendarClock },
+  { title: 'Tasks', href: `${staffWorkspacePath}/tasks`, icon: CheckSquare },
   { title: 'Calls', href: `${staffWorkspacePath}/calls`, icon: PhoneCall },
   { title: 'Documents', href: `${staffWorkspacePath}/documents`, icon: FileText },
   { title: 'Projects', href: `${staffWorkspacePath}/projects`, icon: BriefcaseBusiness },

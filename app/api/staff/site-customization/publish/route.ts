@@ -14,6 +14,8 @@ const publicPaths = [
   '/',
   '/about',
   '/services',
+  '/team',
+  '/projects',
   '/industries',
   '/portfolio',
   '/careers',

@@ -3,6 +3,7 @@ import { cookies } from 'next/headers';
 
 import { authOptions, type StaffRole } from '@/lib/auth';
 import { staffAuthEnabled } from '@/lib/staff-auth-mode';
+import { getSupabaseAdmin } from '@/lib/supabase-admin';
 
 export type CurrentStaff = {
   id?: string;
@@ -11,11 +12,40 @@ export type CurrentStaff = {
   role: StaffRole;
 };
 
+const previewEmployeeId = '00000000-0000-4000-8000-000000000001';
+
 export async function getCurrentStaff(): Promise<CurrentStaff | null> {
+  const session = await getServerSession(authOptions);
+
+  if (session?.user?.role) {
+    return {
+      id: session.user.id,
+      name: session.user.name || 'Staff Member',
+      email: session.user.email,
+      role: session.user.role,
+    };
+  }
+
   if (!staffAuthEnabled) {
     const previewRole = cookies().get('moa_staff_preview_role')?.value;
 
     if (previewRole === 'employee') {
+      const { data: previewEmployee } = await getSupabaseAdmin()
+        .from('staff_accounts')
+        .select('id, name, email')
+        .eq('id', previewEmployeeId)
+        .is('revoked_at', null)
+        .maybeSingle();
+
+      if (previewEmployee) {
+        return {
+          id: previewEmployee.id,
+          name: previewEmployee.name,
+          email: previewEmployee.email,
+          role: 'employee',
+        };
+      }
+
       return {
         id: 'employee-preview',
         name: 'Employee Preview',
@@ -29,18 +59,7 @@ export async function getCurrentStaff(): Promise<CurrentStaff | null> {
     };
   }
 
-  const session = await getServerSession(authOptions);
-
-  if (!session?.user?.role) {
-    return null;
-  }
-
-  return {
-    id: session.user.id,
-    name: session.user.name || 'Staff Member',
-    email: session.user.email,
-    role: session.user.role,
-  };
+  return null;
 }
 
 export function canAccessAssignedRecord(staff: CurrentStaff, assignedTo?: string | null) {

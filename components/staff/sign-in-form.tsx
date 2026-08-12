@@ -8,8 +8,9 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { staffWorkspacePath } from '@/lib/portal-routes';
+import { supabase } from '@/lib/supabase';
 
-export function SignInForm() {
+export function SignInForm({ employeeOnly = false }: { employeeOnly?: boolean }) {
   const [error, setError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -22,6 +23,7 @@ export function SignInForm() {
     const result = await signIn('credentials', {
       email: formData.get('email'),
       password: formData.get('password'),
+      portal: employeeOnly ? 'employee' : undefined,
       redirect: false,
       callbackUrl: staffWorkspacePath,
     });
@@ -29,9 +31,18 @@ export function SignInForm() {
     setIsSubmitting(false);
 
     if (result?.error) {
-      setError('Check your email and password, then try again.');
+      setError(
+        employeeOnly
+          ? 'Use the employee email and password created by your administrator.'
+          : 'Check your email and password, then try again.'
+      );
       return;
     }
+
+    await supabase.auth.signInWithPassword({
+      email: String(formData.get('email') || ''),
+      password: String(formData.get('password') || ''),
+    });
 
     window.location.href = result?.url || staffWorkspacePath;
   }

@@ -10,10 +10,12 @@ export const metadata: Metadata = {
     template: '%s | Mariz Outsourcing Agency',
   },
   description:
-    'Mariz Outsourcing Agency (SMC) Ltd delivers end-to-end human capital solutions, 24/7 call center support, custom software development, corporate branding, and media production across East Africa and beyond.',
+    'Mariz Outsourcing Agency (SMC) Ltd delivers revenue operations, talent acquisition, 24/7 call center support, custom software development, corporate branding, and media production across East Africa and beyond.',
   keywords: [
     'BPO Uganda',
     'outsourcing agency',
+    'revenue operations',
+    'outsourced sales',
     'call center',
     'talent acquisition',
     'software development',
@@ -25,7 +27,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Mariz Outsourcing Agency — Strategic Outsourcing',
     description:
-      'End-to-end human capital, 24/7 call center operations, and custom software development built to scale your business.',
+      'Revenue operations, talent acquisition, 24/7 call center operations, and custom software development built to scale your business.',
     type: 'website',
     url: 'https://www.moa.co.ug',
   },
@@ -33,7 +35,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Mariz Outsourcing Agency — Strategic Outsourcing',
     description:
-      'End-to-end human capital, 24/7 call center operations, and custom software development built to scale your business.',
+      'Revenue operations, talent acquisition, 24/7 call center operations, and custom software development built to scale your business.',
   },
 };
 

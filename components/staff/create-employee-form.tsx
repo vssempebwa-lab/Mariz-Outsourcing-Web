@@ -1,7 +1,7 @@
 'use client';
 
-import { useEffect, useState, type FormEvent } from 'react';
-import { Copy, RotateCcw, ShieldOff, UserPlus } from 'lucide-react';
+import { useEffect, useRef, useState, type ChangeEvent, type FormEvent } from 'react';
+import { CheckCircle2, Clock3, Eye, EyeOff, ImagePlus, KeyRound, Loader2, MailCheck, RotateCcw, ShieldOff, UserPlus, X } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -23,13 +23,15 @@ type Employee = {
   business_role?: string;
   employee_id?: string;
   status?: string;
+  auth_status?: 'not_provisioned' | 'invited' | 'active' | 'suspended';
   revoked_at?: string | null;
   created_at: string;
 };
 
 type CreateEmployeeResponse = {
   employee?: Employee;
-  tempPassword?: string;
+  delivery?: 'email' | 'password';
+  message?: string;
   error?: string;
 };
 
@@ -41,6 +43,44 @@ export function CreateEmployeeForm() {
   const [updatingId, setUpdatingId] = useState('');
   const [businessRole, setBusinessRole] = useState('sales');
   const [status, setStatus] = useState('active');
+  const [credentialMethod, setCredentialMethod] = useState<'invite' | 'password'>('invite');
+  const [showPassword, setShowPassword] = useState(false);
+  const [profilePhotoUrl, setProfilePhotoUrl] = useState('');
+  const [isUploadingPhoto, setIsUploadingPhoto] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  async function uploadProfilePhoto(event: ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0];
+    event.target.value = '';
+    if (!file) return;
+
+    setError('');
+    if (!file.type.startsWith('image/')) {
+      setError('Choose a JPG, PNG, WebP, or GIF image.');
+      return;
+    }
+    if (file.size > 6 * 1024 * 1024) {
+      setError('Profile photo must be 6MB or smaller.');
+      return;
+    }
+
+    setIsUploadingPhoto(true);
+    const upload = new FormData();
+    upload.append('file', file);
+
+    try {
+      const response = await fetch('/api/staff/site-media', { method: 'POST', body: upload });
+      const payload = (await response.json()) as { public_url?: string; error?: string };
+      if (!response.ok || !payload.public_url) {
+        throw new Error(payload.error || 'Profile photo could not be uploaded.');
+      }
+      setProfilePhotoUrl(payload.public_url);
+    } catch (uploadError) {
+      setError(uploadError instanceof Error ? uploadError.message : 'Profile photo could not be uploaded.');
+    } finally {
+      setIsUploadingPhoto(false);
+    }
+  }
 
   async function loadEmployees() {
     const response = await fetch('/api/staff/employees', { cache: 'no-store' });
@@ -64,20 +104,39 @@ export function CreateEmployeeForm() {
     setIsSubmitting(true);
 
     const formData = new FormData(event.currentTarget);
-    const response = await fetch('/api/staff/employees', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        fullName: formData.get('fullName'),
-        email: formData.get('email'),
-        phone: formData.get('phone'),
-        businessRole,
-        employmentDate: formData.get('employmentDate'),
-        status,
-        profilePhotoUrl: formData.get('profilePhotoUrl'),
-      }),
-    });
-    const payload = (await response.json()) as CreateEmployeeResponse;
+    const password = String(formData.get('password') || '');
+    const passwordConfirmation = String(formData.get('passwordConfirmation') || '');
+
+    if (credentialMethod === 'password' && password !== passwordConfirmation) {
+      setIsSubmitting(false);
+      setError('The employee passwords do not match.');
+      return;
+    }
+
+    let response: Response;
+    let payload: CreateEmployeeResponse;
+    try {
+      response = await fetch('/api/staff/employees', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          fullName: formData.get('fullName'),
+          email: formData.get('email'),
+          phone: formData.get('phone'),
+          businessRole,
+          employmentDate: formData.get('employmentDate'),
+          status,
+          profilePhotoUrl,
+          credentialMethod,
+          password: credentialMethod === 'password' ? password : undefined,
+        }),
+      });
+      payload = (await response.json()) as CreateEmployeeResponse;
+    } catch {
+      setIsSubmitting(false);
+      setError('The employee service could not be reached. Please try again.');
+      return;
+    }
 
     setIsSubmitting(false);
 
@@ -89,6 +148,8 @@ export function CreateEmployeeForm() {
     event.currentTarget.reset();
     setBusinessRole('sales');
     setStatus('active');
+    setCredentialMethod('invite');
+    setProfilePhotoUrl('');
     setResult(payload);
     await loadEmployees();
   }
@@ -177,42 +238,130 @@ export function CreateEmployeeForm() {
             </Select>
           </div>
           <div className="space-y-2 sm:col-span-2">
-            <Label htmlFor="profile-photo-url">Profile Photo URL</Label>
-            <Input
-              id="profile-photo-url"
-              name="profilePhotoUrl"
-              type="url"
-              placeholder="Optional image URL"
+            <Label>Profile Photo</Label>
+            <input
+              ref={fileInputRef}
+              className="sr-only"
+              type="file"
+              accept="image/jpeg,image/png,image/webp,image/gif"
+              onChange={uploadProfilePhoto}
             />
+            <div className="flex min-h-[72px] items-center gap-3 rounded-md border bg-background p-3">
+              {profilePhotoUrl ? (
+                <img className="h-12 w-12 rounded-md object-cover" src={profilePhotoUrl} alt="Employee profile preview" />
+              ) : (
+                <div className="flex h-12 w-12 items-center justify-center rounded-md bg-muted text-muted-foreground">
+                  <ImagePlus className="h-5 w-5" />
+                </div>
+              )}
+              <div className="flex flex-1 flex-wrap gap-2">
+                <Button
+                  type="button"
+                  variant="outline"
+                  disabled={isUploadingPhoto}
+                  onClick={() => fileInputRef.current?.click()}
+                >
+                  {isUploadingPhoto ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <ImagePlus className="mr-2 h-4 w-4" />}
+                  {isUploadingPhoto ? 'Uploading...' : profilePhotoUrl ? 'Replace photo' : 'Upload photo'}
+                </Button>
+                {profilePhotoUrl ? (
+                  <Button type="button" variant="ghost" size="icon" title="Remove photo" onClick={() => setProfilePhotoUrl('')}>
+                    <X className="h-4 w-4" />
+                  </Button>
+                ) : null}
+              </div>
+            </div>
           </div>
+          <div className="space-y-2 sm:col-span-2">
+            <Label>Login setup</Label>
+            <div className="grid grid-cols-2 gap-1 rounded-md bg-muted p-1">
+              <Button
+                type="button"
+                variant={credentialMethod === 'invite' ? 'default' : 'ghost'}
+                onClick={() => setCredentialMethod('invite')}
+              >
+                <MailCheck className="mr-2 h-4 w-4" /> Email setup link
+              </Button>
+              <Button
+                type="button"
+                variant={credentialMethod === 'password' ? 'default' : 'ghost'}
+                onClick={() => setCredentialMethod('password')}
+              >
+                <KeyRound className="mr-2 h-4 w-4" /> Set password
+              </Button>
+            </div>
+          </div>
+          {credentialMethod === 'password' ? (
+            <div className="space-y-2 sm:col-span-2">
+              <Label htmlFor="employee-password">Employee Password</Label>
+              <div className="relative">
+                <Input
+                  id="employee-password"
+                  name="password"
+                  type={showPassword ? 'text' : 'password'}
+                  minLength={12}
+                  autoComplete="new-password"
+                  placeholder="At least 12 characters"
+                  className="pr-11"
+                  required
+                />
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="icon"
+                  className="absolute right-0 top-0"
+                  title={showPassword ? 'Hide password' : 'Show password'}
+                  onClick={() => setShowPassword((current) => !current)}
+                >
+                  {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                </Button>
+              </div>
+              <p className="text-xs text-muted-foreground">Share this password with the employee through a secure channel.</p>
+              <Label htmlFor="employee-password-confirmation">Confirm Password</Label>
+              <Input
+                id="employee-password-confirmation"
+                name="passwordConfirmation"
+                type={showPassword ? 'text' : 'password'}
+                minLength={12}
+                autoComplete="new-password"
+                placeholder="Enter the same password again"
+                required
+              />
+            </div>
+          ) : null}
           <div className="sm:col-span-2">
-            <Button type="submit" disabled={isSubmitting}>
-              <UserPlus className="mr-2 h-4 w-4" />
-              {isSubmitting ? 'Creating...' : 'Generate credentials'}
+            <Button type="submit" disabled={isSubmitting || isUploadingPhoto}>
+              {credentialMethod === 'password' ? <KeyRound className="mr-2 h-4 w-4" /> : <UserPlus className="mr-2 h-4 w-4" />}
+              {isSubmitting ? 'Creating...' : credentialMethod === 'password' ? 'Create account with password' : 'Generate credentials'}
             </Button>
           </div>
         </form>
 
         {error ? <p className="mt-4 text-sm text-destructive">{error}</p> : null}
 
-        {result?.employee && result.tempPassword ? (
+        {result?.employee && result.delivery === 'email' ? (
           <div className="mt-5 rounded-md border border-accent/30 bg-accent/10 p-4 text-sm">
-            <p className="font-medium text-foreground">
-              {result.employee.employee_id || 'Employee'} created for {result.employee.email}
-            </p>
-            <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:items-center">
-              <code className="rounded bg-background px-3 py-2 text-xs">
-                {result.tempPassword}
-              </code>
-              <Button
-                type="button"
-                variant="outline"
-                size="sm"
-                onClick={() => navigator.clipboard.writeText(result.tempPassword || '')}
-              >
-                <Copy className="mr-2 h-4 w-4" />
-                Copy
-              </Button>
+            <div className="flex items-start gap-3">
+              <MailCheck className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
+              <div>
+                <p className="font-medium text-foreground">
+                  {result.message || `Credentials sent to ${result.employee.email}.`}
+                </p>
+                <p className="mt-1 text-muted-foreground">
+                  The employee must use the private setup link in that email to choose a password. No password is shown to or stored by the admin.
+                </p>
+              </div>
+            </div>
+          </div>
+        ) : null}
+        {result?.employee && result.delivery === 'password' ? (
+          <div className="mt-5 rounded-md border border-accent/30 bg-accent/10 p-4 text-sm">
+            <div className="flex items-start gap-3">
+              <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
+              <div>
+                <p className="font-medium text-foreground">{result.message}</p>
+                <p className="mt-1 text-muted-foreground">The account is active and the employee can sign in with the password you set.</p>
+              </div>
             </div>
           </div>
         ) : null}
@@ -228,7 +377,16 @@ export function CreateEmployeeForm() {
         <div className="divide-y rounded-md border">
           {employees.length ? (
             employees.map((employee) => {
-              const revoked = Boolean(employee.revoked_at);
+              const revoked = employee.auth_status === 'suspended' || Boolean(employee.revoked_at);
+              const authStatus = employee.auth_status || 'not_provisioned';
+              const statusLabel =
+                authStatus === 'active'
+                  ? 'Active'
+                  : authStatus === 'invited'
+                    ? 'Credentials sent'
+                    : authStatus === 'suspended'
+                      ? 'Suspended'
+                      : 'Not yet activated';
 
               return (
                 <div
@@ -238,8 +396,16 @@ export function CreateEmployeeForm() {
                   <div className="min-w-0">
                     <div className="flex flex-wrap items-center gap-2">
                       <p className="font-medium">{employee.name}</p>
-                      <Badge variant={revoked ? 'secondary' : 'default'}>
-                        {revoked ? 'Revoked' : employee.status || 'Active'}
+                      <Badge
+                        variant={authStatus === 'active' ? 'default' : 'secondary'}
+                        className="gap-1.5"
+                      >
+                        {authStatus === 'active' ? (
+                          <CheckCircle2 className="h-3 w-3" />
+                        ) : (
+                          <Clock3 className="h-3 w-3" />
+                        )}
+                        {statusLabel}
                       </Badge>
                     </div>
                     <p className="mt-1 text-sm text-muted-foreground">
@@ -258,7 +424,7 @@ export function CreateEmployeeForm() {
                     ) : (
                       <ShieldOff className="mr-2 h-4 w-4" />
                     )}
-                    {revoked ? 'Restore' : 'Revoke'}
+                    {revoked ? 'Restore Access' : 'Suspend Access'}
                   </Button>
                 </div>
               );

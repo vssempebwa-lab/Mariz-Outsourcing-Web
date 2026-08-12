@@ -5,6 +5,7 @@ import { SectionHeading } from '@/components/site/section-heading';
 import { LeadForm } from '@/components/site/lead-form';
 import { METRICS, TESTIMONIALS } from '@/lib/data';
 import { getPublishedPageSections, type PageSection } from '@/lib/site-customization';
+import { getPublishedSectionContent, type BlockData } from '@/lib/siteContent';
 import { ArrowRight, CheckCircle2, Star } from 'lucide-react';
 
 const HERO_IMAGE_BUCKET = 'Project images';
@@ -29,13 +30,16 @@ function getPublicStorageUrl(bucket: string, path: string) {
 }
 
 export default async function Home() {
-  const sections = await getPublishedPageSections('home');
+  const [sections, heroBlocks] = await Promise.all([
+    getPublishedPageSections('home'),
+    getPublishedSectionContent('home', 'hero'),
+  ]);
   const heroContent = sections.find((section) => section.section_type === 'hero')?.content;
   const ctaContent = sections.find((section) => section.section_type === 'cta')?.content;
 
   return (
     <>
-      <Hero content={heroContent} />
+      <Hero content={heroContent} blocks={heroBlocks} />
       <Metrics />
       <Testimonials />
       <LeadCapture content={ctaContent} />
@@ -43,11 +47,17 @@ export default async function Home() {
   );
 }
 
-function Hero({ content }: { content?: PageSection['content'] }) {
-  const heroImages = HERO_IMAGE_FILES.map((file) => ({
+function blockString(block: BlockData | undefined, key: string) {
+  const value = block?.[key];
+  return typeof value === 'string' ? value : '';
+}
+
+function Hero({ content, blocks }: { content?: PageSection['content']; blocks: Record<string, BlockData> }) {
+  const cmsImage = blockString(blocks.hero_image, 'url');
+  const heroImages = (cmsImage ? [{ file: 'cms-hero', src: cmsImage }] : HERO_IMAGE_FILES.map((file) => ({
     file,
     src: getPublicStorageUrl(HERO_IMAGE_BUCKET, file),
-  })).filter((image) => image.src);
+  }))).filter((image) => image.src);
   const animationDuration = `${heroImages.length * 6}s`;
 
   return (
@@ -73,28 +83,30 @@ function Hero({ content }: { content?: PageSection['content'] }) {
           <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 backdrop-blur">
             <span className="flex h-2 w-2 rounded-full bg-accent animate-pulse" />
             <span className="text-xs font-semibold text-white/80">
-              {content?.eyebrow || 'Trusted BPO Partner in East Africa'}
+              {blockString(blocks.eyebrow, 'text') || content?.eyebrow || 'Trusted BPO Partner in East Africa'}
             </span>
           </div>
 
           <h1 className="font-display text-3xl font-normal leading-tight text-balance sm:text-4xl lg:text-5xl">
-            {content?.heading || 'One agency for the services that keep your business moving.'}
+            {blockString(blocks.headline, 'text') || content?.heading || 'One agency for the services that keep your business moving.'}
           </h1>
 
           <p className="mt-4 max-w-xl text-sm leading-relaxed text-white/78 text-balance sm:text-base">
-            {content?.body ||
-              'Recruitment, customer support, software, branding, and media production delivered through one coordinated outsourcing partner.'}
+            {blockString(blocks.body, 'text') || content?.body ||
+              'Revenue operations, recruitment, customer support, software, branding, and media production delivered through one coordinated outsourcing partner.'}
           </p>
 
           <div className="mt-6 flex flex-col gap-3 sm:flex-row">
             <Button asChild size="lg" className="group">
-              <Link href={content?.buttonHref || '/contact'}>
-                {content?.buttonLabel || 'Request Consultation'}
+              <Link href={blockString(blocks.primary_cta, 'href') || content?.buttonHref || '/contact'}>
+                {blockString(blocks.primary_cta, 'label') || content?.buttonLabel || 'Request Consultation'}
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
             </Button>
             <Button asChild size="lg" variant="outline" className="border-white/35 bg-white/10 text-white hover:bg-white hover:text-navy">
-              <Link href="/services">Explore Our Services</Link>
+              <Link href={blockString(blocks.secondary_cta, 'href') || '/services'}>
+                {blockString(blocks.secondary_cta, 'label') || 'Explore Our Services'}
+              </Link>
             </Button>
           </div>
 
@@ -109,7 +121,7 @@ function Hero({ content }: { content?: PageSection['content'] }) {
             </div>
             <div className="flex items-center gap-2">
               <CheckCircle2 className="h-4 w-4 text-accent" />
-              ISO-Standard QA
+              Revenue Pipeline Buildout
             </div>
           </div>
         </div>

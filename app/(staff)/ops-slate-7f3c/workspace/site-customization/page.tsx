@@ -2,11 +2,11 @@ import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 import { AlertTriangle, Database } from 'lucide-react';
 
-import { SiteCustomizationClient } from '@/app/(staff)/ops-slate-7f3c/workspace/site-customization/site-customization-client';
+import { SiteCmsClient } from '@/components/ops/site-cms-client';
 import { Button } from '@/components/ui/button';
 import { staffAccessPath } from '@/lib/portal-routes';
 import { getCurrentStaff } from '@/lib/staff-session';
-import { getCustomizationWorkspace } from '@/lib/site-customization';
+import { getCmsWorkspace } from '@/lib/siteContent';
 
 export const metadata: Metadata = {
   title: 'Site Customization',
@@ -29,9 +29,9 @@ export default async function SiteCustomizationPage() {
   }
 
   try {
-    const workspace = await getCustomizationWorkspace(staff);
+    const workspace = await getCmsWorkspace(staff);
 
-    return <SiteCustomizationClient workspace={workspace} />;
+    return <SiteCmsClient workspace={workspace} />;
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Unable to load customization.';
 

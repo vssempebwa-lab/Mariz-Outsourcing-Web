@@ -117,7 +117,7 @@ export async function generateEmployeeReport({
         const { data, error } = await supabase
           .from('ops_tasks')
           .select('id, status, due_date, created_at')
-          .eq('assigned_to', staff.id)
+          .or(`owner_id.eq.${staff.id},assigned_to.eq.${staff.id}`)
           .gte('created_at', window.startIso)
           .lte('created_at', window.endIso);
 
@@ -135,7 +135,7 @@ export async function generateEmployeeReport({
         const { data, error } = await supabase
           .from('ops_projects')
           .select('id, status, created_at')
-          .eq('assigned_to', staff.id)
+          .or(`owner_id.eq.${staff.id},assigned_to.eq.${staff.id}`)
           .gte('created_at', window.startIso)
           .lte('created_at', window.endIso);
 
@@ -153,7 +153,7 @@ export async function generateEmployeeReport({
         const { data, error } = await supabase
           .from('ops_meetings')
           .select('id, starts_at')
-          .contains('attendee_ids', [staff.id])
+          .or(`owner_id.eq.${staff.id},attendee_ids.cs.{${staff.id}}`)
           .gte('starts_at', window.startIso)
           .lte('starts_at', window.endIso);
 
@@ -170,7 +170,7 @@ export async function generateEmployeeReport({
       const { data, error } = await supabase
         .from('ops_leads')
         .select('id, status, created_at')
-        .eq('assigned_to', staff.id)
+        .or(`owner_id.eq.${staff.id},assigned_to.eq.${staff.id}`)
         .gte('created_at', window.startIso)
         .lte('created_at', window.endIso);
 

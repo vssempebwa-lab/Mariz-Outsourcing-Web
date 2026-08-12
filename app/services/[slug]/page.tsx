@@ -5,7 +5,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { SectionHeading } from '@/components/site/section-heading';
 import { Icon } from '@/components/site/icon';
 import { LeadForm } from '@/components/site/lead-form';
-import { SERVICES, SERVICE_OPTIONS } from '@/lib/data';
+import { SERVICES } from '@/lib/data';
 import { CheckCircle2, ArrowRight, ArrowLeft } from 'lucide-react';
 
 export function generateStaticParams() {
@@ -54,12 +54,31 @@ export default function ServiceDetailPage({
               <p className="mt-5 text-lg text-muted-foreground leading-relaxed text-balance">
                 {service.description}
               </p>
+              <div className="mt-6 grid gap-3 sm:grid-cols-3">
+                {[
+                  ['Objective', service.objective],
+                  ['Target metric', service.targetMetric],
+                  ['Best fit', service.targetAudience],
+                ].map(([label, value]) => (
+                  <div
+                    key={label}
+                    className="rounded-xl border border-border bg-background/80 p-4"
+                  >
+                    <p className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+                      {label}
+                    </p>
+                    <p className="mt-2 text-xs font-medium leading-relaxed text-foreground">
+                      {value}
+                    </p>
+                  </div>
+                ))}
+              </div>
               <div className="mt-8 flex gap-3">
                 <Button asChild size="lg">
                   <Link href="/contact">Request Consultation</Link>
                 </Button>
                 <Button asChild size="lg" variant="outline">
-                  <Link href="/portfolio">View Portfolio</Link>
+                  <Link href="/projects">View Projects</Link>
                 </Button>
               </div>
             </div>
@@ -81,12 +100,31 @@ export default function ServiceDetailPage({
           <div className="grid lg:grid-cols-3 gap-12">
             <div className="lg:col-span-2">
               <SectionHeading
-                eyebrow="What We Deliver"
-                title="Capabilities & features"
-                description="A detailed breakdown of what this service includes and how it creates value for your operations."
+                eyebrow="Operational Framework"
+                title="Workflow and core deliverables"
+                description="A detailed breakdown of how this division operates and what it delivers for your organization."
                 align="left"
               />
-              <div className="mt-8 grid sm:grid-cols-2 gap-4">
+              <div className="mt-8 grid gap-3">
+                {service.workflow.map((item, index) => (
+                  <div
+                    key={item}
+                    className="flex items-start gap-4 rounded-xl border border-border bg-background p-4"
+                  >
+                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-xs font-bold text-primary">
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                    <span className="pt-1 text-sm font-medium leading-relaxed text-foreground">
+                      {item}
+                    </span>
+                  </div>
+                ))}
+              </div>
+
+              <h3 className="mt-12 font-display text-2xl font-bold text-foreground">
+                Capabilities included
+              </h3>
+              <div className="mt-6 grid sm:grid-cols-2 gap-4">
                 {service.features.map((f) => (
                   <div
                     key={f}

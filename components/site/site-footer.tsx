@@ -2,10 +2,9 @@ import Link from 'next/link';
 import { Mail, Phone, MapPin, ArrowUpRight, Lock, UserRound } from 'lucide-react';
 import { BrandLogo } from '@/components/site/brand-logo';
 import { SITE, SERVICES } from '@/lib/data';
-import { staffAccessPath, staffWorkspacePath } from '@/lib/portal-routes';
+import { employeeLoginPath, staffAccessPath, staffWorkspacePath } from '@/lib/portal-routes';
 
 const staffPreviewHref = `${staffWorkspacePath}?preview=super_admin`;
-const employeePreviewHref = `${staffWorkspacePath}?preview=employee`;
 
 export function SiteFooter() {
   return (
@@ -23,8 +22,9 @@ export function SiteFooter() {
               </div>
             </Link>
             <p className="text-sm text-white/70 leading-relaxed max-w-sm mb-6">
-              {SITE.tagline} We deliver end-to-end human capital, 24/7 call center
-              operations, custom software, branding, and media production.
+              {SITE.tagline} We deliver revenue operations, talent acquisition,
+              24/7 call center operations, custom software, branding, and media
+              production.
             </p>
             <div className="space-y-3 text-sm">
               <a
@@ -56,7 +56,7 @@ export function SiteFooter() {
               {[
                 { label: 'About Us', href: '/about' },
                 { label: 'Industries', href: '/industries' },
-                { label: 'Portfolio', href: '/portfolio' },
+                { label: 'Projects', href: '/projects' },
                 { label: 'Careers', href: '/careers' },
                 { label: 'Blog', href: '/blog' },
                 { label: 'Contact', href: '/contact' },
@@ -117,7 +117,7 @@ export function SiteFooter() {
                 Staff Access
               </Link>
               <Link
-                href={process.env.STAFF_AUTH_ENABLED === 'true' ? staffAccessPath : employeePreviewHref}
+                href={employeeLoginPath}
                 aria-label="Employee access"
                 title="Employee access"
                 className="inline-flex items-center gap-1.5 text-xs text-white/35 hover:text-white/70 transition-colors"
