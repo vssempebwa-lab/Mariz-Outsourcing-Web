@@ -87,7 +87,9 @@ export async function middleware(request: NextRequest) {
     }
   }
 
-  if (staffAuthEnabled && pathname.startsWith('/api/staff') && !token) {
+  const isStaffOAuthVerify = pathname === '/api/staff/oauth-verify';
+
+  if (staffAuthEnabled && pathname.startsWith('/api/staff') && !isStaffOAuthVerify && !token) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 

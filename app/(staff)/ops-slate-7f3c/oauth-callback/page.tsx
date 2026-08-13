@@ -15,9 +15,26 @@ export default function OAuthCallbackPage() {
     async function handle() {
       try {
         const portal = searchParams.get('portal') || 'admin';
+        const code = searchParams.get('code');
+        const oauthError = searchParams.get('error_description') || searchParams.get('error');
 
-        // Parse the session from the URL fragment returned by Supabase
-        const { data, error } = await supabase.auth.getSessionFromUrl();
+        if (oauthError) {
+          setMessage(oauthError);
+          return;
+        }
+
+        if (code) {
+          const { error: exchangeError } = await supabase.auth.exchangeCodeForSession(code);
+          if (exchangeError) {
+            const existing = await supabase.auth.getSession();
+            if (!existing.data.session?.user?.email) {
+              setMessage(exchangeError.message || 'Could not read authentication response.');
+              return;
+            }
+          }
+        }
+
+        const { data, error } = await supabase.auth.getSession();
 
         if (error || !data.session?.user?.email) {
           setMessage('Could not read authentication response.');
