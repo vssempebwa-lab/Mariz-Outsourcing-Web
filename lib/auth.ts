@@ -3,6 +3,7 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 import { compare } from 'bcryptjs';
 import { createClient } from '@supabase/supabase-js';
 import { z } from 'zod';
+import jwt from 'jsonwebtoken';
 
 import { markEmployeeActive } from '@/lib/employees';
 import { staffWorkspacePath } from '@/lib/portal-routes';
@@ -10,11 +11,16 @@ import { getSupabaseAdmin } from '@/lib/supabase-admin';
 
 export type StaffRole = 'super_admin' | 'employee';
 
-const credentialsSchema = z.object({
-  email: z.string().email(),
-  password: z.string().min(8),
-  portal: z.enum(['employee']).optional(),
-});
+const credentialsSchema = z
+  .object({
+    email: z.string().email().optional(),
+    password: z.string().min(8).optional(),
+    portal: z.enum(['employee']).optional(),
+    token: z.string().optional(),
+  })
+  .refine((v) => Boolean(v.token) || (v.email && v.password), {
+    message: 'Either token or email+password required',
+  });
 
 export const authOptions: NextAuthOptions = {
   session: {
@@ -40,10 +46,47 @@ export const authOptions: NextAuthOptions = {
         }
 
         const admin = getSupabaseAdmin();
+
+        // Token-based exchange (from OAuth flow)
+        if (parsed.data.token) {
+          const secret = process.env.NEXTAUTH_SECRET;
+          if (!secret) return null;
+
+          try {
+            const payload = jwt.verify(parsed.data.token, secret) as {
+              email: string;
+              role: string;
+              sub: string;
+            };
+
+            const { data: account, error } = await admin
+              .from('staff_accounts')
+              .select('id, name, email, role, revoked_at, status')
+              .eq('email', payload.email)
+              .maybeSingle();
+
+            if (error || !account || account.revoked_at || account.status === 'inactive') {
+              return null;
+            }
+
+            return {
+              id: account.id,
+              name: account.name,
+              email: account.email,
+              role: account.role as StaffRole,
+            };
+          } catch (e) {
+            return null;
+          }
+        }
+
+        // Email + password flow (existing)
+        const email = parsed.data.email!.toLowerCase();
+
         const { data: account, error } = await admin
           .from('staff_accounts')
           .select('id, name, email, role, password_hash, auth_user_id, auth_status, status, revoked_at')
-          .eq('email', parsed.data.email.toLowerCase())
+          .eq('email', email)
           .single();
 
         if (error || !account || account.revoked_at || account.status === 'inactive') {
@@ -65,8 +108,8 @@ export const authOptions: NextAuthOptions = {
             auth: { autoRefreshToken: false, persistSession: false },
           });
           const { data: authData, error: authError } = await authClient.auth.signInWithPassword({
-            email: parsed.data.email.toLowerCase(),
-            password: parsed.data.password,
+            email,
+            password: parsed.data.password!,
           });
           passwordIsValid = !authError && authData.user?.id === account.auth_user_id;
 
@@ -74,7 +117,7 @@ export const authOptions: NextAuthOptions = {
             await markEmployeeActive(account.auth_user_id);
           }
         } else if (account.role === 'super_admin') {
-          passwordIsValid = await compare(parsed.data.password, account.password_hash);
+          passwordIsValid = await compare(parsed.data.password!, account.password_hash);
         }
 
         if (!passwordIsValid) {

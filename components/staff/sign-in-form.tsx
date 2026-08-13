@@ -7,7 +7,7 @@ import { Lock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { staffWorkspacePath } from '@/lib/portal-routes';
+import { staffWorkspacePath, staffAccessPath } from '@/lib/portal-routes';
 import { supabase } from '@/lib/supabase';
 
 export function SignInForm({ employeeOnly = false }: { employeeOnly?: boolean }) {
@@ -47,6 +47,23 @@ export function SignInForm({ employeeOnly = false }: { employeeOnly?: boolean })
     window.location.href = result?.url || staffWorkspacePath;
   }
 
+  async function onGoogleSignIn() {
+    try {
+      setError('');
+      setIsSubmitting(true);
+
+      const redirectTo = `${window.location.origin}${staffAccessPath}/oauth-callback?portal=${
+        employeeOnly ? 'employee' : 'admin'
+      }`;
+
+      await supabase.auth.signInWithOAuth({ provider: 'google', options: { redirectTo } });
+      // supabase will redirect the browser to the OAuth flow
+    } catch (err) {
+      setError('Could not start Google sign-in.');
+      setIsSubmitting(false);
+    }
+  }
+
   return (
     <form className="space-y-4" onSubmit={onSubmit}>
       <div className="space-y-2">
@@ -75,6 +92,28 @@ export function SignInForm({ employeeOnly = false }: { employeeOnly?: boolean })
         <Lock className="mr-2 h-4 w-4" />
         {isSubmitting ? 'Signing in...' : 'Sign in'}
       </Button>
+      <div className="pt-2">
+        <Button
+          type="button"
+          variant="outline"
+          className="w-full"
+          onClick={() => window.location.assign('/contact')}
+          disabled={isSubmitting}
+        >
+          Sign up
+        </Button>
+      </div>
+      <div className="pt-2">
+        <Button
+          type="button"
+          variant="ghost"
+          className="w-full border"
+          onClick={onGoogleSignIn}
+          disabled={isSubmitting}
+        >
+          Continue with Google
+        </Button>
+      </div>
     </form>
   );
 }
