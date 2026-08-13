@@ -107,24 +107,7 @@ export function SiteFooter() {
               <ArrowUpRight className="h-4 w-4" />
             </Link>
             <div className="mt-6 flex flex-col items-start gap-2 border-t border-white/10 pt-6">
-              <Link
-                href={process.env.STAFF_AUTH_ENABLED === 'true' ? staffAccessPath : staffPreviewHref}
-                aria-label="Staff access"
-                title="Staff access"
-                className="inline-flex items-center gap-1.5 text-xs text-white/35 hover:text-white/70 transition-colors"
-              >
-                <Lock className="h-3 w-3" />
-                Staff Access
-              </Link>
-              <Link
-                href={employeeLoginPath}
-                aria-label="Employee access"
-                title="Employee access"
-                className="inline-flex items-center gap-1.5 text-xs text-white/35 hover:text-white/70 transition-colors"
-              >
-                <UserRound className="h-3 w-3" />
-                Employee Access
-              </Link>
+              {/* Staff/Employee access links intentionally removed from public footer */}
             </div>
           </div>
         </div>
