@@ -2,7 +2,7 @@
 
 import { usePathname } from 'next/navigation';
 
-import { staffAccessPath } from '@/lib/portal-routes';
+import { isStaffPath } from '@/lib/portal-routes';
 import { SiteFooter } from '@/components/site/site-footer';
 import { SiteHeader } from '@/components/site/site-header';
 
@@ -14,7 +14,7 @@ export function SiteChrome({
   publicThemeStyle?: React.CSSProperties;
 }) {
   const pathname = usePathname();
-  const isStaffArea = pathname.startsWith(staffAccessPath);
+  const isStaffArea = isStaffPath(pathname);
 
   return (
     <>
@@ -28,7 +28,7 @@ export function SiteChrome({
           <SiteFooter />
         </div>
       ) : (
-        <main className="flex-1">{children}</main>
+        <main className="staff-theme min-h-screen flex-1 bg-background text-foreground">{children}</main>
       )}
     </>
   );

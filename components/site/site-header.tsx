@@ -11,15 +11,7 @@ import { NAV_LINKS, SITE } from '@/lib/data';
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
-    onScroll();
-    window.addEventListener('scroll', onScroll);
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
 
   useEffect(() => {
     setOpen(false);
@@ -32,12 +24,7 @@ export function SiteHeader() {
 
   return (
     <header
-      className={cn(
-        'sticky top-0 z-50 w-full transition-all duration-300',
-        scrolled
-          ? 'border-b border-white/10 bg-background/88 backdrop-blur-lg'
-          : 'bg-transparent'
-      )}
+      className="sticky top-0 z-50 w-full border-b border-border bg-background"
     >
       <div className="container mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 lg:h-20 items-center justify-between">
@@ -53,7 +40,7 @@ export function SiteHeader() {
             </div>
           </Link>
 
-          <nav className="hidden min-w-0 flex-1 items-center justify-center gap-0.5 px-3 lg:flex xl:px-5">
+          <nav className="hidden min-w-0 flex-1 items-center justify-center gap-0.5 px-3 xl:flex xl:px-5">
             {NAV_LINKS.map((link) => {
               const active = isActive(link.href);
               return (
@@ -64,7 +51,7 @@ export function SiteHeader() {
                     'relative shrink-0 rounded-md px-2 py-2 text-sm font-medium transition-colors xl:px-2.5 2xl:px-3.5',
                     active
                       ? 'text-foreground'
-                      : 'text-foreground/68 hover:text-foreground hover:bg-white/5'
+                      : 'text-foreground/68 hover:text-foreground hover:bg-primary/5'
                   )}
                 >
                   {link.label}
@@ -76,8 +63,8 @@ export function SiteHeader() {
             })}
           </nav>
 
-          <div className="hidden shrink-0 items-center gap-3 border-l border-border/70 pl-4 lg:flex">
-            <div className="hidden items-center gap-2 xl:flex">
+          <div className="hidden shrink-0 items-center gap-3 border-l border-border/70 pl-4 xl:flex">
+            <div className="hidden items-center gap-2 2xl:flex">
               <a
                 href={`tel:${SITE.phoneHref}`}
                 aria-label={`Call ${SITE.phone}`}
@@ -99,7 +86,7 @@ export function SiteHeader() {
           </div>
 
           <button
-            className="lg:hidden p-2 -mr-2 text-foreground"
+            className="xl:hidden p-2 -mr-2 text-foreground"
             onClick={() => setOpen(!open)}
             aria-label="Toggle menu"
           >
@@ -109,7 +96,7 @@ export function SiteHeader() {
       </div>
 
       {open && (
-        <div className="animate-fade-up border-t border-white/10 bg-background lg:hidden">
+        <div className="animate-fade-up border-t border-border bg-background xl:hidden">
           <nav className="container mx-auto flex max-w-[1440px] flex-col gap-1 px-4 py-4">
             {NAV_LINKS.map((link) => (
               <Link
@@ -119,7 +106,7 @@ export function SiteHeader() {
                   'min-h-11 px-4 py-3 text-sm font-medium rounded-lg transition-colors',
                   isActive(link.href)
                     ? 'bg-primary/10 text-primary'
-                    : 'text-foreground/70 hover:bg-white/5'
+                    : 'text-foreground/70 hover:bg-primary/5'
                 )}
               >
                 {link.label}

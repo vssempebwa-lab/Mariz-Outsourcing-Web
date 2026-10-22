@@ -6,7 +6,6 @@ import {
   PanelLeftClose,
   PanelLeftOpen,
   Search,
-  UserCircle,
 } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
@@ -20,16 +19,21 @@ import {
 } from '@/components/ui/select';
 import { SignOutButton } from '@/components/staff/sign-out-button';
 import type { StaffRole } from '@/lib/auth';
-import { employeeLoginPath } from '@/lib/portal-routes';
+import Link from 'next/link';
+import type { CurrentStaff } from '@/lib/staff-session';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { employeeLoginPath, staffWorkspacePath } from '@/lib/portal-routes';
 
 export function OpsTopbar({
   role,
+  staff,
   authEnabled,
   onOpenSidebar,
   sidebarCollapsed,
   onToggleSidebar,
 }: {
   role: StaffRole;
+  staff: CurrentStaff;
   authEnabled: boolean;
   onOpenSidebar: () => void;
   sidebarCollapsed: boolean;
@@ -38,8 +42,8 @@ export function OpsTopbar({
   const isEmployee = role === 'employee';
 
   return (
-    <header className="sticky top-0 z-20 border-b bg-background/95 px-4 py-3 backdrop-blur lg:px-6">
-      <div className="flex items-center gap-3">
+    <header className="sticky top-0 z-20 border-b border-border bg-card px-4 py-3 lg:px-6">
+      <div className="flex flex-wrap items-center gap-2 sm:flex-nowrap sm:gap-3">
         <Button
           variant="outline"
           size="icon"
@@ -63,7 +67,7 @@ export function OpsTopbar({
             <PanelLeftClose className="h-4 w-4" />
           )}
         </Button>
-        <div className="relative max-w-xl flex-1">
+        <div className="relative order-last min-w-0 basis-full sm:order-none sm:max-w-xl sm:flex-1 sm:basis-auto">
           <Search className="pointer-events-none absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
           <Input
             className="h-10 pl-9"
@@ -72,7 +76,7 @@ export function OpsTopbar({
         </div>
         {isEmployee ? (
           <Select defaultValue="available">
-            <SelectTrigger className="hidden h-10 w-36 md:flex" aria-label="Work status">
+            <SelectTrigger className="hidden h-10 w-32 shrink-0 md:flex" aria-label="Work status">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -82,14 +86,17 @@ export function OpsTopbar({
             </SelectContent>
           </Select>
         ) : null}
-        <Button variant="outline" size="icon" aria-label="Notifications">
+        <Button variant="outline" size="icon" className="ml-auto shrink-0 sm:ml-0" aria-label="Notifications">
           <Bell className="h-4 w-4" />
         </Button>
-        <div className="hidden items-center gap-2 rounded-md border px-3 py-2 text-sm md:flex">
-          <UserCircle className="h-4 w-4 text-muted-foreground" />
-          <span className="capitalize">{role.replace('_', ' ')}</span>
-        </div>
-        {authEnabled || isEmployee ? (
+        <Link href={`${staffWorkspacePath}/settings`} className="flex shrink-0 items-center gap-2 rounded-md border p-2 text-sm hover:bg-muted" aria-label="Open account settings">
+          <Avatar className="h-8 w-8">
+            <AvatarImage src={staff.profile_photo_url || undefined} alt="" className="object-cover" />
+            <AvatarFallback>{staff.name.slice(0, 1).toUpperCase()}</AvatarFallback>
+          </Avatar>
+          <span className="hidden max-w-28 truncate md:block">{staff.name}</span>
+        </Link>
+        {authEnabled || isEmployee || staff.id ? (
           <SignOutButton callbackUrl={isEmployee ? employeeLoginPath : undefined} />
         ) : null}
       </div>

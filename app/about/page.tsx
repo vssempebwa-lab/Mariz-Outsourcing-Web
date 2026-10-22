@@ -64,17 +64,17 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="py-20 lg:py-24 border-y border-border bg-navy">
+      <section className="py-20 lg:py-24 border-y border-border bg-secondary">
         <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-8 lg:grid-cols-3">
             <div className="lg:col-span-1">
               <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-accent/20 text-accent mb-5">
                 <Target className="h-7 w-7" />
               </div>
-              <h2 className="font-display font-bold text-2xl text-white mb-3">
+              <h2 className="font-display font-bold text-2xl text-foreground mb-3">
                 Our Mission
               </h2>
-              <p className="text-white/70 leading-relaxed">
+              <p className="text-muted-foreground leading-relaxed">
                 {SITE.mission}
               </p>
             </div>
@@ -82,10 +82,10 @@ export default function AboutPage() {
               <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-accent/20 text-accent mb-5">
                 <Eye className="h-7 w-7" />
               </div>
-              <h2 className="font-display font-bold text-2xl text-white mb-3">
+              <h2 className="font-display font-bold text-2xl text-foreground mb-3">
                 Our Vision
               </h2>
-              <p className="text-white/70 leading-relaxed">
+              <p className="text-muted-foreground leading-relaxed">
                 {SITE.vision}
               </p>
             </div>
@@ -93,10 +93,10 @@ export default function AboutPage() {
               <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-accent/20 text-accent mb-5">
                 <Heart className="h-7 w-7" />
               </div>
-              <h2 className="font-display font-bold text-2xl text-white mb-3">
+              <h2 className="font-display font-bold text-2xl text-foreground mb-3">
                 Our Approach
               </h2>
-              <p className="text-white/70 leading-relaxed">
+              <p className="text-muted-foreground leading-relaxed">
                 We operate as a direct extension of our clients&apos; teams —
                 optimizing workflows, reducing administrative costs, and improving
                 operational efficiency with a relentless focus on quality.
@@ -137,7 +137,7 @@ export default function AboutPage() {
               <SectionHeading
                 eyebrow="Who We Are"
                 title="A full-service outsourcing agency built for scale"
-                description="Headquartered at Adonai Plaza in Uganda, MOA serves corporate enterprises, hospitality groups, construction firms, healthcare providers, retailers, and manufacturers — delivering integrated solutions that span talent, technology, and brand."
+                description="Headquartered at Level 3 Rm HC3 Honora Plaza, Opposite Be Energy Fuels, Zzana, Kampala, MOA serves corporate enterprises, hospitality groups, construction firms, healthcare providers, retailers, and manufacturers — delivering integrated solutions that span talent, technology, and brand."
                 align="left"
               />
               <div className="mt-8 space-y-4">
@@ -229,12 +229,12 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="py-20 lg:py-24 bg-navy">
+      <section className="py-20 lg:py-24 bg-secondary">
         <div className="container mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="font-display font-bold text-3xl sm:text-4xl text-white text-balance">
+          <h2 className="font-display font-bold text-3xl sm:text-4xl text-foreground text-balance">
             Let&apos;s build something efficient together
           </h2>
-          <p className="mt-4 text-white/70 text-lg text-balance">
+          <p className="mt-4 text-muted-foreground text-lg text-balance">
             Whether you need a single service or an integrated outsourcing solution,
             our team is ready to help you scale.
           </p>
@@ -242,7 +242,7 @@ export default function AboutPage() {
             <Button asChild size="lg">
               <Link href="/contact">Request Consultation</Link>
             </Button>
-            <Button asChild size="lg" variant="outline" className="bg-transparent border-white/30 text-white hover:bg-white/10 hover:text-white">
+            <Button asChild size="lg" variant="outline" className="bg-transparent border-border text-foreground hover:bg-primary/10 hover:text-foreground">
               <Link href="/services">View Services</Link>
             </Button>
           </div>

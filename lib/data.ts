@@ -7,7 +7,7 @@ export const SITE = {
   phoneHref: '+256705285709',
   website: 'www.moa.co.ug',
   websiteUrl: 'https://www.moa.co.ug',
-  address: 'Adonai Plaza, Opp Be Energy Petrol Station, Uganda',
+  address: 'Level 3 Rm HC3 Honora Plaza, Opposite Be Energy Fuels, Zzana, Kampala',
   email: 'info@moa.co.ug',
   mission:
     'To help businesses operate more efficiently and profitably by providing reliable outsourcing solutions that reduce operational stress, enhance productivity, and improve overall business performance.',
@@ -35,8 +35,7 @@ export const SERVICES = [
     description:
       'Mariz RevOps builds, optimizes, and executes end-to-end sales pipelines for growing businesses. We align CRM architecture, lead data, closing specialists, contract administration, and financial reconciliation into one measurable revenue engine.',
     icon: 'TrendingUp',
-    image:
-      'https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+    image: '/services/revenue-operations.jpeg',
     objective: 'End-to-end sales closing and pipeline build',
     targetMetric: 'Closed revenue, pipeline velocity, conversion rate',
     targetAudience: 'B2B companies, high-ticket services, SaaS teams, and growth-stage firms',
@@ -66,8 +65,7 @@ export const SERVICES = [
     description:
       'Mariz Strategic Recruitment & Talent Acquisition provides specialized headhunting, executive search, and workforce scaling. We map markets, engage passive talent, verify capability, and support onboarding so clients can hire for both performance and long-term fit.',
     icon: 'Users',
-    image:
-      'https://images.pexels.com/photos/5439368/pexels-photo-5439368.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+    image: '/services/strategic-recruitment.jpeg',
     objective: 'Executive headhunting and staff scaling',
     targetMetric: '95%+ retention, speed-to-value, candidate quality',
     targetAudience: 'Enterprises, scaling startups, technical teams, and specialized operators',
@@ -97,8 +95,7 @@ export const SERVICES = [
     description:
       'The Call Center & Customer Support division delivers always-on communication infrastructure across voice, email, web, chat, WhatsApp, and social channels. Tiered support, outbound growth campaigns, QA, and compliance controls help every customer touchpoint create measurable value.',
     icon: 'Headset',
-    image:
-      'https://images.pexels.com/photos/7709179/pexels-photo-7709179.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+    image: '/services/call-center.jpeg',
     objective: '24/7 inbound and outbound customer operations',
     targetMetric: 'First-contact resolution, SLA performance, customer satisfaction',
     targetAudience: 'E-commerce, telecom, logistics, hospitality, and service businesses',
@@ -128,8 +125,7 @@ export const SERVICES = [
     description:
       'Mariz builds secure web applications, mobile platforms, enterprise software, and automation systems that remove manual bottlenecks. We centralize disconnected databases into cloud-ready operational platforms built around each client workflow.',
     icon: 'Code2',
-    image:
-      'https://images.pexels.com/photos/6804068/pexels-photo-6804068.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+    image: '/services/software-development.jpeg',
     objective: 'Custom business automation and software infrastructure',
     targetMetric: '99.9% uptime, secure operations, zero manual data drops',
     targetAudience: 'Operations teams, retail businesses, finance teams, and scaling enterprises',
@@ -159,8 +155,7 @@ export const SERVICES = [
     description:
       'The Strategic Branding & Corporate Identity division develops unified visual and narrative systems for organizations that need credibility across every client-facing touchpoint, from market positioning to brand guidelines, pitch collateral, and digital storefront assets.',
     icon: 'Palette',
-    image:
-      'https://images.pexels.com/photos/8546590/pexels-photo-8546590.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+    image: '/services/branding.jpeg',
     objective: 'High-authority visual and narrative identity',
     targetMetric: 'Complete Brand Bible, pitch collateral, consistent market presence',
     targetAudience: 'Corporate entities, product launches, founders, and investor-facing teams',
@@ -212,6 +207,32 @@ export const SERVICES = [
       'Professional editing, color grading, sound design, and audio post',
       'Corporate podcast and video series support',
       'Long-form footage repurposed into social and web micro-content',
+    ],
+  },
+  {
+    slug: 'talent-clinic',
+    title: 'Mariz Talent Clinic',
+    short: 'Six weeks of practical training in digital, creative, and sales skills.',
+    description:
+      'Mariz Talent Clinic helps participants build practical skills in digital tools, creative production, and sales. The six-week programme offers free training with a registration fee of UGX 100,000. Choose a Digital, Creative, or Sales clinic and contact our team for the next intake and available places.',
+    icon: 'Users',
+    image: '/services/mariz-talent-clinic.jpeg',
+    objective: 'Build practical skills for work and income opportunities',
+    targetMetric: 'Practical digital, creative, and sales skills',
+    targetAudience: 'Learners, job seekers, and people looking to develop practical skills during the holidays',
+    workflow: [
+      'Contact the Talent Clinic team to confirm the next intake and available places',
+      'Choose the Digital, Creative, or Sales clinic',
+      'Register for the six-week training programme; registration fee: UGX 100,000',
+      'Attend practical training at Level 3 Rm HC3 Honora Plaza, Opposite Be Energy Fuels, Zzana, Kampala',
+    ],
+    features: [
+      'Digital Clinic: computer skills, Microsoft Suite, and front office training',
+      'Creative Clinic: graphics, photography, videography, and branding',
+      'Sales Clinic: telesales and affiliate marketing',
+      'Six-week programme with free training',
+      'Registration fee: UGX 100,000',
+      'Limited intake; contact us for current availability',
     ],
   },
 ];
@@ -467,5 +488,6 @@ export const SERVICE_OPTIONS = [
   'Software Development & IT Solutions',
   'Strategic Branding & Corporate Identity',
   'Professional Photography & Cinematic Videography',
+  'Mariz Talent Clinic',
   'General Inquiry',
 ];

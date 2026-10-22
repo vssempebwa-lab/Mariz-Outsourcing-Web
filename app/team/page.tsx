@@ -12,14 +12,7 @@ export const metadata = {
     'Meet the leadership and specialist operators behind Mariz Outsourcing Agency, spanning revenue operations, talent acquisition, call center operations, software, branding, and media.',
 };
 
-const DEPARTMENT_SUMMARY = [
-  'Leadership',
-  'Revenue Operations',
-  'Talent Acquisition',
-  'Call Center Operations',
-  'Software Development',
-  'Branding & Media',
-];
+const DEPARTMENT_SUMMARY = Array.from(new Set(TEAM_MEMBERS.map((member) => member.department)));
 
 export default function TeamPage() {
   return (
@@ -48,7 +41,7 @@ export default function TeamPage() {
 
       <section className="border-y border-border bg-muted/30 py-10">
         <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-6">
+          <div className="grid gap-3 sm:grid-cols-3">
             {DEPARTMENT_SUMMARY.map((department) => (
               <Card key={department} className="border-border">
                 <CardContent className="flex min-h-24 items-center p-4">
@@ -67,9 +60,9 @@ export default function TeamPage() {
           <SectionHeading
             eyebrow="People"
             title="Leadership and delivery specialists"
-            description="Placeholder profiles are structured for easy replacement with real names, portraits, departments, and social links."
+            description="Meet the people behind MARIZ OUTSOURCING (U) - SMC LIMITED, spanning leadership, human resource, finance, and software development."
           />
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {TEAM_MEMBERS.map((member) => (
               <TeamMemberCard key={member.id} member={member} />
             ))}
@@ -77,12 +70,12 @@ export default function TeamPage() {
         </div>
       </section>
 
-      <section className="bg-navy py-20 lg:py-24">
+      <section className="bg-secondary py-20 lg:py-24">
         <div className="container mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
-          <h2 className="font-display text-3xl font-bold text-balance text-white sm:text-4xl">
+          <h2 className="font-display text-3xl font-bold text-balance text-foreground sm:text-4xl">
             Build your next operating team with Mariz
           </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-balance text-white/70">
+          <p className="mx-auto mt-4 max-w-2xl text-lg text-balance text-muted-foreground">
             Tell us the roles, systems, or support workflows you need, and we
             will assemble the right specialists around your objectives.
           </p>

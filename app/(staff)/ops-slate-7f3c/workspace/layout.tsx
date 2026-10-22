@@ -26,8 +26,8 @@ export default async function WorkspaceLayout({ children }: { children: React.Re
   }
 
   return (
-    <section className="min-h-screen bg-slate-50">
-      <OpsShell role={staff.role} authEnabled={staffAuthEnabled}>
+    <section className="min-h-screen bg-background">
+      <OpsShell staff={staff} role={staff.role} authEnabled={staffAuthEnabled}>
         {children}
       </OpsShell>
     </section>

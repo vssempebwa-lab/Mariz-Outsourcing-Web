@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { z } from 'zod';
 
+import { staffPasswordSetupPath } from '@/lib/portal-routes';
 import { authOptions } from '@/lib/auth';
 import { inviteEmployee, listEmployees, updateEmployeeAccess } from '@/lib/employees';
 import { logOpsActivity } from '@/lib/ops-activity';
@@ -139,7 +140,7 @@ export async function POST(request: Request) {
       profilePhotoUrl: parsed.data.profilePhotoUrl || null,
       status: parsed.data.status,
       createdBy: session?.user?.id || null,
-      redirectTo: `${origin}/ops-slate-7f3c/setup-password`,
+      redirectTo: `${origin}${staffPasswordSetupPath}`,
       credentialMethod: parsed.data.credentialMethod,
       password: parsed.data.password,
     });

@@ -5,7 +5,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { SectionHeading } from '@/components/site/section-heading';
 import { Icon } from '@/components/site/icon';
 import { LeadForm } from '@/components/site/lead-form';
-import { SERVICES } from '@/lib/data';
+import { SERVICES, SITE } from '@/lib/data';
 import { CheckCircle2, ArrowRight, ArrowLeft } from 'lucide-react';
 
 export function generateStaticParams() {
@@ -73,9 +73,9 @@ export default function ServiceDetailPage({
                   </div>
                 ))}
               </div>
-              <div className="mt-8 flex gap-3">
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                 <Button asChild size="lg">
-                  <Link href="/contact">Request Consultation</Link>
+                  <Link href="/contact">{service.slug === 'talent-clinic' ? 'Ask About Training' : 'Request Consultation'}</Link>
                 </Button>
                 <Button asChild size="lg" variant="outline">
                   <Link href="/projects">View Projects</Link>
@@ -83,17 +83,33 @@ export default function ServiceDetailPage({
               </div>
             </div>
             <div className="relative">
-              <div className="overflow-hidden rounded-2xl shadow-xl aspect-[4/3]">
+              <div className="overflow-hidden rounded-2xl border border-border bg-muted/40">
                 <img
                   src={service.image}
                   alt={service.title}
-                  className="w-full h-full object-cover"
+                  className="block h-auto max-h-[640px] w-full object-contain"
                 />
               </div>
             </div>
           </div>
         </div>
       </section>
+
+      {service.slug === 'talent-clinic' ? (
+        <section className="border-y border-border bg-muted/30 py-8">
+          <div className="container mx-auto flex max-w-6xl flex-col gap-4 px-4 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
+            <div className="min-w-0">
+              <h2 className="font-display text-xl font-semibold">Join Mariz Talent Clinic</h2>
+              <p className="mt-2 text-sm text-muted-foreground">Six weeks of free training ? Registration fee: UGX 100,000</p>
+              <p className="mt-2 text-sm text-muted-foreground">{SITE.address}</p>
+              <p className="mt-2 text-sm text-muted-foreground">Contact us to confirm intake dates and available places.</p>
+            </div>
+            <Button asChild className="min-h-11 shrink-0">
+              <a href="tel:+256766630248">Call +256 766 630 248</a>
+            </Button>
+          </div>
+        </section>
+      ) : null}
 
       <section className="py-20 lg:py-24">
         <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
@@ -148,7 +164,7 @@ export default function ServiceDetailPage({
                     Tell us about your needs and our team will respond within one
                     business day.
                   </p>
-                  <LeadForm compact />
+                  <LeadForm compact defaultService={service.title} />
                 </CardContent>
               </Card>
             </div>

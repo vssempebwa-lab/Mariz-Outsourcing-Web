@@ -4,7 +4,7 @@ import { AlertTriangle, Database } from 'lucide-react';
 
 import { SiteCmsClient } from '@/components/ops/site-cms-client';
 import { Button } from '@/components/ui/button';
-import { staffAccessPath } from '@/lib/portal-routes';
+import { staffAccessPath, staffWorkspacePath } from '@/lib/portal-routes';
 import { getCurrentStaff } from '@/lib/staff-session';
 import { getCmsWorkspace } from '@/lib/siteContent';
 
@@ -25,7 +25,7 @@ export default async function SiteCustomizationPage() {
   }
 
   if (staff.role !== 'super_admin') {
-    redirect(`${staffAccessPath}/workspace`);
+    redirect(staffWorkspacePath);
   }
 
   try {

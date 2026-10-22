@@ -61,6 +61,7 @@ export default function OAuthCallbackPage() {
         // Use NextAuth credentials provider to exchange the signed token for a session
         const next = await signIn('credentials', {
           token,
+          portal,
           redirect: false,
           callbackUrl: staffWorkspacePath,
         });
@@ -80,7 +81,7 @@ export default function OAuthCallbackPage() {
   }, [router, searchParams]);
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-slate-50 px-4 py-12">
+    <main className="flex min-h-screen items-center justify-center bg-background px-4 py-12">
       <div className="w-full max-w-md rounded-lg border bg-card p-6 shadow-sm">
         <p className="text-sm text-muted-foreground">Mariz Operations</p>
         <h1 className="mt-1 font-display text-xl font-semibold">Completing sign-in</h1>

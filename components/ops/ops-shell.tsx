@@ -6,6 +6,7 @@ import { OpsSidebar } from '@/components/ops/sidebar';
 import { OpsTopbar } from '@/components/ops/topbar';
 import { Sheet, SheetContent, SheetTitle } from '@/components/ui/sheet';
 import type { StaffRole } from '@/lib/auth';
+import type { CurrentStaff } from '@/lib/staff-session';
 
 const sidebarStorageKey = 'moa-ops-sidebar-collapsed';
 
@@ -13,10 +14,12 @@ export function OpsShell({
   children,
   role,
   authEnabled,
+  staff,
 }: {
   children: ReactNode;
   role: StaffRole;
   authEnabled: boolean;
+  staff: CurrentStaff;
 }) {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
@@ -31,7 +34,7 @@ export function OpsShell({
   }
 
   return (
-    <div className="flex min-h-screen">
+    <div className="flex min-h-screen bg-background text-foreground">
       <OpsSidebar
         role={role}
         collapsed={isCollapsed}
@@ -40,7 +43,7 @@ export function OpsShell({
       <Sheet open={isMobileOpen} onOpenChange={setIsMobileOpen}>
         <SheetContent
           side="left"
-          className="w-72 border-white/10 bg-navy p-0 text-white [&>button]:text-white"
+          className="w-[min(18rem,calc(100vw-2rem))] border-border bg-card p-0 text-foreground [&>button]:text-foreground"
         >
           <SheetTitle className="sr-only">Dashboard navigation</SheetTitle>
           <OpsSidebar
@@ -53,6 +56,7 @@ export function OpsShell({
 
       <div className="min-w-0 flex-1">
         <OpsTopbar
+          staff={staff}
           role={role}
           authEnabled={authEnabled}
           onOpenSidebar={() => setIsMobileOpen(true)}

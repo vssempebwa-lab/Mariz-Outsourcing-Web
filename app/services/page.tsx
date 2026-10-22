@@ -9,7 +9,7 @@ import { ArrowRight, CheckCircle2 } from 'lucide-react';
 export const metadata = {
   title: 'Our Services',
   description:
-    'Revenue operations, strategic recruitment, 24/7 call center operations, custom software development, corporate branding, and cinematic media production from Mariz Outsourcing Agency.',
+    'Revenue operations, strategic recruitment, 24/7 call center operations, custom software development, corporate branding, cinematic media production, and Mariz Talent Clinic training from Mariz Outsourcing Agency.',
 };
 
 export default function ServicesPage() {
@@ -28,10 +28,10 @@ export default function ServicesPage() {
               Integrated outsourcing solutions for every operational need
             </h1>
             <p className="mt-6 text-lg text-muted-foreground leading-relaxed max-w-2xl text-balance">
-              Six specialized divisions working together as one partner. From
+              Our services bring specialist teams together as one partner. From
               revenue operations and talent acquisition to customer support,
-              software, branding, and media, we cover the full spectrum of your
-              outsourcing requirements.
+              software, branding, media, and Mariz Talent Clinic training, we support
+              your business and skills development needs.
             </p>
           </div>
         </div>
@@ -39,50 +39,51 @@ export default function ServicesPage() {
 
       <section className="py-20 lg:py-24">
         <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-8 lg:grid-cols-2">
+          <div className="grid items-stretch gap-6 md:grid-cols-2 xl:grid-cols-3">
             {SERVICES.map((s, i) => (
               <Card
                 key={s.slug}
-                className="group overflow-hidden border-border hover:border-primary/30 hover:shadow-xl transition-all"
+                className="group h-full min-w-0 overflow-hidden border-border transition-colors hover:border-primary/30"
               >
-                <CardContent className="p-0">
-                  <div className="relative overflow-hidden aspect-[16/9]">
+                <CardContent className="flex h-full flex-col p-0">
+                  <Link href={`/services/${s.slug}`} className="relative block aspect-[4/3] shrink-0 bg-muted/40" aria-label={`View ${s.title}`}>
                     <img
                       src={s.image}
                       alt={s.title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      className="absolute inset-0 h-full w-full object-contain"
+                      loading="lazy"
+                      decoding="async"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-navy/70 via-navy/20 to-transparent" />
-                    <div className="absolute top-4 left-4 flex h-12 w-12 items-center justify-center rounded-xl bg-white/90 backdrop-blur shadow-lg">
-                      <Icon name={s.icon} className="h-6 w-6 text-primary" />
-                    </div>
-                    <div className="absolute bottom-4 left-4 right-4">
-                      <span className="text-xs font-semibold text-white/80 uppercase tracking-wider">
-                        0{i + 1} / 06
+                  </Link>
+                  <div className="flex min-w-0 flex-1 flex-col border-t border-border p-5 sm:p-6">
+                    <div className="mb-4 flex items-center justify-between gap-3">
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                        <Icon name={s.icon} className="h-5 w-5" />
+                      </div>
+                      <span className="text-xs font-medium tracking-wider text-muted-foreground">
+                        {String(i + 1).padStart(2, '0')} / {String(SERVICES.length).padStart(2, '0')}
                       </span>
                     </div>
-                  </div>
-                  <div className="p-6 lg:p-8">
-                    <h3 className="font-display font-bold text-xl lg:text-2xl text-foreground">
+                    <h3 className="break-words font-display text-xl font-bold leading-snug text-foreground">
                       {s.title}
                     </h3>
-                    <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
-                      {s.description}
+                    <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                      {s.short}
                     </p>
-                    <div className="mt-5 grid grid-cols-2 gap-2">
+                    <div className="my-5 grid gap-3">
                       {s.features.slice(0, 4).map((f) => (
-                        <div key={f} className="flex items-start gap-2">
-                          <CheckCircle2 className="h-4 w-4 text-accent shrink-0 mt-0.5" />
-                          <span className="text-xs text-foreground/70">{f}</span>
+                        <div key={f} className="flex min-w-0 items-start gap-2">
+                          <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
+                          <span className="text-xs leading-relaxed text-foreground/70">{f}</span>
                         </div>
                       ))}
                     </div>
                     <Link
                       href={`/services/${s.slug}`}
-                      className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:gap-2.5 transition-all"
+                      className="mt-auto inline-flex min-h-11 items-center justify-between gap-3 border-t border-border pt-4 text-sm font-semibold text-primary transition-colors hover:text-accent"
                     >
-                      Explore {s.title.split(' & ')[0].split(' — ')[0]}
-                      <ArrowRight className="h-4 w-4" />
+                      Explore Service
+                      <ArrowRight className="h-4 w-4 shrink-0" />
                     </Link>
                   </div>
                 </CardContent>
@@ -174,12 +175,12 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <section className="py-20 lg:py-24 bg-navy">
+      <section className="py-20 lg:py-24 bg-secondary">
         <div className="container mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="font-display font-bold text-3xl sm:text-4xl text-white text-balance">
+          <h2 className="font-display font-bold text-3xl sm:text-4xl text-foreground text-balance">
             Not sure which service you need?
           </h2>
-          <p className="mt-4 text-white/70 text-lg text-balance">
+          <p className="mt-4 text-muted-foreground text-lg text-balance">
             Our team will help you identify the right combination of services for
             your operational goals. Request a free consultation today.
           </p>

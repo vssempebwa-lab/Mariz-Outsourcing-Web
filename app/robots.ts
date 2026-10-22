@@ -1,14 +1,13 @@
 import type { MetadataRoute } from 'next';
 
-const staffAccessPath =
-  process.env.NEXT_PUBLIC_STAFF_ACCESS_PATH || '/ops-slate-7f3c';
+import { staffAccessPath, employeeLoginPath, staffBasePath } from '@/lib/portal-routes';
 
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
       userAgent: '*',
       allow: '/',
-      disallow: [staffAccessPath, `${staffAccessPath}/`, '/api/staff/'],
+      disallow: [staffAccessPath, employeeLoginPath, staffBasePath, `${staffBasePath}/`, '/api/staff/'],
     },
   };
 }

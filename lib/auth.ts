@@ -6,7 +6,7 @@ import { z } from 'zod';
 import jwt from 'jsonwebtoken';
 
 import { markEmployeeActive } from '@/lib/employees';
-import { staffWorkspacePath } from '@/lib/portal-routes';
+import { staffAccessPath, staffWorkspacePath } from '@/lib/portal-routes';
 import { getSupabaseAdmin } from '@/lib/supabase-admin';
 
 export type StaffRole = 'super_admin' | 'employee';
@@ -15,7 +15,7 @@ const credentialsSchema = z
   .object({
     email: z.string().email().optional(),
     password: z.string().min(8).optional(),
-    portal: z.enum(['employee']).optional(),
+    portal: z.enum(['employee', 'admin']).optional(),
     token: z.string().optional(),
   })
   .refine((v) => Boolean(v.token) || (v.email && v.password), {
@@ -28,7 +28,7 @@ export const authOptions: NextAuthOptions = {
     maxAge: 60 * 60 * 8,
   },
   pages: {
-    signIn: process.env.NEXT_PUBLIC_STAFF_ACCESS_PATH || '/ops-slate-7f3c',
+    signIn: staffAccessPath,
   },
   providers: [
     CredentialsProvider({
@@ -69,6 +69,13 @@ export const authOptions: NextAuthOptions = {
               return null;
             }
 
+            if (
+              (parsed.data.portal === 'admin' && account.role !== 'super_admin') ||
+              (parsed.data.portal === 'employee' && account.role !== 'employee')
+            ) {
+              return null;
+            }
+
             return {
               id: account.id,
               name: account.name,
@@ -94,6 +101,10 @@ export const authOptions: NextAuthOptions = {
         }
 
         if (parsed.data.portal === 'employee' && account.role !== 'employee') {
+          return null;
+        }
+
+        if (parsed.data.portal === 'admin' && account.role !== 'super_admin') {
           return null;
         }
 

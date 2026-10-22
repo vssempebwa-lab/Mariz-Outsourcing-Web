@@ -119,12 +119,12 @@ export default function CareersPage() {
         </div>
       </section>
 
-      <section className="py-20 lg:py-24 bg-navy">
+      <section className="py-20 lg:py-24 bg-secondary">
         <div className="container mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="font-display font-bold text-3xl sm:text-4xl text-white text-balance">
+          <h2 className="font-display font-bold text-3xl sm:text-4xl text-foreground text-balance">
             Ready to join the MOA team?
           </h2>
-          <p className="mt-4 text-white/70 text-lg text-balance">
+          <p className="mt-4 text-muted-foreground text-lg text-balance">
             Send us your CV and a brief note about your experience. We review every
             application carefully.
           </p>

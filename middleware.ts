@@ -1,13 +1,10 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { getToken } from 'next-auth/jwt';
+import { staffAccessPath, employeeLoginPath, staffBasePath, staffWorkspacePath } from '@/lib/portal-routes';
 import { staffAuthEnabled } from '@/lib/staff-auth-mode';
 
 const appStaffAccessPath = '/ops-slate-7f3c';
-const appStaffWorkspacePath = `${appStaffAccessPath}/workspace`;
-const staffAccessPath =
-  process.env.NEXT_PUBLIC_STAFF_ACCESS_PATH || appStaffAccessPath;
-const staffWorkspacePath = `${staffAccessPath}/workspace`;
 const employeeRestrictedPaths = [
   'accounts',
   'documents',
@@ -32,6 +29,15 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
+  const isLegacyAdminLogin = pathname === appStaffAccessPath || pathname === staffBasePath;
+  const isLegacyEmployeeLogin = pathname === `${appStaffAccessPath}/employee-login` ||
+    pathname === `${staffBasePath}/employee-login`;
+  if (isLegacyAdminLogin || isLegacyEmployeeLogin) {
+    const target = request.nextUrl.clone();
+    target.pathname = isLegacyEmployeeLogin ? employeeLoginPath : staffAccessPath;
+    return NextResponse.redirect(target);
+  }
+
   const token = await getToken({
     req: request,
     secret: process.env.NEXTAUTH_SECRET,
@@ -51,8 +57,13 @@ export async function middleware(request: NextRequest) {
     return NextResponse.rewrite(new URL('/404', request.url));
   }
 
-  if (pathname === staffAccessPath && (!staffAuthEnabled || token)) {
-    return NextResponse.redirect(new URL(staffWorkspacePath, request.url));
+  if (pathname === staffAccessPath) {
+    if (token?.role === 'super_admin') {
+      return NextResponse.redirect(new URL(staffWorkspacePath, request.url));
+    }
+    if (!staffAuthEnabled && !token) {
+      return NextResponse.redirect(new URL(`${staffWorkspacePath}?preview=super_admin`, request.url));
+    }
   }
 
   if (
@@ -75,14 +86,14 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL(staffAccessPath, request.url));
   }
 
-  if (staffAccessPath !== appStaffAccessPath) {
-    if (pathname === appStaffAccessPath || pathname.startsWith(appStaffWorkspacePath)) {
+  if (staffBasePath !== appStaffAccessPath) {
+    if (pathname.startsWith(`${appStaffAccessPath}/`)) {
       return NextResponse.rewrite(new URL('/404', request.url));
     }
 
-    if (pathname === staffAccessPath || pathname.startsWith(staffWorkspacePath)) {
+    if (pathname.startsWith(`${staffBasePath}/`)) {
       const target = request.nextUrl.clone();
-      target.pathname = pathname.replace(staffAccessPath, appStaffAccessPath);
+      target.pathname = pathname.replace(staffBasePath, appStaffAccessPath);
       return NextResponse.rewrite(target);
     }
   }

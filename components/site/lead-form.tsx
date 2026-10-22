@@ -18,7 +18,7 @@ import { supabase } from '@/lib/supabase';
 
 type Status = 'idle' | 'loading' | 'success' | 'error';
 
-export function LeadForm({ compact = false }: { compact?: boolean }) {
+export function LeadForm({ compact = false, defaultService }: { compact?: boolean; defaultService?: string }) {
   const [status, setStatus] = useState<Status>('idle');
   const [errorMsg, setErrorMsg] = useState('');
 
@@ -27,7 +27,8 @@ export function LeadForm({ compact = false }: { compact?: boolean }) {
     setStatus('loading');
     setErrorMsg('');
 
-    const formData = new FormData(e.currentTarget);
+    const form = e.currentTarget;
+    const formData = new FormData(form);
     const payload = {
       full_name: (formData.get('full_name') as string)?.trim(),
       email: (formData.get('email') as string)?.trim(),
@@ -52,7 +53,7 @@ export function LeadForm({ compact = false }: { compact?: boolean }) {
     }
 
     setStatus('success');
-    e.currentTarget.reset();
+    form.reset();
   }
 
   if (status === 'success') {
@@ -129,7 +130,7 @@ export function LeadForm({ compact = false }: { compact?: boolean }) {
 
       <div className="space-y-2">
         <Label htmlFor="service_requested">Service Needed</Label>
-        <Select name="service_requested" disabled={status === 'loading'}>
+        <Select defaultValue={defaultService} name="service_requested" disabled={status === 'loading'}>
           <SelectTrigger id="service_requested">
             <SelectValue placeholder="Select a service" />
           </SelectTrigger>
