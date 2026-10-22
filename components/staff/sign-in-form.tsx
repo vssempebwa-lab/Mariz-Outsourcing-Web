@@ -7,7 +7,7 @@ import { Lock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { staffWorkspacePath, staffAccessPath } from '@/lib/portal-routes';
+import { staffWorkspacePath, staffOAuthCallbackPath } from '@/lib/portal-routes';
 import { supabase } from '@/lib/supabase';
 
 export function SignInForm({ employeeOnly = false }: { employeeOnly?: boolean }) {
@@ -23,7 +23,7 @@ export function SignInForm({ employeeOnly = false }: { employeeOnly?: boolean })
     const result = await signIn('credentials', {
       email: formData.get('email'),
       password: formData.get('password'),
-      portal: employeeOnly ? 'employee' : undefined,
+      portal: employeeOnly ? 'employee' : 'admin',
       redirect: false,
       callbackUrl: staffWorkspacePath,
     });
@@ -34,7 +34,7 @@ export function SignInForm({ employeeOnly = false }: { employeeOnly?: boolean })
       setError(
         employeeOnly
           ? 'Use the employee email and password created by your administrator.'
-          : 'Check your email and password, then try again.'
+          : 'Use an administrator email and password to access the Admin Portal.'
       );
       return;
     }
@@ -52,7 +52,7 @@ export function SignInForm({ employeeOnly = false }: { employeeOnly?: boolean })
       setError('');
       setIsSubmitting(true);
 
-      const redirectTo = `${window.location.origin}${staffAccessPath}/oauth-callback?portal=${
+      const redirectTo = `${window.location.origin}${staffOAuthCallbackPath}?portal=${
         employeeOnly ? 'employee' : 'admin'
       }`;
 

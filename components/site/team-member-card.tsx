@@ -22,26 +22,28 @@ export function TeamMemberCard({ member }: { member: TeamMember }) {
   ].filter((item) => item.href);
 
   return (
-    <Card className="group h-full overflow-hidden border-border transition-all hover:border-primary/30 hover:shadow-xl">
+    <Card className="group h-full min-w-0 overflow-hidden border-border transition-all hover:border-primary/30 hover:shadow-xl">
       <CardContent className="p-0">
         <div className="relative aspect-[4/5] overflow-hidden bg-muted">
           <img
             src={member.photo}
             alt={member.name}
+            loading="lazy"
+            decoding="async"
             className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
           <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-navy/70 to-transparent" />
-          <span className="absolute bottom-4 left-4 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-primary backdrop-blur">
+          <span className="absolute bottom-4 left-4 right-4 w-fit max-w-[calc(100%-2rem)] rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-slate-900">
             {member.department}
           </span>
         </div>
-        <div className="p-6">
-          <div className="flex items-start justify-between gap-4">
-            <div>
-              <h3 className="font-display text-xl font-bold leading-tight text-foreground">
+        <div className="p-5 sm:p-6">
+          <div className="flex flex-wrap items-start justify-between gap-3">
+            <div className="min-w-0 flex-1 basis-40">
+              <h3 className="break-words font-display text-xl font-bold leading-tight text-foreground">
                 {member.name}
               </h3>
-              <p className="mt-1 text-sm font-semibold text-primary">
+              <p className="mt-1 break-words text-sm font-semibold text-primary">
                 {member.role}
               </p>
             </div>
@@ -55,7 +57,7 @@ export function TeamMemberCard({ member }: { member: TeamMember }) {
                       key={social.label}
                       href={social.href}
                       aria-label={`${member.name} ${social.label}`}
-                      className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary"
+                      className="flex h-11 w-11 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary"
                       target={social.label === 'Email' ? undefined : '_blank'}
                       rel={social.label === 'Email' ? undefined : 'noreferrer'}
                     >
@@ -66,9 +68,6 @@ export function TeamMemberCard({ member }: { member: TeamMember }) {
               </div>
             )}
           </div>
-          <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-            {member.bio}
-          </p>
         </div>
       </CardContent>
     </Card>

@@ -103,7 +103,8 @@ export function CreateEmployeeForm() {
     setResult(null);
     setIsSubmitting(true);
 
-    const formData = new FormData(event.currentTarget);
+    const form = event.currentTarget;
+    const formData = new FormData(form);
     const password = String(formData.get('password') || '');
     const passwordConfirmation = String(formData.get('passwordConfirmation') || '');
 
@@ -145,7 +146,7 @@ export function CreateEmployeeForm() {
       return;
     }
 
-    event.currentTarget.reset();
+    form.reset();
     setBusinessRole('sales');
     setStatus('active');
     setCredentialMethod('invite');

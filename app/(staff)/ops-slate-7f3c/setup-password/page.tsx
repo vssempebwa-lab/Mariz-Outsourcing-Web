@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function SetupPasswordPage() {
   return (
-    <main className="flex min-h-screen items-center justify-center bg-slate-50 px-4 py-12">
+    <main className="flex min-h-screen items-center justify-center bg-background px-4 py-12">
       <div className="w-full max-w-md rounded-lg border bg-card p-6 shadow-sm">
         <p className="text-sm font-medium text-muted-foreground">Mariz Operations</p>
         <h1 className="mt-1 font-display text-2xl font-semibold">Set up your password</h1>

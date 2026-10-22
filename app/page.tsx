@@ -65,7 +65,7 @@ function Hero({ content, blocks }: { content?: PageSection['content']; blocks: R
       {heroImages.map((image, index) => (
         <div
           key={image.file}
-          className="absolute inset-0 opacity-0 animate-hero-service-slide"
+          className={index === 0 ? 'absolute inset-0' : 'absolute inset-0 opacity-0 animate-hero-service-slide motion-reduce:hidden'}
           style={{ animationDelay: `${index * 6}s`, animationDuration }}
         >
           <img
@@ -74,13 +74,12 @@ function Hero({ content, blocks }: { content?: PageSection['content']; blocks: R
             className="h-full w-full object-cover"
             aria-hidden="true"
           />
-          <div className="absolute inset-0 bg-navy/72" />
-          <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/76 to-navy/30" />
         </div>
       ))}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-black/70 via-black/[0.35] to-black/10" />
       <div className="container relative z-10 mx-auto flex max-w-6xl items-end px-4 pb-10 pt-24 sm:px-6 sm:pb-12 lg:px-8 lg:pb-14">
         <div className="max-w-2xl animate-fade-up text-white">
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 backdrop-blur">
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/20 bg-black/20 px-3 py-1.5">
             <span className="flex h-2 w-2 rounded-full bg-accent animate-pulse" />
             <span className="text-xs font-semibold text-white/80">
               {blockString(blocks.eyebrow, 'text') || content?.eyebrow || 'Trusted BPO Partner in East Africa'}
@@ -91,7 +90,7 @@ function Hero({ content, blocks }: { content?: PageSection['content']; blocks: R
             {blockString(blocks.headline, 'text') || content?.heading || 'One agency for the services that keep your business moving.'}
           </h1>
 
-          <p className="mt-4 max-w-xl text-sm leading-relaxed text-white/78 text-balance sm:text-base">
+          <p className="mt-4 max-w-xl text-sm leading-relaxed text-white/95 text-balance sm:text-base">
             {blockString(blocks.body, 'text') || content?.body ||
               'Revenue operations, recruitment, customer support, software, branding, and media production delivered through one coordinated outsourcing partner.'}
           </p>
@@ -110,7 +109,7 @@ function Hero({ content, blocks }: { content?: PageSection['content']; blocks: R
             </Button>
           </div>
 
-          <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-white/75 sm:text-sm">
+          <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-white/90 sm:text-sm">
             <div className="flex items-center gap-2">
               <CheckCircle2 className="h-4 w-4 text-accent" />
               24/7 Operations
@@ -132,7 +131,7 @@ function Hero({ content, blocks }: { content?: PageSection['content']; blocks: R
 
 function Metrics() {
   return (
-    <section className="border-y border-white/10 bg-background py-12 lg:py-16">
+    <section className="border-y border-border bg-background py-12 lg:py-16">
       <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
           {METRICS.map((m) => (
@@ -151,8 +150,8 @@ function Metrics() {
 
 function Testimonials() {
   return (
-    <section className="relative overflow-hidden border-y border-white/10 bg-background py-20 lg:py-28">
-      <div className="public-glow-orange pointer-events-none absolute inset-x-0 top-0 h-[520px] opacity-55" />
+    <section className="relative overflow-hidden border-y border-border bg-background py-20 lg:py-28">
+      <div className="public-glow-blue pointer-events-none absolute inset-x-0 top-0 h-[520px] opacity-55" />
       <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           eyebrow="Client Trust"
@@ -162,20 +161,20 @@ function Testimonials() {
 
         <div className="mt-14 grid gap-6 lg:grid-cols-3">
           {TESTIMONIALS.map((t, i) => (
-            <Card key={i} className="border-white/10 bg-card/95 shadow-none">
+            <Card key={i} className="border-border bg-card shadow-none">
               <CardContent className="p-6 lg:p-8">
                 <div className="flex gap-1 mb-4">
                   {[...Array(5)].map((_, j) => (
                     <Star
                       key={j}
-                      className="h-4 w-4 fill-gold text-gold"
+                      className="h-4 w-4 fill-primary text-primary"
                     />
                   ))}
                 </div>
                 <blockquote className="text-foreground leading-relaxed text-balance">
                   &ldquo;{t.quote}&rdquo;
                 </blockquote>
-                <div className="mt-6 border-t border-white/10 pt-6">
+                <div className="mt-6 border-t border-border pt-6">
                   <p className="text-sm font-medium text-foreground">
                     {t.author}
                   </p>
@@ -192,9 +191,9 @@ function Testimonials() {
           <p className="text-center text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-6">
             Trusted by organizations across industries
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4 opacity-60">
+          <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4">
             {['Corporate Enterprise', 'Hospitality Group', 'Manufacturing', 'Healthcare', 'Construction', 'Retail'].map((c) => (
-              <span key={c} className="text-sm font-medium text-foreground/50">
+              <span key={c} className="text-sm font-medium text-muted-foreground">
                 {c}
               </span>
             ))}
@@ -236,7 +235,7 @@ function LeadCapture({ content }: { content?: PageSection['content'] }) {
             </div>
           </div>
 
-          <Card className="border-white/10 bg-card/95 shadow-none">
+          <Card className="border-border bg-card shadow-none">
             <CardContent className="p-6 lg:p-8">
               <LeadForm />
             </CardContent>

@@ -18,6 +18,7 @@ import {
 import { staffAccessPath, staffWorkspacePath } from '@/lib/portal-routes';
 import { getOpsDashboardOverview } from '@/lib/ops-data';
 import { AdminRealtimeRefresh } from '@/components/ops/admin-realtime-refresh';
+import { AccountProfileCard } from '@/components/staff/account-profile-card';
 import { CreateEmployeeForm } from '@/components/staff/create-employee-form';
 import { getCurrentStaff } from '@/lib/staff-session';
 
@@ -72,6 +73,8 @@ export default async function StaffWorkspacePage() {
           </Link>
         )}
       </div>
+
+      <AccountProfileCard staff={staff} />
 
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         {widgets.map((widget) => {

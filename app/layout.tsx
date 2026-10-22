@@ -2,9 +2,14 @@ import './globals.css';
 import type { Metadata } from 'next';
 import { SiteChrome } from '@/components/site/site-chrome';
 import { Toaster } from '@/components/ui/sonner';
-import { getPublishedSiteTheme, siteThemeToCssVars } from '@/lib/site-customization';
+import { defaultSiteTheme, getPublishedSiteTheme, siteThemeToCssVars } from '@/lib/site-customization';
 
 export const metadata: Metadata = {
+  icons: {
+    icon: { url: '/brand/moa-logo.png', type: 'image/png' },
+    shortcut: '/brand/moa-logo.png',
+    apple: '/brand/moa-logo.png',
+  },
   title: {
     default: 'Mariz Outsourcing Agency — Streamline Your Business With Strategic Outsourcing',
     template: '%s | Mariz Outsourcing Agency',
@@ -49,7 +54,14 @@ export default async function RootLayout({
   return (
     <html lang="en" className="font-local" suppressHydrationWarning>
       <body className="font-sans antialiased min-h-screen flex flex-col">
-        <SiteChrome publicThemeStyle={siteThemeToCssVars(theme)}>
+        <SiteChrome publicThemeStyle={siteThemeToCssVars({
+          ...theme,
+          background: defaultSiteTheme.background,
+          text: defaultSiteTheme.text,
+          secondary: defaultSiteTheme.secondary,
+          primary: defaultSiteTheme.primary,
+          accent: defaultSiteTheme.accent,
+        })}>
           {children}
         </SiteChrome>
         <Toaster />

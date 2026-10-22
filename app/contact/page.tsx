@@ -98,17 +98,17 @@ export default function ContactPage() {
                 })}
               </div>
 
-              <div className="mt-8 rounded-2xl bg-navy p-6 text-white">
+              <div className="mt-8 rounded-2xl bg-secondary p-6 text-foreground">
                 <h3 className="font-display font-semibold text-lg mb-2">
                   Prefer to talk now?
                 </h3>
-                <p className="text-sm text-white/70 mb-4">
+                <p className="text-sm text-muted-foreground mb-4">
                   Our operations team is available 24/7. Call us directly and we will
                   connect you with the right specialist.
                 </p>
                 <a
                   href={`tel:${SITE.phoneHref}`}
-                  className="inline-flex items-center gap-2 text-accent font-semibold text-lg hover:text-white transition-colors"
+                  className="inline-flex items-center gap-2 text-accent font-semibold text-lg hover:text-primary transition-colors"
                 >
                   <Phone className="h-5 w-5" />
                   {SITE.phone}

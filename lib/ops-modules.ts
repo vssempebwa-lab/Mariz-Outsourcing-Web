@@ -10,6 +10,7 @@ import {
   Palette,
   PhoneCall,
   PieChart,
+  Settings,
   Users,
 } from 'lucide-react';
 
@@ -28,6 +29,7 @@ export const opsModules = [
   { title: 'Site Customization', href: `${staffWorkspacePath}/site-customization`, icon: Palette, superAdminOnly: true },
   { title: 'Employees', href: `${staffWorkspacePath}/employees`, icon: Users, superAdminOnly: true },
   { title: 'Pipeline', href: `${staffWorkspacePath}/pipeline`, icon: FolderKanban },
+  { title: 'Account Settings', href: `${staffWorkspacePath}/settings`, icon: Settings },
 ] as const;
 
 export const employeeOpsModules = [
@@ -38,6 +40,7 @@ export const employeeOpsModules = [
   { title: 'My Meetings', href: `${staffWorkspacePath}/meetings`, icon: CalendarClock },
   { title: 'My Calls', href: `${staffWorkspacePath}/calls`, icon: PhoneCall },
   { title: 'Reports', href: `${staffWorkspacePath}/reports`, icon: PieChart },
+  { title: 'Account Settings', href: `${staffWorkspacePath}/settings`, icon: Settings },
 ] as const;
 
 export function getOpsModulesForRole(role: StaffRole) {

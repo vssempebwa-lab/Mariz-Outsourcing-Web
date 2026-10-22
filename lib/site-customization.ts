@@ -57,11 +57,11 @@ export type MediaAsset = {
 };
 
 export const defaultSiteTheme: SiteTheme = {
-  primary: '#0075ff',
-  secondary: '#020617',
-  accent: '#00a995',
-  background: '#000000',
-  text: '#f8fbff',
+  primary: '#1976b5',
+  secondary: '#eaf3fa',
+  accent: '#1976b5',
+  background: '#f5f8fc',
+  text: '#10112c',
 };
 
 export const editablePages = [
@@ -163,7 +163,12 @@ export function siteThemeToCssVars(theme: SiteTheme) {
     '--secondary': hexToHslTriplet(theme.secondary),
     '--background': hexToHslTriplet(theme.background),
     '--foreground': hexToHslTriplet(theme.text),
-    '--card': hexToHslTriplet(theme.background),
+    '--card': '0 0% 100%',
+    '--popover': '0 0% 100%',
+    '--popover-foreground': hexToHslTriplet(theme.text),
+    '--secondary-foreground': hexToHslTriplet(theme.text),
+    '--primary-foreground': '0 0% 100%',
+    '--accent-foreground': '0 0% 100%',
     '--card-foreground': hexToHslTriplet(theme.text),
   } as CSSProperties;
 }

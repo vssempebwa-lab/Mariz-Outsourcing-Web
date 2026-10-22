@@ -78,12 +78,12 @@ export default function IndustriesPage() {
         </div>
       </section>
 
-      <section className="py-20 lg:py-24 bg-navy">
+      <section className="py-20 lg:py-24 bg-secondary">
         <div className="container mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="font-display font-bold text-3xl sm:text-4xl text-white text-balance">
+          <h2 className="font-display font-bold text-3xl sm:text-4xl text-foreground text-balance">
             Don&apos;t see your industry listed?
           </h2>
-          <p className="mt-4 text-white/70 text-lg text-balance">
+          <p className="mt-4 text-muted-foreground text-lg text-balance">
             We work with organizations across many sectors. If you have an
             outsourcing need, we can design a solution for it.
           </p>

@@ -32,7 +32,7 @@ export function OpsSidebar({
   return (
     <aside
       className={cn(
-        'shrink-0 bg-navy text-white',
+        'shrink-0 bg-card text-foreground',
         mobile
           ? 'flex h-full w-full flex-col'
           : 'relative hidden min-h-screen flex-col border-r transition-[width] duration-200 lg:flex',
@@ -41,14 +41,14 @@ export function OpsSidebar({
     >
       <div
         className={cn(
-          'flex h-20 shrink-0 items-center gap-3 border-b border-white/10',
+          'flex h-20 shrink-0 items-center gap-3 border-b border-border',
           collapsed && !mobile ? 'justify-center px-3' : 'px-6'
         )}
       >
-        <BrandLogo className="h-10 w-10 ring-white/10" />
+        <BrandLogo className="h-10 w-10 ring-border" />
         <div className={cn(collapsed && !mobile && 'sr-only')}>
           <p className="font-display text-lg font-semibold">Mariz Operations</p>
-          <p className="text-xs text-white/55">
+          <p className="text-xs text-muted-foreground">
             {isEmployee ? 'Employee Workspace' : 'MOA Management Dashboard'}
           </p>
         </div>
@@ -65,10 +65,11 @@ export function OpsSidebar({
                 key={item.href}
                 href={item.href}
                 onClick={onNavigate}
+                aria-current={isActive ? 'page' : undefined}
                 className={cn(
-                  'flex h-11 items-center gap-3 rounded-md px-3 text-sm font-medium text-white/68 transition-colors hover:bg-white/10 hover:text-white',
+                  'flex h-11 items-center gap-3 rounded-md px-3 border border-transparent text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-primary',
                   collapsed && !mobile && 'justify-center px-0',
-                  isActive && 'bg-white/12 text-white'
+                  isActive && 'border-primary/20 bg-primary/10 text-primary'
                 )}
               >
                 <Icon className="h-4 w-4 shrink-0" />
