@@ -24,7 +24,7 @@ export function SiteHeader() {
 
   return (
     <header
-      className="sticky top-0 z-50 w-full border-b border-border bg-background"
+      className="sticky top-0 z-50 w-full border-b border-border bg-card/95 backdrop-blur-md"
     >
       <div className="container mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 lg:h-20 items-center justify-between">
@@ -50,13 +50,13 @@ export function SiteHeader() {
                   className={cn(
                     'relative shrink-0 rounded-md px-2 py-2 text-sm font-medium transition-colors xl:px-2.5 2xl:px-3.5',
                     active
-                      ? 'text-foreground'
+                      ? 'bg-secondary/60 text-navy'
                       : 'text-foreground/68 hover:text-foreground hover:bg-primary/5'
                   )}
                 >
                   {link.label}
                   {active && (
-                    <span className="absolute bottom-0 left-3.5 right-3.5 h-px rounded-full bg-foreground" />
+                    <span className="absolute bottom-0 left-3.5 right-3.5 h-0.5 rounded-full bg-ocean-cyan" />
                   )}
                 </Link>
               );
@@ -105,7 +105,7 @@ export function SiteHeader() {
                 className={cn(
                   'min-h-11 px-4 py-3 text-sm font-medium rounded-lg transition-colors',
                   isActive(link.href)
-                    ? 'bg-primary/10 text-primary'
+                    ? 'bg-primary/10 text-navy'
                     : 'text-foreground/70 hover:bg-primary/5'
                 )}
               >

@@ -127,7 +127,7 @@ export default function ServiceDetailPage({
                     key={item}
                     className="flex items-start gap-4 rounded-xl border border-border bg-background p-4"
                   >
-                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-xs font-bold text-primary">
+                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-xs font-bold text-navy">
                       {String(index + 1).padStart(2, '0')}
                     </span>
                     <span className="pt-1 text-sm font-medium leading-relaxed text-foreground">
@@ -146,7 +146,7 @@ export default function ServiceDetailPage({
                     key={f}
                     className="flex items-start gap-3 p-4 rounded-xl border border-border bg-background"
                   >
-                    <CheckCircle2 className="h-5 w-5 text-accent shrink-0 mt-0.5" />
+                    <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
                     <span className="text-sm font-medium text-foreground">
                       {f}
                     </span>

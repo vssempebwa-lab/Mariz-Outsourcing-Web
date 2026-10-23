@@ -186,7 +186,7 @@ export function EmployeeReportsClient() {
             </div>
 
             {error ? <p className="text-sm text-destructive">{error}</p> : null}
-            {message ? <p className="text-sm text-accent">{message}</p> : null}
+            {message ? <p className="text-sm text-primary">{message}</p> : null}
 
             <Button type="submit" className="w-full" disabled={isGenerating || !selectedModules.length}>
               <CalendarDays className="mr-2 h-4 w-4" />
@@ -222,7 +222,7 @@ export function EmployeeReportsClient() {
                       <p className="text-sm text-muted-foreground">{item.label}</p>
                       <p className="mt-1 font-display text-3xl font-semibold">{item.count}</p>
                     </div>
-                    <Check className="h-5 w-5 text-accent" />
+                    <Check className="h-5 w-5 text-primary" />
                   </div>
                   <div className="mt-4 space-y-2">
                     {Object.entries(item.statusBreakdown).length ? (

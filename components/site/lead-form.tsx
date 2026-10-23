@@ -60,7 +60,7 @@ export function LeadForm({ compact = false, defaultService }: { compact?: boolea
     return (
       <div className="flex flex-col items-center justify-center text-center py-12 px-6 rounded-2xl bg-accent/5 border border-accent/20">
         <div className="flex h-14 w-14 items-center justify-center rounded-full bg-accent/10 mb-4">
-          <CheckCircle2 className="h-7 w-7 text-accent" />
+          <CheckCircle2 className="h-7 w-7 text-primary" />
         </div>
         <h3 className="font-display font-bold text-xl text-foreground mb-2">
           Request Received

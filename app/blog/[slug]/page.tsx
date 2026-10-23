@@ -33,7 +33,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
             <ArrowLeft className="h-4 w-4" />
             All Articles
           </Link>
-          <span className="inline-flex items-center px-3 py-1 rounded-full bg-accent/10 text-xs font-semibold text-accent mb-4">
+          <span className="inline-flex items-center px-3 py-1 rounded-full bg-accent/10 text-xs font-semibold text-primary mb-4">
             {post.category}
           </span>
           <h1 className="font-display font-bold text-3xl sm:text-4xl lg:text-5xl leading-tight text-balance text-foreground">
@@ -132,7 +132,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
               <Link key={p.slug} href={`/blog/${p.slug}`}>
                 <Card className="h-full border-border hover:border-primary/20 hover:shadow-lg transition-all">
                   <CardContent className="p-5">
-                    <span className="text-xs font-semibold text-accent">
+                    <span className="text-xs font-semibold text-primary">
                       {p.category}
                     </span>
                     <h3 className="mt-2 font-display font-semibold text-base text-foreground leading-tight">

@@ -23,8 +23,8 @@ export default function ProjectsPage() {
         <div className="container relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent/10 px-3.5 py-1.5">
-              <BriefcaseBusiness className="h-4 w-4 text-accent" />
-              <span className="text-xs font-semibold uppercase tracking-wider text-accent">
+              <BriefcaseBusiness className="h-4 w-4 text-primary" />
+              <span className="text-xs font-semibold uppercase tracking-wider text-primary">
                 Projects Executed
               </span>
             </div>

@@ -21,7 +21,7 @@ export default function BlogPage() {
         <div className="container relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-accent/10 border border-accent/20 mb-6">
-              <span className="text-xs font-semibold text-accent uppercase tracking-wider">
+              <span className="text-xs font-semibold text-primary uppercase tracking-wider">
                 Blog & Insights
               </span>
             </div>
@@ -49,7 +49,7 @@ export default function BlogPage() {
                   />
                 </div>
                 <div className="p-8 lg:p-10 flex flex-col justify-center">
-                  <span className="inline-flex w-fit items-center px-3 py-1 rounded-full bg-accent/10 text-xs font-semibold text-accent mb-4">
+                  <span className="inline-flex w-fit items-center px-3 py-1 rounded-full bg-accent/10 text-xs font-semibold text-primary mb-4">
                     Featured &middot; {featured.category}
                   </span>
                   <h2 className="font-display font-bold text-2xl lg:text-3xl text-foreground leading-tight">
