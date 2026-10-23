@@ -41,9 +41,9 @@ function CmsSectionRenderer({ section }: { section: PublishedCmsSection }) {
   const isHero = section.section_type === 'hero';
   return (
     <section className={isHero ? 'relative isolate min-h-[480px] overflow-hidden bg-navy py-24 text-white' : 'border-t border-border py-16 lg:py-20'}>
-      {isHero && image && typeof image.data.url === 'string' && image.data.url ? <><img src={image.data.url} alt={typeof image.data.alt === 'string' ? image.data.alt : ''} className="absolute inset-0 -z-10 h-full w-full object-cover" /><div className="absolute inset-0 -z-10 bg-navy/75" /></> : null}
+      {isHero && image && typeof image.data.url === 'string' && image.data.url ? <><img src={image.data.url} alt={typeof image.data.alt === 'string' ? image.data.alt : ''} className="absolute inset-0 -z-10 h-full w-full object-cover" /><div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-t from-black/70 via-black/30 to-transparent sm:bg-gradient-to-r" /></> : null}
       <div className="container mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-        <div className="max-w-3xl space-y-5">
+        <div className={isHero ? 'banner-copy max-w-3xl space-y-5' : 'max-w-3xl space-y-5'}>
           {section.blocks.map((block) => <CmsBlockRenderer key={block.id} block={block} isHero={isHero} />)}
         </div>
       </div>

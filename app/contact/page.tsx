@@ -44,7 +44,7 @@ export default function ContactPage() {
         <div className="container relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-accent/10 border border-accent/20 mb-6">
-              <span className="text-xs font-semibold text-accent uppercase tracking-wider">
+              <span className="text-xs font-semibold text-primary uppercase tracking-wider">
                 Contact Us
               </span>
             </div>
@@ -108,7 +108,7 @@ export default function ContactPage() {
                 </p>
                 <a
                   href={`tel:${SITE.phoneHref}`}
-                  className="inline-flex items-center gap-2 text-accent font-semibold text-lg hover:text-primary transition-colors"
+                  className="inline-flex items-center gap-2 text-primary font-semibold text-lg hover:text-primary transition-colors"
                 >
                   <Phone className="h-5 w-5" />
                   {SITE.phone}

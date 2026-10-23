@@ -20,7 +20,7 @@ export default function ServicesPage() {
         <div className="container relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-accent/10 border border-accent/20 mb-6">
-              <span className="text-xs font-semibold text-accent uppercase tracking-wider">
+              <span className="text-xs font-semibold text-primary uppercase tracking-wider">
                 Our Services
               </span>
             </div>
@@ -73,14 +73,14 @@ export default function ServicesPage() {
                     <div className="my-5 grid gap-3">
                       {s.features.slice(0, 4).map((f) => (
                         <div key={f} className="flex min-w-0 items-start gap-2">
-                          <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
+                          <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
                           <span className="text-xs leading-relaxed text-foreground/70">{f}</span>
                         </div>
                       ))}
                     </div>
                     <Link
                       href={`/services/${s.slug}`}
-                      className="mt-auto inline-flex min-h-11 items-center justify-between gap-3 border-t border-border pt-4 text-sm font-semibold text-primary transition-colors hover:text-accent"
+                      className="mt-auto inline-flex min-h-11 items-center justify-between gap-3 border-t border-border pt-4 text-sm font-semibold text-primary transition-colors hover:text-navy"
                     >
                       Explore Service
                       <ArrowRight className="h-4 w-4 shrink-0" />
@@ -161,7 +161,7 @@ export default function ServicesPage() {
                   <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary mb-4">
                     <Icon name={step.icon} className="h-6 w-6" />
                   </div>
-                  <span className="text-xs font-bold text-accent">{step.step}</span>
+                  <span className="text-xs font-bold text-primary">{step.step}</span>
                   <h3 className="mt-1 font-display font-semibold text-base text-foreground">
                     {step.title}
                   </h3>

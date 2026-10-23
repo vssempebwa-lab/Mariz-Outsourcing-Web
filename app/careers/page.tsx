@@ -27,7 +27,7 @@ export default function CareersPage() {
         <div className="container relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-accent/10 border border-accent/20 mb-6">
-              <span className="text-xs font-semibold text-accent uppercase tracking-wider">
+              <span className="text-xs font-semibold text-primary uppercase tracking-wider">
                 Careers at MOA
               </span>
             </div>
@@ -53,7 +53,7 @@ export default function CareersPage() {
             {PERKS.map((p) => (
               <Card key={p.title} className="border-border">
                 <CardContent className="p-6">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10 text-accent mb-4">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10 text-primary mb-4">
                     <Icon name={p.icon} className="h-6 w-6" />
                   </div>
                   <h3 className="font-display font-semibold text-base text-foreground mb-2">

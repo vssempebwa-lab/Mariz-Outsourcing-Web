@@ -47,7 +47,7 @@ export default function AboutPage() {
         <div className="container relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-accent/10 border border-accent/20 mb-6">
-              <span className="text-xs font-semibold text-accent uppercase tracking-wider">
+              <span className="text-xs font-semibold text-primary uppercase tracking-wider">
                 About MOA
               </span>
             </div>
@@ -68,7 +68,7 @@ export default function AboutPage() {
         <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-8 lg:grid-cols-3">
             <div className="lg:col-span-1">
-              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-accent/20 text-accent mb-5">
+              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-accent/20 text-primary mb-5">
                 <Target className="h-7 w-7" />
               </div>
               <h2 className="font-display font-bold text-2xl text-foreground mb-3">
@@ -79,7 +79,7 @@ export default function AboutPage() {
               </p>
             </div>
             <div className="lg:col-span-1">
-              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-accent/20 text-accent mb-5">
+              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-accent/20 text-primary mb-5">
                 <Eye className="h-7 w-7" />
               </div>
               <h2 className="font-display font-bold text-2xl text-foreground mb-3">
@@ -90,7 +90,7 @@ export default function AboutPage() {
               </p>
             </div>
             <div className="lg:col-span-1">
-              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-accent/20 text-accent mb-5">
+              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-accent/20 text-primary mb-5">
                 <Heart className="h-7 w-7" />
               </div>
               <h2 className="font-display font-bold text-2xl text-foreground mb-3">
@@ -149,7 +149,7 @@ export default function AboutPage() {
                 ].map((item) => (
                   <div key={item} className="flex items-start gap-3">
                     <div className="flex h-6 w-6 items-center justify-center rounded-full bg-accent/10 shrink-0 mt-0.5">
-                      <Icon name="CheckCircle2" className="h-4 w-4 text-accent" />
+                      <Icon name="CheckCircle2" className="h-4 w-4 text-primary" />
                     </div>
                     <span className="text-sm text-foreground/80 leading-relaxed">
                       {item}

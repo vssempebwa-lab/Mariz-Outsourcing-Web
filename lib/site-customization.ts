@@ -57,11 +57,11 @@ export type MediaAsset = {
 };
 
 export const defaultSiteTheme: SiteTheme = {
-  primary: '#1976b5',
-  secondary: '#eaf3fa',
-  accent: '#1976b5',
-  background: '#f5f8fc',
-  text: '#10112c',
+  primary: '#0077b6',
+  secondary: '#caf0f8',
+  accent: '#90e0ef',
+  background: '#f4fcfe',
+  text: '#03045e',
 };
 
 export const editablePages = [
@@ -152,7 +152,7 @@ export function hexToHslTriplet(hex: string) {
     h /= 6;
   }
 
-  return `${Math.round(h * 360)} ${Math.round(s * 100)}% ${Math.round(l * 100)}%`;
+  return `${(h * 360).toFixed(2)} ${(s * 100).toFixed(2)}% ${(l * 100).toFixed(2)}%`;
 }
 
 export function siteThemeToCssVars(theme: SiteTheme) {
@@ -168,7 +168,7 @@ export function siteThemeToCssVars(theme: SiteTheme) {
     '--popover-foreground': hexToHslTriplet(theme.text),
     '--secondary-foreground': hexToHslTriplet(theme.text),
     '--primary-foreground': '0 0% 100%',
-    '--accent-foreground': '0 0% 100%',
+    '--accent-foreground': hexToHslTriplet(theme.text),
     '--card-foreground': hexToHslTriplet(theme.text),
   } as CSSProperties;
 }

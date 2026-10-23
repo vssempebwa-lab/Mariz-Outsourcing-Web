@@ -3,9 +3,11 @@ import { Mail, Phone, MapPin, ArrowUpRight } from 'lucide-react';
 import { BrandLogo } from '@/components/site/brand-logo';
 import { SITE, SERVICES } from '@/lib/data';
 
+const footerPhone = '+256766630248';
+
 export function SiteFooter() {
   return (
-    <footer className="border-t border-border bg-secondary text-foreground">
+    <footer className="ocean-inverse border-t border-ocean-cyan/40 text-foreground">
       <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-4">
@@ -25,21 +27,21 @@ export function SiteFooter() {
             </p>
             <div className="space-y-3 text-sm">
               <a
-                href={`tel:${SITE.phoneHref}`}
+                href={`tel:${footerPhone}`}
                 className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors"
               >
-                <Phone className="h-4 w-4 text-accent" />
-                {SITE.phone}
+                <Phone className="h-4 w-4 text-primary" />
+                {footerPhone}
               </a>
               <a
                 href={`mailto:${SITE.email}`}
                 className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors"
               >
-                <Mail className="h-4 w-4 text-accent" />
+                <Mail className="h-4 w-4 text-primary" />
                 {SITE.email}
               </a>
               <div className="flex items-start gap-3 text-muted-foreground">
-                <MapPin className="h-4 w-4 text-accent mt-0.5 shrink-0" />
+                <MapPin className="h-4 w-4 text-primary mt-0.5 shrink-0" />
                 <span>{SITE.address}</span>
               </div>
             </div>
@@ -61,7 +63,7 @@ export function SiteFooter() {
                 <li key={l.href}>
                   <Link
                     href={l.href}
-                    className="text-muted-foreground hover:text-accent transition-colors"
+                    className="text-muted-foreground hover:text-white transition-colors"
                   >
                     {l.label}
                   </Link>
@@ -79,7 +81,7 @@ export function SiteFooter() {
                 <li key={s.slug}>
                   <Link
                     href={`/services/${s.slug}`}
-                    className="text-muted-foreground hover:text-accent transition-colors"
+                    className="text-muted-foreground hover:text-white transition-colors"
                   >
                     {s.title.split(' & ')[0].split(' — ')[0]}
                   </Link>
@@ -98,7 +100,7 @@ export function SiteFooter() {
             </p>
             <Link
               href="/contact"
-              className="inline-flex items-center gap-1.5 text-sm font-medium text-accent hover:text-primary transition-colors"
+              className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:text-white transition-colors"
             >
               Request Consultation
               <ArrowUpRight className="h-4 w-4" />

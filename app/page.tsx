@@ -76,11 +76,11 @@ function Hero({ content, blocks }: { content?: PageSection['content']; blocks: R
           />
         </div>
       ))}
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-black/70 via-black/[0.35] to-black/10" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent sm:bg-gradient-to-r" />
       <div className="container relative z-10 mx-auto flex max-w-6xl items-end px-4 pb-10 pt-24 sm:px-6 sm:pb-12 lg:px-8 lg:pb-14">
-        <div className="max-w-2xl animate-fade-up text-white">
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/20 bg-black/20 px-3 py-1.5">
-            <span className="flex h-2 w-2 rounded-full bg-accent animate-pulse" />
+        <div className="banner-copy max-w-2xl animate-fade-up text-white">
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-ocean-sky/40 bg-ocean-deep/40 px-3 py-1.5">
+            <span className="flex h-2 w-2 rounded-full bg-ocean-cyan animate-pulse" />
             <span className="text-xs font-semibold text-white/80">
               {blockString(blocks.eyebrow, 'text') || content?.eyebrow || 'Trusted BPO Partner in East Africa'}
             </span>
@@ -111,15 +111,15 @@ function Hero({ content, blocks }: { content?: PageSection['content']; blocks: R
 
           <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-white/90 sm:text-sm">
             <div className="flex items-center gap-2">
-              <CheckCircle2 className="h-4 w-4 text-accent" />
+              <CheckCircle2 className="h-4 w-4 text-ocean-sky" />
               24/7 Operations
             </div>
             <div className="flex items-center gap-2">
-              <CheckCircle2 className="h-4 w-4 text-accent" />
+              <CheckCircle2 className="h-4 w-4 text-ocean-sky" />
               200+ Agent Capacity
             </div>
             <div className="flex items-center gap-2">
-              <CheckCircle2 className="h-4 w-4 text-accent" />
+              <CheckCircle2 className="h-4 w-4 text-ocean-sky" />
               Revenue Pipeline Buildout
             </div>
           </div>
@@ -131,12 +131,12 @@ function Hero({ content, blocks }: { content?: PageSection['content']; blocks: R
 
 function Metrics() {
   return (
-    <section className="border-y border-border bg-background py-12 lg:py-16">
+    <section className="border-y border-border bg-secondary/60 py-12 lg:py-16">
       <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
           {METRICS.map((m) => (
             <div key={m.label} className="text-center">
-              <p className="font-display text-4xl font-normal text-foreground lg:text-5xl">
+              <p className="font-display text-4xl font-normal text-primary lg:text-5xl">
                 {m.value}
               </p>
               <p className="mt-2 text-sm font-medium text-muted-foreground">{m.label}</p>
@@ -228,7 +228,7 @@ function LeadCapture({ content }: { content?: PageSection['content'] }) {
                 'Transparent pricing with no hidden costs',
               ].map((item) => (
                 <div key={item} className="flex items-start gap-3">
-                  <CheckCircle2 className="h-5 w-5 text-accent shrink-0 mt-0.5" />
+                  <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
                   <span className="text-sm text-foreground/80">{item}</span>
                 </div>
               ))}

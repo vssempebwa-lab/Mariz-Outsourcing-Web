@@ -343,7 +343,7 @@ export function CreateEmployeeForm() {
         {result?.employee && result.delivery === 'email' ? (
           <div className="mt-5 rounded-md border border-accent/30 bg-accent/10 p-4 text-sm">
             <div className="flex items-start gap-3">
-              <MailCheck className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
+              <MailCheck className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
               <div>
                 <p className="font-medium text-foreground">
                   {result.message || `Credentials sent to ${result.employee.email}.`}
@@ -358,7 +358,7 @@ export function CreateEmployeeForm() {
         {result?.employee && result.delivery === 'password' ? (
           <div className="mt-5 rounded-md border border-accent/30 bg-accent/10 p-4 text-sm">
             <div className="flex items-start gap-3">
-              <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
+              <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
               <div>
                 <p className="font-medium text-foreground">{result.message}</p>
                 <p className="mt-1 text-muted-foreground">The account is active and the employee can sign in with the password you set.</p>

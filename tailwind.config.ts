@@ -20,6 +20,13 @@ const config: Config = {
         sm: 'calc(var(--radius) - 4px)',
       },
       colors: {
+        ocean: {
+          deep: 'hsl(var(--ocean-deep) / <alpha-value>)',
+          blue: 'hsl(var(--ocean-blue) / <alpha-value>)',
+          cyan: 'hsl(var(--ocean-cyan) / <alpha-value>)',
+          sky: 'hsl(var(--ocean-sky) / <alpha-value>)',
+          mist: 'hsl(var(--ocean-mist) / <alpha-value>)',
+        },
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         card: {

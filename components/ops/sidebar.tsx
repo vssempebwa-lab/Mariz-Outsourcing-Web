@@ -67,9 +67,9 @@ export function OpsSidebar({
                 onClick={onNavigate}
                 aria-current={isActive ? 'page' : undefined}
                 className={cn(
-                  'flex h-11 items-center gap-3 rounded-md px-3 border border-transparent text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-primary',
+                  'flex h-11 items-center gap-3 rounded-md px-3 border border-transparent text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-navy',
                   collapsed && !mobile && 'justify-center px-0',
-                  isActive && 'border-primary/20 bg-primary/10 text-primary'
+                  isActive && 'border-primary/20 bg-primary/10 text-navy'
                 )}
               >
                 <Icon className="h-4 w-4 shrink-0" />

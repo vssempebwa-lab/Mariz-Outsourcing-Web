@@ -33,7 +33,7 @@ export function TeamMemberCard({ member }: { member: TeamMember }) {
             className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
           <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-navy/70 to-transparent" />
-          <span className="absolute bottom-4 left-4 right-4 w-fit max-w-[calc(100%-2rem)] rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-slate-900">
+          <span className="absolute bottom-4 left-4 right-4 w-fit max-w-[calc(100%-2rem)] rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-navy">
             {member.department}
           </span>
         </div>
