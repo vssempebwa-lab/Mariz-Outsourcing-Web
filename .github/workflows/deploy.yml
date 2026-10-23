@@ -1,0 +1,57 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    name: Deploy to production
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure SSH
+        env:
+          VPS_SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
+        run: |
+          if [ -z "$VPS_SSH_KEY" ]; then
+            echo "Add the VPS_SSH_KEY repository secret before this workflow can deploy." >&2
+            exit 1
+          fi
+          mkdir -p ~/.ssh
+          printf '%s\n' "$VPS_SSH_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          echo '62.171.186.233 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMM3iZxQSlVmMpdt7XAWEhVSxjbq1NWDq5Xo0qUY8MSM' >> ~/.ssh/known_hosts
+
+      - name: Sync application
+        run: |
+          rsync -az --delete \
+            --filter 'protect .env' \
+            --exclude '.env' \
+            --exclude '.git/' \
+            --exclude 'node_modules/' \
+            --exclude '.next/' \
+            --exclude '.next-dev/' \
+            -e "ssh -i ~/.ssh/id_ed25519 -o IdentitiesOnly=yes" \
+            ./ deploy@62.171.186.233:/opt/mariz-outsourcing-web/
+
+      - name: Rebuild and restart
+        run: |
+          ssh -i ~/.ssh/id_ed25519 -o IdentitiesOnly=yes deploy@62.171.186.233 \
+            'sh /opt/mariz-outsourcing-web/scripts/remote-deploy.sh'
+
+      - name: Check public site
+        run: |
+          code="$(curl -fsS --retry 5 --retry-delay 3 --resolve marizgroup.com:443:62.171.186.233 -o /dev/null -w '%{http_code}' https://marizgroup.com/)"
+          echo "https://marizgroup.com/ returned $code"
+          test "$code" = "200"
