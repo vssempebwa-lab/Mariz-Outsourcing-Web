@@ -14,7 +14,6 @@ export const metadata = {
 
 export default function ProjectsPage() {
   const featuredProjects = PROJECTS.filter((project) => project.featured);
-  const generalProjects = PROJECTS.filter((project) => !project.featured);
 
   return (
     <>
@@ -32,9 +31,9 @@ export default function ProjectsPage() {
               Completed work across the Mariz service ecosystem
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-balance text-muted-foreground">
-              Explore representative case studies from our revenue operations,
-              talent acquisition, call center, software, branding, and media
-              divisions.
+              Explore our work for Rolkat Financial Services, Rakentaa Real Estate,
+              Kunju Uganda, Social Nest, Rub Shoots Photography, Wabz Foods, and
+              Shope4me across digital platforms, revenue operations, and media.
             </p>
           </div>
         </div>
@@ -48,7 +47,7 @@ export default function ProjectsPage() {
             description="Selected work that shows how Mariz combines people, process, technology, and creative execution."
             align="left"
           />
-          <div className="mt-10 grid gap-6 lg:grid-cols-3">
+          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {featuredProjects.map((project) => (
               <ProjectCard key={project.id} project={project} />
             ))}
@@ -60,12 +59,12 @@ export default function ProjectsPage() {
         <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <SectionHeading
             eyebrow="Project Library"
-            title="Filter work by service division"
-            description="Use the tabs to browse the completed projects most relevant to your operating challenge."
+            title="Browse all completed projects"
+            description="Use the tabs to filter by service division and explore our delivered solutions."
             align="left"
           />
           <div className="mt-10">
-            <ProjectsFilter projects={generalProjects} />
+            <ProjectsFilter projects={PROJECTS} />
           </div>
         </div>
       </section>

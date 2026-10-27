@@ -28,7 +28,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
         <div className="container relative mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
           <Link
             href="/blog"
-            className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-primary transition-colors mb-8"
+            className="mb-6 inline-flex min-h-[44px] items-center gap-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
           >
             <ArrowLeft className="h-4 w-4" />
             All Articles

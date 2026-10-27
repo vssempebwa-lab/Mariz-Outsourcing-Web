@@ -34,13 +34,13 @@ export function SiteHeader() {
               <span className="font-display font-bold text-base lg:text-lg text-foreground">
                 Mariz
               </span>
-              <span className="text-[10px] lg:text-xs text-muted-foreground font-medium tracking-wide">
+              <span className="text-[11px] sm:text-xs text-muted-foreground font-medium tracking-wide">
                 Outsourcing Agency
               </span>
             </div>
           </Link>
 
-          <nav className="hidden min-w-0 flex-1 items-center justify-center gap-0.5 px-3 xl:flex xl:px-5">
+          <nav className="hidden min-w-0 flex-1 items-center justify-center gap-0.5 px-2 lg:flex xl:px-5">
             {NAV_LINKS.map((link) => {
               const active = isActive(link.href);
               return (
@@ -48,7 +48,7 @@ export function SiteHeader() {
                   key={link.href}
                   href={link.href}
                   className={cn(
-                    'relative shrink-0 rounded-md px-2 py-2 text-sm font-medium transition-colors xl:px-2.5 2xl:px-3.5',
+                    'relative shrink-0 rounded-md px-1.5 py-2 text-sm font-medium transition-colors xl:px-2.5 2xl:px-3.5',
                     active
                       ? 'bg-secondary/60 text-navy'
                       : 'text-foreground/68 hover:text-foreground hover:bg-primary/5'
@@ -56,20 +56,20 @@ export function SiteHeader() {
                 >
                   {link.label}
                   {active && (
-                    <span className="absolute bottom-0 left-3.5 right-3.5 h-0.5 rounded-full bg-ocean-cyan" />
+                    <span className="absolute bottom-0 left-2.5 right-2.5 h-0.5 rounded-full bg-ocean-cyan xl:left-3.5 xl:right-3.5" />
                   )}
                 </Link>
               );
             })}
           </nav>
 
-          <div className="hidden shrink-0 items-center gap-3 border-l border-border/70 pl-4 xl:flex">
+          <div className="hidden shrink-0 items-center gap-3 border-l border-border/70 pl-3 lg:flex xl:pl-4">
             <div className="hidden items-center gap-2 2xl:flex">
               <a
                 href={`tel:${SITE.phoneHref}`}
                 aria-label={`Call ${SITE.phone}`}
                 title={`Call ${SITE.phone}`}
-                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-border text-foreground/70 transition-colors hover:border-primary/50 hover:text-primary"
+                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-border text-foreground/70 transition-colors hover:border-primary/50 hover:text-primary"
               >
                 <Phone className="h-4 w-4" />
               </a>
@@ -86,9 +86,10 @@ export function SiteHeader() {
           </div>
 
           <button
-            className="xl:hidden p-2 -mr-2 text-foreground"
+            className="-mr-2 flex min-h-[44px] min-w-[44px] items-center justify-center p-2 text-foreground lg:hidden"
             onClick={() => setOpen(!open)}
             aria-label="Toggle menu"
+            aria-expanded={open}
           >
             {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
@@ -96,14 +97,14 @@ export function SiteHeader() {
       </div>
 
       {open && (
-        <div className="animate-fade-up border-t border-border bg-background xl:hidden">
+        <div className="animate-fade-up max-h-[calc(100dvh-4rem)] overflow-y-auto overscroll-contain border-t border-border bg-background lg:hidden">
           <nav className="container mx-auto flex max-w-[1440px] flex-col gap-1 px-4 py-4">
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 className={cn(
-                  'min-h-11 px-4 py-3 text-sm font-medium rounded-lg transition-colors',
+                  'flex min-h-[44px] items-center rounded-lg px-4 py-3 text-sm font-medium transition-colors',
                   isActive(link.href)
                     ? 'bg-primary/10 text-navy'
                     : 'text-foreground/70 hover:bg-primary/5'

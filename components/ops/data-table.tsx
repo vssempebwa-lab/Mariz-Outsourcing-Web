@@ -137,7 +137,7 @@ export function DataTable<T>({
                       type="button"
                       onClick={() => updateSort(column)}
                       className={cn(
-                        'inline-flex items-center gap-1.5 text-left',
+                        'inline-flex min-h-[44px] items-center gap-1.5 text-left',
                         column.sortable ? 'cursor-pointer hover:text-foreground' : 'cursor-default'
                       )}
                     >
@@ -186,12 +186,13 @@ export function DataTable<T>({
           Page {page} of {pageCount}
         </p>
         <div className="flex items-center gap-2">
-          <Button variant="outline" size="sm" disabled={page === 1} onClick={() => setPage((value) => value - 1)}>
+          <Button variant="outline" size="sm" className="min-h-[44px] sm:min-h-0" disabled={page === 1} onClick={() => setPage((value) => value - 1)}>
             Previous
           </Button>
           <Button
             variant="outline"
             size="sm"
+            className="min-h-[44px] sm:min-h-0"
             disabled={page === pageCount}
             onClick={() => setPage((value) => value + 1)}
           >

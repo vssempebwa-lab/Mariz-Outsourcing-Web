@@ -74,7 +74,7 @@ export default function BlogPage() {
                   </div>
                   <Link
                     href={`/blog/${featured.slug}`}
-                    className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:gap-2.5 transition-all"
+                    className="mt-6 inline-flex min-h-[44px] items-center gap-1.5 text-sm font-semibold text-primary hover:gap-2.5 transition-all"
                   >
                     Read Article
                     <ArrowRight className="h-4 w-4" />
@@ -136,7 +136,7 @@ export default function BlogPage() {
             <input
               type="email"
               placeholder="your@email.com"
-              className="flex h-11 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              className="flex h-11 w-full rounded-md border border-input bg-background px-3 py-2 text-base sm:text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             />
             <Button size="lg" className="shrink-0">Subscribe</Button>
           </div>

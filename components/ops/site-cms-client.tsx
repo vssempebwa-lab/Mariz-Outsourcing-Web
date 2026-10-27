@@ -105,10 +105,10 @@ export function SiteCmsClient({ workspace }: { workspace: CmsWorkspace }) {
           <p className="mt-1 text-sm text-muted-foreground">Manage registered pages, sections, content blocks, and reusable media.</p>
         </div>
         <div className="flex flex-wrap gap-2">
-          <Button variant="outline" onClick={() => setCreateMode('page')}>
+          <Button variant="outline" className="min-h-[44px] sm:min-h-10" onClick={() => setCreateMode('page')}>
             <FilePlus2 className="mr-2 h-4 w-4" /> Register Page
           </Button>
-          <Button onClick={publishPage} disabled={!activePage || isPublishing}>
+          <Button className="min-h-[44px] sm:min-h-10" onClick={publishPage} disabled={!activePage || isPublishing}>
             <Send className="mr-2 h-4 w-4" /> {isPublishing ? 'Publishing...' : 'Publish Page'}
           </Button>
         </div>
@@ -130,7 +130,7 @@ export function SiteCmsClient({ workspace }: { workspace: CmsWorkspace }) {
                     <button
                       type="button"
                       onClick={() => selectPage(page)}
-                      className={cn('flex min-h-11 w-full items-center gap-2 rounded-md px-3 text-left text-sm font-medium', selected ? 'bg-primary text-primary-foreground' : 'hover:bg-muted')}
+                      className={cn('flex min-h-[44px] w-full items-center gap-2 rounded-md px-3 text-left text-sm font-medium', selected ? 'bg-primary text-primary-foreground' : 'hover:bg-muted')}
                     >
                       <ChevronRight className={cn('h-4 w-4 shrink-0 transition-transform', selected && 'rotate-90')} />
                       <span className="min-w-0 flex-1 truncate">{page.title}</span>
@@ -139,9 +139,9 @@ export function SiteCmsClient({ workspace }: { workspace: CmsWorkspace }) {
                     {selected ? (
                       <div className="ml-5 mt-1 space-y-1 border-l pl-2">
                         {childSections.map((section) => (
-                          <button key={section.id} type="button" onClick={() => setActiveSectionId(section.id)} className={cn('flex min-h-10 w-full items-center rounded-md px-3 text-left text-sm', activeSection?.id === section.id ? 'bg-muted font-medium' : 'text-muted-foreground hover:bg-muted/60')}>{section.label}</button>
+                          <button key={section.id} type="button" onClick={() => setActiveSectionId(section.id)} className={cn('flex min-h-[40px] w-full items-center rounded-md px-3 text-left text-sm', activeSection?.id === section.id ? 'bg-muted font-medium' : 'text-muted-foreground hover:bg-muted/60')}>{section.label}</button>
                         ))}
-                        <button type="button" onClick={() => setCreateMode('section')} className="flex min-h-10 w-full items-center gap-2 rounded-md px-3 text-left text-sm text-primary hover:bg-primary/5"><Plus className="h-3.5 w-3.5" /> Add section</button>
+                        <button type="button" onClick={() => setCreateMode('section')} className="flex min-h-[40px] w-full items-center gap-2 rounded-md px-3 text-left text-sm text-primary hover:bg-primary/5"><Plus className="h-3.5 w-3.5" /> Add section</button>
                       </div>
                     ) : null}
                   </div>
@@ -152,12 +152,12 @@ export function SiteCmsClient({ workspace }: { workspace: CmsWorkspace }) {
         </aside>
 
         <main className="min-w-0">
-          <div className="flex min-h-14 flex-col gap-3 border-b px-5 py-3 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex min-h-[56px] flex-col gap-3 border-b px-5 py-3 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <p className="text-xs text-muted-foreground">{activePage?.route_path || 'No page selected'}</p>
               <h2 className="font-display text-xl font-semibold">{activeSection?.label || activePage?.title || 'Content blocks'}</h2>
             </div>
-            {activeSection ? <Button variant="outline" size="sm" onClick={() => setCreateMode('block')}><Plus className="mr-2 h-4 w-4" /> Add Block</Button> : null}
+            {activeSection ? <Button variant="outline" size="sm" className="min-h-[44px] sm:min-h-0" onClick={() => setCreateMode('block')}><Plus className="mr-2 h-4 w-4" /> Add Block</Button> : null}
           </div>
 
           <div className="grid gap-5 p-5 2xl:grid-cols-[minmax(0,1fr)_340px]">
@@ -207,7 +207,7 @@ function BlockEditor({ block, media, onSaved }: { block: ContentBlock; media: Cm
         <span className={cn('rounded px-2 py-1 text-[11px] font-medium capitalize', block.status === 'draft' ? 'bg-amber-50 text-amber-700' : 'bg-emerald-50 text-emerald-700')}>{block.status}</span>
       </div>
       <DynamicFields type={block.block_type} data={data} media={media} update={update} />
-      <Button size="sm" className="mt-4" onClick={save} disabled={isSaving}><Save className="mr-2 h-4 w-4" /> {isSaving ? 'Saving...' : 'Save Draft'}</Button>
+      <Button size="sm" className="mt-4 min-h-[44px] sm:min-h-0" onClick={save} disabled={isSaving}><Save className="mr-2 h-4 w-4" /> {isSaving ? 'Saving...' : 'Save Draft'}</Button>
     </section>
   );
 }
@@ -230,7 +230,7 @@ function HeroPreview({ page, section, blocks }: { page?: CmsPage; section?: CmsS
 }
 
 function MediaLibrary({ media, onUpload }: { media: CmsMediaAsset[]; onUpload: (file: File) => Promise<void> }) {
-  return <section className="rounded-md border p-4"><div className="flex items-center justify-between"><div><p className="text-sm font-semibold">Media Library</p><p className="text-xs text-muted-foreground">{media.length} reusable assets</p></div><Label className="inline-flex h-9 cursor-pointer items-center rounded-md border px-3 text-xs font-medium"><ImagePlus className="mr-2 h-4 w-4" /> Upload<Input type="file" accept="image/*" className="sr-only" onChange={(event) => { const file = event.target.files?.[0]; if (file) void onUpload(file); event.target.value = ''; }} /></Label></div><div className="mt-4 grid grid-cols-3 gap-2">{media.slice(0, 12).map((asset) => <div key={asset.id} className="overflow-hidden rounded border"><img src={asset.public_url} alt={asset.alt || ''} className="aspect-square w-full object-cover" /></div>)}</div>{!media.length ? <div className="mt-4 flex h-24 items-center justify-center rounded border border-dashed"><ImageIcon className="h-5 w-5 text-muted-foreground" /></div> : null}</section>;
+  return <section className="rounded-md border p-4"><div className="flex items-center justify-between gap-3"><div className="min-w-0"><p className="text-sm font-semibold">Media Library</p><p className="text-xs text-muted-foreground">{media.length} reusable assets</p></div><Label className="inline-flex min-h-[44px] shrink-0 cursor-pointer items-center rounded-md border px-3 text-xs font-medium sm:min-h-9"><ImagePlus className="mr-2 h-4 w-4" /> Upload<input type="file" accept="image/*" className="sr-only" onChange={(event) => { const file = event.target.files?.[0]; if (file) void onUpload(file); event.target.value = ''; }} /></Label></div><div className="mt-4 grid grid-cols-3 gap-2">{media.slice(0, 12).map((asset) => <div key={asset.id} className="overflow-hidden rounded border"><img src={asset.public_url} alt={asset.alt || ''} className="aspect-square w-full object-cover" /></div>)}</div>{!media.length ? <div className="mt-4 flex h-24 items-center justify-center rounded border border-dashed"><ImageIcon className="h-5 w-5 text-muted-foreground" /></div> : null}</section>;
 }
 
 function CreateRegistryDialog({ mode, page, section, onClose, onCreated }: { mode: CreateMode; page?: CmsPage; section?: CmsSection; onClose: () => void; onCreated: (kind: Exclude<CreateMode, null>, value: unknown) => void }) {

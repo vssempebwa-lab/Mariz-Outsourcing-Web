@@ -38,7 +38,7 @@ export default function ServiceDetailPage({
         <div className="container relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <Link
             href="/services"
-            className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-primary transition-colors mb-8"
+            className="inline-flex min-h-[44px] items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-primary transition-colors mb-8"
           >
             <ArrowLeft className="h-4 w-4" />
             All Services
@@ -64,7 +64,7 @@ export default function ServiceDetailPage({
                     key={label}
                     className="rounded-xl border border-border bg-background/80 p-4"
                   >
-                    <p className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+                    <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                       {label}
                     </p>
                     <p className="mt-2 text-xs font-medium leading-relaxed text-foreground">
@@ -100,12 +100,12 @@ export default function ServiceDetailPage({
           <div className="container mx-auto flex max-w-6xl flex-col gap-4 px-4 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
             <div className="min-w-0">
               <h2 className="font-display text-xl font-semibold">Join Mariz Talent Clinic</h2>
-              <p className="mt-2 text-sm text-muted-foreground">Six weeks of free training ? Registration fee: UGX 100,000</p>
+              <p className="mt-2 text-sm text-muted-foreground">Six weeks of free training · Registration fee: UGX 100,000</p>
               <p className="mt-2 text-sm text-muted-foreground">{SITE.address}</p>
               <p className="mt-2 text-sm text-muted-foreground">Contact us to confirm intake dates and available places.</p>
             </div>
-            <Button asChild className="min-h-11 shrink-0">
-              <a href="tel:+256766630248">Call +256 766 630 248</a>
+            <Button asChild className="min-h-[44px] shrink-0">
+              <a href={`tel:${SITE.phoneHref}`}>Call {SITE.phone}</a>
             </Button>
           </div>
         </section>

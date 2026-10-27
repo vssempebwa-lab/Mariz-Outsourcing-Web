@@ -417,6 +417,7 @@ export function CreateEmployeeForm() {
                     type="button"
                     variant={revoked ? 'outline' : 'destructive'}
                     size="sm"
+                    className="min-h-[44px] shrink-0 sm:min-h-0"
                     disabled={updatingId === employee.id}
                     onClick={() => updateAccess(employee.id, revoked ? 'restore' : 'revoke')}
                   >

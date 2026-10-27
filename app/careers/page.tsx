@@ -90,7 +90,7 @@ export default function CareersPage() {
                           {job.title}
                         </h3>
                       </div>
-                      <p className="text-sm text-muted-foreground lg:ml-13 ml-0">
+                      <p className="text-sm text-muted-foreground lg:pl-[52px]">
                         {job.description}
                       </p>
                     </div>
@@ -107,7 +107,7 @@ export default function CareersPage() {
                         <Clock className="h-4 w-4" />
                         {job.type}
                       </span>
-                      <Button asChild size="sm" variant="outline">
+                      <Button asChild size="sm" variant="outline" className="min-h-[44px]">
                         <Link href="/contact">Apply Now</Link>
                       </Button>
                     </div>

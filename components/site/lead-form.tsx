@@ -88,7 +88,6 @@ export function LeadForm({ compact = false, defaultService }: { compact?: boolea
           <Input
             id="full_name"
             name="full_name"
-            placeholder="Jane Doe"
             required
             disabled={status === 'loading'}
           />
@@ -99,7 +98,6 @@ export function LeadForm({ compact = false, defaultService }: { compact?: boolea
             id="email"
             name="email"
             type="email"
-            placeholder="jane@company.com"
             required
             disabled={status === 'loading'}
           />
@@ -113,7 +111,6 @@ export function LeadForm({ compact = false, defaultService }: { compact?: boolea
             id="phone"
             name="phone"
             type="tel"
-            placeholder="+256 700 000 000"
             disabled={status === 'loading'}
           />
         </div>
@@ -122,7 +119,6 @@ export function LeadForm({ compact = false, defaultService }: { compact?: boolea
           <Input
             id="company_name"
             name="company_name"
-            placeholder="Your company"
             disabled={status === 'loading'}
           />
         </div>
@@ -149,7 +145,6 @@ export function LeadForm({ compact = false, defaultService }: { compact?: boolea
         <Textarea
           id="message"
           name="message"
-          placeholder="Tell us about your project or operational needs..."
           rows={compact ? 3 : 4}
           disabled={status === 'loading'}
         />

@@ -80,7 +80,7 @@ export default function ServicesPage() {
                     </div>
                     <Link
                       href={`/services/${s.slug}`}
-                      className="mt-auto inline-flex min-h-11 items-center justify-between gap-3 border-t border-border pt-4 text-sm font-semibold text-primary transition-colors hover:text-navy"
+                      className="mt-auto inline-flex min-h-[44px] items-center justify-between gap-3 border-t border-border pt-4 text-sm font-semibold text-primary transition-colors hover:text-navy"
                     >
                       Explore Service
                       <ArrowRight className="h-4 w-4 shrink-0" />

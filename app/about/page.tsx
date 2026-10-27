@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { SectionHeading } from '@/components/site/section-heading';
+import { ClientLogoWall } from '@/components/site/client-logo-wall';
 import { Icon } from '@/components/site/icon';
 import { SITE, METRICS } from '@/lib/data';
 import { Target, Eye, Heart, ArrowRight, Award, Handshake, Lightbulb, Activity } from 'lucide-react';
@@ -162,6 +163,10 @@ export default function AboutPage() {
         </div>
       </section>
 
+      <ClientLogoWall
+        description="These are some of the organizations that trust Mariz to run critical parts of their operations, from travel and logistics to construction, retail, and marketing."
+      />
+
       <section className="py-20 lg:py-28 bg-muted/30 border-y border-border">
         <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <SectionHeading
@@ -192,7 +197,7 @@ export default function AboutPage() {
       <section className="py-20 lg:py-28">
         <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <SectionHeading
-            eyebrow="Industries We Serve"
+            eyebrow="Sectors We Serve"
             title="Sector expertise across six industries"
             description="We bring domain-specific knowledge to every engagement, tailoring our solutions to the operational realities of your sector."
           />
@@ -220,8 +225,8 @@ export default function AboutPage() {
           </div>
           <div className="mt-10 text-center">
             <Button asChild variant="outline" size="lg">
-              <Link href="/industries">
-                Explore Industries
+              <Link href="/clients">
+                Meet Our Clients
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>

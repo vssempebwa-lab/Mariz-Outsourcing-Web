@@ -34,7 +34,7 @@ export function AccountProfileCard({ staff }: { staff: CurrentStaff }) {
             <h2 className="break-words font-display text-xl font-semibold">{staff.name}</h2>
           </div>
         </div>
-        <Link href={`${staffWorkspacePath}/settings`} className="inline-flex min-h-11 w-full items-center justify-center rounded-md border px-4 py-2 sm:w-auto text-sm font-medium hover:bg-muted">
+        <Link href={`${staffWorkspacePath}/settings`} className="inline-flex min-h-[44px] w-full items-center justify-center rounded-md border px-4 py-2 sm:w-auto text-sm font-medium hover:bg-muted">
           Account Settings
         </Link>
       </div>

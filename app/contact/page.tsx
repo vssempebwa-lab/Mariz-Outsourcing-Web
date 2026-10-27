@@ -108,7 +108,7 @@ export default function ContactPage() {
                 </p>
                 <a
                   href={`tel:${SITE.phoneHref}`}
-                  className="inline-flex items-center gap-2 text-primary font-semibold text-lg hover:text-primary transition-colors"
+                  className="inline-flex min-h-[44px] items-center gap-2 text-primary font-semibold text-lg hover:text-primary transition-colors"
                 >
                   <Phone className="h-5 w-5" />
                   {SITE.phone}

@@ -3,14 +3,12 @@ import { Mail, Phone, MapPin, ArrowUpRight } from 'lucide-react';
 import { BrandLogo } from '@/components/site/brand-logo';
 import { SITE, SERVICES } from '@/lib/data';
 
-const footerPhone = '+256766630248';
-
 export function SiteFooter() {
   return (
     <footer className="ocean-inverse border-t border-ocean-cyan/40 text-foreground">
       <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
-        <div className="grid gap-12 lg:grid-cols-12">
-          <div className="lg:col-span-4">
+        <div className="grid grid-cols-2 gap-x-6 gap-y-10 lg:grid-cols-12 lg:gap-12">
+          <div className="col-span-2 lg:col-span-4">
             <Link href="/" className="flex items-center gap-2.5 mb-5">
               <BrandLogo className="h-11 w-11 ring-border" />
               <div className="flex flex-col leading-none">
@@ -25,17 +23,17 @@ export function SiteFooter() {
               24/7 call center operations, custom software, branding, and media
               production.
             </p>
-            <div className="space-y-3 text-sm">
+            <div className="space-y-1 text-sm">
               <a
-                href={`tel:${footerPhone}`}
-                className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors"
+                href={`tel:${SITE.phoneHref}`}
+                className="flex min-h-[44px] items-center gap-3 text-muted-foreground hover:text-primary transition-colors"
               >
                 <Phone className="h-4 w-4 text-primary" />
-                {footerPhone}
+                {SITE.phone}
               </a>
               <a
                 href={`mailto:${SITE.email}`}
-                className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors"
+                className="flex min-h-[44px] items-center gap-3 text-muted-foreground hover:text-primary transition-colors"
               >
                 <Mail className="h-4 w-4 text-primary" />
                 {SITE.email}
@@ -47,14 +45,14 @@ export function SiteFooter() {
             </div>
           </div>
 
-          <div className="lg:col-span-2">
+          <div className="col-span-1 lg:col-span-2">
             <h4 className="font-display font-semibold text-sm mb-4 text-foreground">
               Company
             </h4>
-            <ul className="space-y-2.5 text-sm">
+            <ul className="text-sm">
               {[
                 { label: 'About Us', href: '/about' },
-                { label: 'Industries', href: '/industries' },
+                { label: 'Clients', href: '/clients' },
                 { label: 'Projects', href: '/projects' },
                 { label: 'Careers', href: '/careers' },
                 { label: 'Blog', href: '/blog' },
@@ -63,7 +61,7 @@ export function SiteFooter() {
                 <li key={l.href}>
                   <Link
                     href={l.href}
-                    className="text-muted-foreground hover:text-white transition-colors"
+                    className="flex min-h-[44px] items-center text-muted-foreground hover:text-white transition-colors"
                   >
                     {l.label}
                   </Link>
@@ -72,16 +70,16 @@ export function SiteFooter() {
             </ul>
           </div>
 
-          <div className="lg:col-span-3">
+          <div className="col-span-1 lg:col-span-3">
             <h4 className="font-display font-semibold text-sm mb-4 text-foreground">
               Services
             </h4>
-            <ul className="space-y-2.5 text-sm">
+            <ul className="text-sm">
               {SERVICES.map((s) => (
                 <li key={s.slug}>
                   <Link
                     href={`/services/${s.slug}`}
-                    className="text-muted-foreground hover:text-white transition-colors"
+                    className="flex min-h-[44px] items-center text-muted-foreground hover:text-white transition-colors"
                   >
                     {s.title.split(' & ')[0].split(' — ')[0]}
                   </Link>
@@ -90,7 +88,7 @@ export function SiteFooter() {
             </ul>
           </div>
 
-          <div className="lg:col-span-3">
+          <div className="col-span-2 lg:col-span-3">
             <h4 className="font-display font-semibold text-sm mb-4 text-foreground">
               Get in Touch
             </h4>
@@ -100,7 +98,7 @@ export function SiteFooter() {
             </p>
             <Link
               href="/contact"
-              className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:text-white transition-colors"
+              className="inline-flex min-h-[44px] items-center gap-1.5 text-sm font-medium text-primary hover:text-white transition-colors"
             >
               Request Consultation
               <ArrowUpRight className="h-4 w-4" />
@@ -112,11 +110,11 @@ export function SiteFooter() {
           <p className="text-xs text-muted-foreground">
             {SITE.legalName} &copy; {new Date().getFullYear()}. All rights reserved.
           </p>
-          <div className="flex items-center gap-6 text-xs text-muted-foreground">
-            <Link href="/privacy" className="hover:text-primary transition-colors">
+          <div className="flex items-center gap-4 text-xs text-muted-foreground sm:gap-6">
+            <Link href="/privacy" className="inline-flex min-h-[40px] items-center hover:text-primary transition-colors">
               Privacy Policy
             </Link>
-            <Link href="/terms" className="hover:text-primary transition-colors">
+            <Link href="/terms" className="inline-flex min-h-[40px] items-center hover:text-primary transition-colors">
               Terms of Service
             </Link>
           </div>

@@ -16,6 +16,8 @@ export type Project = {
   featured?: boolean;
   href?: string;
   external?: boolean;
+  tags?: string[];
+  metrics?: { label: string; value: string };
 };
 
 export const PROJECT_DIVISIONS: Array<'All' | ProjectDivision> = [
@@ -30,86 +32,87 @@ export const PROJECT_DIVISIONS: Array<'All' | ProjectDivision> = [
 
 export const PROJECTS: Project[] = [
   {
-    id: 'crm-sales-engine',
-    title: 'B2B CRM & Sales Pipeline Engine',
+    id: 'rolkat',
+    title: 'Rolkat Financial Services',
     division: 'RevOps',
-    category: 'High-Ticket Services',
-    image:
-      'https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+    category: 'Financial Services & Revenue Operations',
+    image: '/projects/rolkat.webp',
     summary:
-      'Designed a CRM architecture with lead scoring, routing rules, deal dashboards, follow-up automations, and contract handoff flows.',
+      'Engineered high-performance revenue operations, loan processing pipelines, CRM synchronization, and digital outreach workflows for Rolkat Financial Services.',
     featured: true,
+    tags: ['Financial Services', 'RevOps', 'Pipeline Architecture', 'CRM Sync'],
+    metrics: { label: 'Pipeline Velocity', value: '+42%' },
   },
   {
-    id: 'omnichannel-support-center',
-    title: 'Omnichannel Support Center Launch',
-    division: 'Call Center',
-    category: 'Telecom & Logistics',
-    image:
-      'https://images.pexels.com/photos/8867472/pexels-photo-8867472.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
-    summary:
-      'Launched a 120-seat support operation across voice, email, live chat, WhatsApp, and social media with QA reporting.',
-    featured: true,
-  },
-  {
-    id: 'inventory-finance-platform',
-    title: 'Inventory & Financial Control Platform',
-    division: 'Software Dev',
-    category: 'Manufacturing',
-    image:
-      'https://images.pexels.com/photos/6803554/pexels-photo-6803554.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
-    summary:
-      'Built a custom platform for asset entry, stock sync, reorder alerts, transaction posting, and executive finance dashboards.',
-    featured: true,
-  },
-  {
-    id: 'specialist-talent-pipeline',
-    title: 'Specialist Talent Pipeline',
-    division: 'Talent Acquisition',
-    category: 'Engineering & Construction',
-    image:
-      'https://images.pexels.com/photos/5439371/pexels-photo-5439371.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
-    summary:
-      'Mapped competitors, sourced passive candidates, screened technical capability, and supported onboarding for specialist roles.',
-  },
-  {
-    id: 'corporate-identity-system',
-    title: 'Corporate Identity & Brand Bible',
-    division: 'Branding',
-    category: 'Corporate Services',
-    image:
-      'https://images.pexels.com/photos/7598009/pexels-photo-7598009.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
-    summary:
-      'Created a full visual identity system with positioning, logo rules, typography, color palette, pitch decks, and collateral.',
-  },
-  {
-    id: 'cinematic-brand-documentary',
-    title: 'Cinematic Brand Documentary',
+    id: 'rubshoots',
+    title: 'Rub Shoots Photography',
     division: 'Media',
-    category: 'Hospitality',
-    image:
-      'https://images.pexels.com/photos/7709678/pexels-photo-7709678.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+    category: 'Photography Portfolio & Booking Platform',
+    image: '/projects/rubshoots.webp',
     summary:
-      'Produced a corporate film with executive interviews, site footage, aerial scenes, color grading, and web-ready micro-content.',
+      'Custom portfolio and booking website for Rub Shoots Photography, showcasing wedding, portrait, graduation, and event galleries with online session reservation.',
+    featured: true,
+    tags: ['Photography Portfolio', 'Session Booking', 'Gallery Showcase', 'Web Design'],
+    metrics: { label: 'Client Inquiries', value: '+75%' },
   },
   {
-    id: 'reactivation-campaign',
-    title: 'Dormant Account Reactivation Campaign',
-    division: 'Call Center',
-    category: 'E-Commerce',
-    image:
-      'https://images.pexels.com/photos/7709179/pexels-photo-7709179.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+    id: 'socialnest',
+    title: 'Social Nest',
+    division: 'Software Dev',
+    category: 'AI Publishing & Workflow Automation',
+    image: '/projects/socialnest.webp',
     summary:
-      'Executed outbound reactivation and satisfaction audit workflows with segmented lists, call QA, and conversion reporting.',
+      'Plan, create, and publish faster with AI-powered media tools, content scheduling, and team publishing workflows in one unified web platform.',
+    featured: true,
+    tags: ['AI Publishing', 'Content Automation', 'Media Scheduling', 'Team Workflow'],
+    metrics: { label: 'Workflow Boost', value: '3.5x' },
   },
   {
-    id: 'executive-search-program',
-    title: 'Executive Search Program',
-    division: 'Talent Acquisition',
-    category: 'Scaling Startup',
-    image:
-      'https://images.pexels.com/photos/5439368/pexels-photo-5439368.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+    id: 'kunju',
+    title: 'Kunju Uganda',
+    division: 'Software Dev',
+    category: 'Property Platform & Real Estate Marketplace',
+    image: '/projects/kunju.webp',
     summary:
-      'Delivered a leadership shortlist using market mapping, discreet outreach, behavioral scorecards, and culture-fit assessment.',
+      'Digital real estate marketplace featuring 2,400+ verified listings across 12 cities in Uganda, with landlord verification workflows and automated search filters.',
+    featured: true,
+    tags: ['Property Platform', 'Real Estate', 'Verified Listings', 'Marketplace'],
+    metrics: { label: 'Active Listings', value: '2,400+' },
+  },
+  {
+    id: 'rakenta',
+    title: 'Rakentaa Real Estate',
+    division: 'Software Dev',
+    category: 'Property Management, Construction & Design',
+    image: '/projects/rakenta.webp',
+    summary:
+      'Full-service property development, architecture, construction, and property management web platform developed for Rakenta Group of Companies.',
+    featured: true,
+    tags: ['Property Management', 'Construction', 'Architecture', 'Web Platform'],
+    metrics: { label: 'Online Bookings', value: '3.2x' },
+  },
+  {
+    id: 'shope4me',
+    title: 'Shope4me',
+    division: 'Software Dev',
+    category: 'Digital Marketplace & E-Commerce Platform',
+    image: '/projects/shope4me.webp',
+    summary:
+      'Modern e-commerce platform featuring automated inventory synchronization, secure multi-currency payment processing, mobile checkout optimization, and instant order dispatching.',
+    featured: false,
+    tags: ['E-Commerce', 'Inventory Sync', 'Payment Gateway', 'Cloud Backend'],
+    metrics: { label: 'Checkout Speed', value: '1.2s' },
+  },
+  {
+    id: 'wabzfoods',
+    title: 'Wabz Foods',
+    division: 'Software Dev',
+    category: 'Online Food Ordering & Delivery Platform',
+    image: '/projects/wabzfoods.webp',
+    summary:
+      'Modern food ordering and dispatch platform featuring real-time menu browsing, secure online payments, instant meal tracking, and localized delivery logistics.',
+    featured: true,
+    tags: ['Food Delivery', 'Online Ordering', 'Order Tracking', 'E-Commerce'],
+    metrics: { label: 'Order Speed', value: '<25 Mins' },
   },
 ];

@@ -2,6 +2,8 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { SectionHeading } from '@/components/site/section-heading';
+import { AnimatedCounter } from '@/components/site/animated-counter';
+import { ClientLogoMarquee } from '@/components/site/client-logo-marquee';
 import { LeadForm } from '@/components/site/lead-form';
 import { METRICS, TESTIMONIALS } from '@/lib/data';
 import { getPublishedPageSections, type PageSection } from '@/lib/site-customization';
@@ -41,6 +43,7 @@ export default async function Home() {
     <>
       <Hero content={heroContent} blocks={heroBlocks} />
       <Metrics />
+      <ClientLogoMarquee />
       <Testimonials />
       <LeadCapture content={ctaContent} />
     </>
@@ -76,7 +79,7 @@ function Hero({ content, blocks }: { content?: PageSection['content']; blocks: R
           />
         </div>
       ))}
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent sm:bg-gradient-to-r" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/85 via-black/50 to-black/10 sm:bg-gradient-to-r sm:from-black/75 sm:via-black/35 sm:to-transparent" />
       <div className="container relative z-10 mx-auto flex max-w-6xl items-end px-4 pb-10 pt-24 sm:px-6 sm:pb-12 lg:px-8 lg:pb-14">
         <div className="banner-copy max-w-2xl animate-fade-up text-white">
           <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-ocean-sky/40 bg-ocean-deep/40 px-3 py-1.5">
@@ -133,11 +136,11 @@ function Metrics() {
   return (
     <section className="border-y border-border bg-secondary/60 py-12 lg:py-16">
       <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+        <div data-count-group className="grid grid-cols-2 lg:grid-cols-4 gap-8">
           {METRICS.map((m) => (
             <div key={m.label} className="text-center">
               <p className="font-display text-4xl font-normal text-primary lg:text-5xl">
-                {m.value}
+                <AnimatedCounter value={m.value} />
               </p>
               <p className="mt-2 text-sm font-medium text-muted-foreground">{m.label}</p>
             </div>
@@ -185,19 +188,6 @@ function Testimonials() {
               </CardContent>
             </Card>
           ))}
-        </div>
-
-        <div className="mt-16">
-          <p className="text-center text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-6">
-            Trusted by organizations across industries
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4">
-            {['Corporate Enterprise', 'Hospitality Group', 'Manufacturing', 'Healthcare', 'Construction', 'Retail'].map((c) => (
-              <span key={c} className="text-sm font-medium text-muted-foreground">
-                {c}
-              </span>
-            ))}
-          </div>
         </div>
       </div>
     </section>

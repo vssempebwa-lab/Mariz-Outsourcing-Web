@@ -70,7 +70,7 @@ export function AccountSettings({ staff }: { staff: CurrentStaff }) {
             </div>
             {profileError ? <p role="alert" className="text-sm text-destructive">{profileError}</p> : null}
             {profileMessage ? <p role="status" className="text-sm text-green-700">{profileMessage}</p> : null}
-            <Button className="min-h-11 w-full sm:w-auto" disabled={saving !== null}>{saving === 'profile' ? 'Saving...' : 'Save Profile'}</Button>
+            <Button className="min-h-[44px] w-full sm:w-auto" disabled={saving !== null}>{saving === 'profile' ? 'Saving...' : 'Save Profile'}</Button>
           </form>
         </section>
         <section className="min-w-0 rounded-lg border bg-card p-4 shadow-sm sm:p-6">
@@ -91,7 +91,7 @@ export function AccountSettings({ staff }: { staff: CurrentStaff }) {
             </div>
             {passwordError ? <p role="alert" className="text-sm text-destructive">{passwordError}</p> : null}
             {passwordMessage ? <p role="status" className="text-sm text-green-700">{passwordMessage}</p> : null}
-            <Button className="min-h-11 w-full sm:w-auto" disabled={saving !== null}>{saving === 'password' ? 'Changing...' : 'Change Password'}</Button>
+            <Button className="min-h-[44px] w-full sm:w-auto" disabled={saving !== null}>{saving === 'password' ? 'Changing...' : 'Change Password'}</Button>
           </form>
         </section>
       </div>
