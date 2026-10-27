@@ -96,7 +96,7 @@ const defaultSections = [
       eyebrow: 'Trusted BPO Partner in East Africa',
       heading: 'One agency for the services that keep your business moving.',
       body:
-        'Revenue operations, recruitment, customer support, software, branding, and media production delivered through one coordinated outsourcing partner.',
+        'Revenue operations, recruitment, customer support, software, consultancy, digital marketing, branding, and media production delivered through one coordinated outsourcing partner.',
       buttonLabel: 'Request Consultation',
       buttonHref: '/contact',
     },
@@ -111,7 +111,7 @@ const defaultSections = [
       heading: 'Ready to Scale Your Operations?',
       body:
         'Tell us about your business and the challenges you are facing. Our team will reach out within one business day.',
-      buttonLabel: 'Contact MOA',
+      buttonLabel: 'Contact Mariz',
       buttonHref: '/contact',
     },
   },

@@ -20,8 +20,8 @@ export function SiteFooter() {
             </Link>
             <p className="text-sm text-muted-foreground leading-relaxed max-w-sm mb-6">
               {SITE.tagline} We deliver revenue operations, talent acquisition,
-              24/7 call center operations, custom software, branding, and media
-              production.
+              24/7 call support, custom software, consultancy, digital
+              marketing, branding, and media production.
             </p>
             <div className="space-y-1 text-sm">
               <a
@@ -38,10 +38,15 @@ export function SiteFooter() {
                 <Mail className="h-4 w-4 text-primary" />
                 {SITE.email}
               </a>
-              <div className="flex items-start gap-3 text-muted-foreground">
+              <a
+                href={SITE.mapDirectionsUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="flex min-h-[44px] items-start gap-3 text-muted-foreground transition-colors hover:text-primary"
+              >
                 <MapPin className="h-4 w-4 text-primary mt-0.5 shrink-0" />
                 <span>{SITE.address}</span>
-              </div>
+              </a>
             </div>
           </div>
 
@@ -81,7 +86,7 @@ export function SiteFooter() {
                     href={`/services/${s.slug}`}
                     className="flex min-h-[44px] items-center text-muted-foreground hover:text-white transition-colors"
                   >
-                    {s.title.split(' & ')[0].split(' — ')[0]}
+                    {s.shortTitle}
                   </Link>
                 </li>
               ))}

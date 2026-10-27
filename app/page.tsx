@@ -95,7 +95,7 @@ function Hero({ content, blocks }: { content?: PageSection['content']; blocks: R
 
           <p className="mt-4 max-w-xl text-sm leading-relaxed text-white/95 text-balance sm:text-base">
             {blockString(blocks.body, 'text') || content?.body ||
-              'Revenue operations, recruitment, customer support, software, branding, and media production delivered through one coordinated outsourcing partner.'}
+              'Revenue operations, recruitment, customer support, software, consultancy, digital marketing, branding, and media production delivered through one coordinated outsourcing partner.'}
           </p>
 
           <div className="mt-6 flex flex-col gap-3 sm:flex-row">

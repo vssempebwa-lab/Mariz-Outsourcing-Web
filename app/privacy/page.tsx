@@ -14,7 +14,7 @@ export default function PrivacyPage() {
         </h1>
         <div className="prose prose-lg max-w-none text-muted-foreground">
           <p className="text-foreground leading-relaxed mb-4">
-            {SITE.legalName} (&ldquo;MOA&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;)
+            {SITE.legalName} (&ldquo;Mariz&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;)
             respects your privacy and is committed to protecting your personal data.
             This policy explains how we collect, use, and safeguard information you
             provide through our website.

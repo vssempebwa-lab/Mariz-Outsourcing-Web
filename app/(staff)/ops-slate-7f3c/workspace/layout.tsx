@@ -8,8 +8,8 @@ import { staffAuthEnabled } from '@/lib/staff-auth-mode';
 
 export const metadata: Metadata = {
   title: {
-    default: 'MOA Management Dashboard',
-    template: '%s | MOA Management Dashboard',
+    default: 'Mariz Management Dashboard',
+    template: '%s | Mariz Management Dashboard',
   },
   robots: {
     index: false,

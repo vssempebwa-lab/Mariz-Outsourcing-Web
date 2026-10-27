@@ -51,7 +51,7 @@ function isRateLimited(key: string) {
 function employeeId() {
   const suffix = Date.now().toString().slice(-6);
   const random = Math.floor(Math.random() * 900 + 100);
-  return `MOA-EMP-${suffix}${random}`;
+  return `MARIZ-EMP-${suffix}${random}`;
 }
 
 function friendlyDatabaseError(error: Error) {

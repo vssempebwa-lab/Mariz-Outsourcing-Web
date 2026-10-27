@@ -8,10 +8,10 @@ import { ArrowRight } from 'lucide-react';
 export const metadata = {
   title: 'Portfolio & Work',
   description:
-    'Explore selected projects from Mariz Outsourcing Agency — call center launches, custom ERP systems, brand refreshes, cinematic media, and talent pipelines.',
+    'Explore selected projects from Mariz Outsourcing Agency — call support launches, custom ERP systems, brand refreshes, cinematic media, and talent pipelines.',
 };
 
-const CATEGORIES = ['All', 'Call Center', 'Software', 'Branding', 'Media', 'Recruitment'];
+const CATEGORIES = ['All', 'Call Support', 'Software', 'Branding', 'Media', 'Recruitment'];
 
 export default function PortfolioPage() {
   return (

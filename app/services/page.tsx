@@ -9,7 +9,7 @@ import { ArrowRight, CheckCircle2 } from 'lucide-react';
 export const metadata = {
   title: 'Our Services',
   description:
-    'Revenue operations, strategic recruitment, 24/7 call center operations, custom software development, corporate branding, cinematic media production, and Mariz Talent Clinic training from Mariz Outsourcing Agency.',
+    'Revenue operations, strategic recruitment, 24/7 call support and audio services, custom software development, business consultancy, digital marketing, sales outsourcing, corporate branding, cinematic media production, and community skilling from Mariz Outsourcing Agency.',
 };
 
 export default function ServicesPage() {
@@ -29,9 +29,10 @@ export default function ServicesPage() {
             </h1>
             <p className="mt-6 text-lg text-muted-foreground leading-relaxed max-w-2xl text-balance">
               Our services bring specialist teams together as one partner. From
-              revenue operations and talent acquisition to customer support,
-              software, branding, media, and Mariz Talent Clinic training, we support
-              your business and skills development needs.
+              revenue operations and talent acquisition to call support and audio,
+              software, consultancy, digital marketing, sales outsourcing, branding,
+              media, and community skilling, we support your business and skills
+              development needs.
             </p>
           </div>
         </div>
@@ -151,7 +152,7 @@ export default function ServicesPage() {
         <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <SectionHeading
             eyebrow="How We Work"
-            title="The MOA Work Cycle"
+            title="The Mariz Work Cycle"
             description="Every service engagement follows our structured five-phase process — ensuring clarity, quality, and measurable outcomes."
           />
           <div className="mt-14 grid gap-6 md:grid-cols-3 lg:grid-cols-5">

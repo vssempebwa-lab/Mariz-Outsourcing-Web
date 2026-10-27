@@ -75,7 +75,7 @@ export default function ServiceDetailPage({
               </div>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                 <Button asChild size="lg">
-                  <Link href="/contact">{service.slug === 'talent-clinic' ? 'Ask About Training' : 'Request Consultation'}</Link>
+                  <Link href="/contact">{service.slug === 'community-skilling' ? 'Ask About Training' : 'Request Consultation'}</Link>
                 </Button>
                 <Button asChild size="lg" variant="outline">
                   <Link href="/projects">View Projects</Link>
@@ -95,11 +95,11 @@ export default function ServiceDetailPage({
         </div>
       </section>
 
-      {service.slug === 'talent-clinic' ? (
+      {service.slug === 'community-skilling' ? (
         <section className="border-y border-border bg-muted/30 py-8">
           <div className="container mx-auto flex max-w-6xl flex-col gap-4 px-4 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
             <div className="min-w-0">
-              <h2 className="font-display text-xl font-semibold">Join Mariz Talent Clinic</h2>
+              <h2 className="font-display text-xl font-semibold">Join the Mariz Talent Clinic</h2>
               <p className="mt-2 text-sm text-muted-foreground">Six weeks of free training · Registration fee: UGX 100,000</p>
               <p className="mt-2 text-sm text-muted-foreground">{SITE.address}</p>
               <p className="mt-2 text-sm text-muted-foreground">Contact us to confirm intake dates and available places.</p>

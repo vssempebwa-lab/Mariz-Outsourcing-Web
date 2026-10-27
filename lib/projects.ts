@@ -1,7 +1,7 @@
 export type ProjectDivision =
   | 'RevOps'
   | 'Talent Acquisition'
-  | 'Call Center'
+  | 'Call Support'
   | 'Software Dev'
   | 'Branding'
   | 'Media';
@@ -24,7 +24,7 @@ export const PROJECT_DIVISIONS: Array<'All' | ProjectDivision> = [
   'All',
   'RevOps',
   'Talent Acquisition',
-  'Call Center',
+  'Call Support',
   'Software Dev',
   'Branding',
   'Media',

@@ -10,7 +10,7 @@ import { Target, Eye, Heart, ArrowRight, Award, Handshake, Lightbulb, Activity }
 export const metadata = {
   title: 'About Us',
   description:
-    'Mariz Outsourcing Agency (SMC) Ltd is a professional BPO and strategic consulting firm headquartered in Uganda, delivering revenue operations, talent acquisition, call center operations, software development, branding, and media production.',
+    'Mariz Outsourcing Agency (SMC) Ltd is a professional BPO and strategic consulting firm headquartered in Uganda, delivering revenue operations, talent acquisition, call support and audio services, software development, branding, and media production.',
 };
 
 const VALUES = [
@@ -49,7 +49,7 @@ export default function AboutPage() {
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-accent/10 border border-accent/20 mb-6">
               <span className="text-xs font-semibold text-primary uppercase tracking-wider">
-                About MOA
+                About Mariz
               </span>
             </div>
             <h1 className="font-display font-bold text-4xl sm:text-5xl lg:text-6xl leading-tight text-balance text-foreground">
@@ -58,8 +58,9 @@ export default function AboutPage() {
             <p className="mt-6 text-lg text-muted-foreground leading-relaxed max-w-2xl text-balance">
               {SITE.legalName} is a professional Business Process Outsourcing and
               strategic consulting firm delivering revenue operations, talent
-              acquisition, 24/7 call center support, software development,
-              corporate branding, and media production.
+              acquisition, 24/7 call support and audio services, software development,
+              business consultancy, digital marketing, sales outsourcing, corporate
+              branding, and media production.
             </p>
           </div>
         </div>
@@ -138,13 +139,13 @@ export default function AboutPage() {
               <SectionHeading
                 eyebrow="Who We Are"
                 title="A full-service outsourcing agency built for scale"
-                description="Headquartered at Level 3 Rm HC3 Honora Plaza, Opposite Be Energy Fuels, Zzana, Kampala, MOA serves corporate enterprises, hospitality groups, construction firms, healthcare providers, retailers, and manufacturers — delivering integrated solutions that span talent, technology, and brand."
+                description="Headquartered at Level 3 Rm HC3 Honora Plaza, Opposite Be Energy Fuels, Zzana, Kampala, Mariz serves corporate enterprises, hospitality groups, construction firms, healthcare providers, retailers, and manufacturers — delivering integrated solutions that span talent, technology, and brand."
                 align="left"
               />
               <div className="mt-8 space-y-4">
                 {[
                   'Integrated service divisions covering revenue, talent, technology, support, and creative under one roof',
-                  '24/7 operations with a 200+ seat call center and omnichannel support capabilities',
+                  '24/7 operations with a 200+ seat call support floor and omnichannel capabilities',
                   'Custom software development from ERPs to financial tracking platforms',
                   'Strategic branding and cinematic media production for corporate clients',
                 ].map((item) => (

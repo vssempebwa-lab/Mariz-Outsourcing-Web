@@ -28,7 +28,7 @@ export default function CareersPage() {
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-accent/10 border border-accent/20 mb-6">
               <span className="text-xs font-semibold text-primary uppercase tracking-wider">
-                Careers at MOA
+                Careers at Mariz
               </span>
             </div>
             <h1 className="font-display font-bold text-4xl sm:text-5xl lg:text-6xl leading-tight text-balance text-foreground">
@@ -122,7 +122,7 @@ export default function CareersPage() {
       <section className="py-20 lg:py-24 bg-secondary">
         <div className="container mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="font-display font-bold text-3xl sm:text-4xl text-foreground text-balance">
-            Ready to join the MOA team?
+            Ready to join the Mariz team?
           </h2>
           <p className="mt-4 text-muted-foreground text-lg text-balance">
             Send us your CV and a brief note about your experience. We review every

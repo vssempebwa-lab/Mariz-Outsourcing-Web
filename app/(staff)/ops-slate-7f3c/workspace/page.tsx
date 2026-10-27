@@ -61,7 +61,7 @@ export default async function StaffWorkspacePage() {
           {isSuperAdmin ? 'Mariz Operations' : 'Employee Workspace'}
         </p>
         <h1 className="mt-1 font-display text-3xl font-semibold">
-          {isSuperAdmin ? 'The MOA Management Dashboard' : 'My Dashboard'}
+          {isSuperAdmin ? 'The Mariz Management Dashboard' : 'My Dashboard'}
         </h1>
         {isSuperAdmin && (
           <Link

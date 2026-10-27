@@ -1,13 +1,17 @@
 export const SITE = {
   name: 'Mariz Outsourcing Agency',
-  shortName: 'MOA',
-  legalName: 'Mariz Outsourcing Agency (SMC) Ltd',
+  shortName: 'Mariz',
+  legalName: 'Mariz Outsourcing (U) - SMC Ltd',
   tagline: 'Streamline your business with strategic outsourcing.',
   phone: '+256 766 630 248',
   phoneHref: '+256766630248',
   website: 'www.moa.co.ug',
   websiteUrl: 'https://www.moa.co.ug',
   address: 'Level 3 Rm HC3 Honora Plaza, Opposite Be Energy Fuels, Zzana, Kampala',
+  mapEmbedUrl:
+    'https://www.google.com/maps?q=Honora%20Plaza%2C%20Zzana%2C%20Kampala%2C%20Uganda&output=embed',
+  mapDirectionsUrl:
+    'https://www.google.com/maps/dir/?api=1&destination=Honora%20Plaza%2C%20Zzana%2C%20Kampala%2C%20Uganda',
   email: 'info@moa.co.ug',
   mission:
     'To help businesses operate more efficiently and profitably by providing reliable outsourcing solutions that reduce operational stress, enhance productivity, and improve overall business performance.',
@@ -30,6 +34,7 @@ export const SERVICES = [
   {
     slug: 'revops-sales',
     title: 'Revenue Operations & Outsourced Sales',
+    shortTitle: 'Revenue Operations',
     short: 'Performance-driven pipeline buildout, sales execution, and revenue reconciliation.',
     description:
       'Mariz RevOps builds, optimizes, and executes end-to-end sales pipelines for growing businesses. We align CRM architecture, lead data, closing specialists, contract administration, and financial reconciliation into one measurable revenue engine.',
@@ -60,6 +65,7 @@ export const SERVICES = [
   {
     slug: 'recruitment',
     title: 'Strategic Recruitment & Talent Acquisition',
+    shortTitle: 'Recruitment',
     short: 'Executive search, passive talent sourcing, assessment, and onboarding.',
     description:
       'Mariz Strategic Recruitment & Talent Acquisition provides specialized headhunting, executive search, and workforce scaling. We map markets, engage passive talent, verify capability, and support onboarding so clients can hire for both performance and long-term fit.',
@@ -88,14 +94,15 @@ export const SERVICES = [
     ],
   },
   {
-    slug: 'call-center',
-    title: 'Call Center & Customer Support Operations',
-    short: '24/7 omnichannel support, helpdesk, outbound growth, and QA.',
+    slug: 'call-support-audio',
+    title: 'Call Support & Audio Services',
+    shortTitle: 'Call Support & Audio',
+    short: '24/7 inbound support, outbound campaigns, branded CRBT, and IVR voice production.',
     description:
-      'The Call Center & Customer Support division delivers always-on communication infrastructure across voice, email, web, chat, WhatsApp, and social channels. Tiered support, outbound growth campaigns, QA, and compliance controls help every customer touchpoint create measurable value.',
+      'The Call Support & Audio Services division runs always-on communication infrastructure across voice, email, web chat, WhatsApp, and social channels. Tiered helpdesk support and outbound campaigns sit alongside branded Corporate Ring Back Tunes (CRBT) and professional IVR, prompt, and multimedia voice production.',
     icon: 'Headset',
     image: '/services/call-center.jpeg',
-    objective: '24/7 inbound and outbound customer operations',
+    objective: '24/7 inbound support, outbound call operations, and branded audio',
     targetMetric: 'First-contact resolution, SLA performance, customer satisfaction',
     targetAudience: 'E-commerce, telecom, logistics, hospitality, and service businesses',
     workflow: [
@@ -103,16 +110,18 @@ export const SERVICES = [
       'Tier 1 triage through Tier 3 technical escalation',
       'Predictive outbound dialing and lead nurturing',
       'Dormant account reactivation and satisfaction audits',
-      '100% call recording, QA reviews, and sentiment analysis',
-      'Secure infrastructure aligned with GDPR and data sovereignty requirements',
+      'Corporate Ring Back Tunes (CRBT) and professional IVR voice recording',
+      '100% call recording, QA reviews, and secure, compliant infrastructure',
     ],
     features: [
-      '24/7/365 inbound and outbound coverage',
+      '24/7/365 inbound and outbound call support',
       'Voice, email, web, chat, WhatsApp, and social media support',
       'Tier 1 to Tier 3 technical helpdesk models',
       'Scalable teams from 5 agents to 200+ seat operations',
       'Predictive dialing and lead-scored outbound campaigns',
       'Reactivation, cross-selling, and upselling workflows',
+      'Corporate Ring Back Tunes (CRBT) with branded caller messages',
+      'Professional voice overs and IVR menu recording',
       'AI-supported sentiment analysis and agent calibration',
       'Compliance-ready recording, reporting, and data security',
     ],
@@ -120,6 +129,7 @@ export const SERVICES = [
   {
     slug: 'software',
     title: 'Software Development & IT Solutions',
+    shortTitle: 'Software Development',
     short: 'Custom enterprise apps, automation, cloud infrastructure, and IT support.',
     description:
       'Mariz builds secure web applications, mobile platforms, enterprise software, and automation systems that remove manual bottlenecks. We centralize disconnected databases into cloud-ready operational platforms built around each client workflow.',
@@ -137,8 +147,11 @@ export const SERVICES = [
       'Security-by-design, API integration, maintenance, and AI consulting',
     ],
     features: [
+      'Custom websites, portals, and e-commerce platforms built for conversion',
       'Bespoke enterprise software and web applications',
-      'Cross-platform mobile application development',
+      'ERP modules for HR, operations, inventory, and finance',
+      'Multi-store POS with real-time stock monitoring and digital receipts',
+      'Cross-platform mobile application development for iOS and Android',
       'AWS and Azure cloud infrastructure engineering',
       'Automated inventory tracking and reorder alerts',
       'Financial management dashboards and ledger visibility',
@@ -150,6 +163,7 @@ export const SERVICES = [
   {
     slug: 'branding',
     title: 'Strategic Branding & Corporate Identity',
+    shortTitle: 'Branding',
     short: 'Brand strategy, visual identity systems, collateral, and reputation assets.',
     description:
       'The Strategic Branding & Corporate Identity division develops unified visual and narrative systems for organizations that need credibility across every client-facing touchpoint, from market positioning to brand guidelines, pitch collateral, and digital storefront assets.',
@@ -172,14 +186,17 @@ export const SERVICES = [
       'Logo systems, typography suites, and color palettes',
       'Full Brand Bible and visual usage guidelines',
       'Sales decks, prospectuses, annual reports, and corporate stationery',
+      'Company profiles and investor pitch decks',
       'Digital storefront branding and social media asset packages',
-      'Packaging, signage, merchandise, and print collateral',
+      'Large-format printing: teardrop and pull-up banners, billboards, and trade show displays',
+      'Corporate merchandise: calendars, flyers, business cards, brochures, uniforms, and gifts',
       'Reputation tracking with automated sentiment analysis',
     ],
   },
   {
     slug: 'media',
     title: 'Professional Photography & Cinematic Videography',
+    shortTitle: 'Media Production',
     short: 'Broadcast-quality photography, drone footage, brand films, and micro-content.',
     description:
       'The Professional Photography & Cinematic Videography division produces original, broadcast-quality content for corporate storytelling, marketing campaigns, site documentation, investor updates, and web assets.',
@@ -202,6 +219,8 @@ export const SERVICES = [
       'Technical site and operational facility documentation',
       'Licensed 4K aerial drone videography',
       'Cinematic brand documentaries and executive interviews',
+      'Commercial video adverts and 2D/3D motion graphics',
+      'Product photography and commercial stills with professional retouching',
       'Customer success video case studies',
       'Professional editing, color grading, sound design, and audio post',
       'Corporate podcast and video series support',
@@ -209,18 +228,112 @@ export const SERVICES = [
     ],
   },
   {
-    slug: 'talent-clinic',
-    title: 'Mariz Talent Clinic',
-    short: 'Six weeks of practical training in digital, creative, and sales skills.',
+    slug: 'business-consultancy',
+    title: 'Business Consultancy & Advisory',
+    shortTitle: 'Business Consultancy',
+    short: 'Process audits, governance, feasibility studies, and HR & payroll advisory.',
     description:
-      'Mariz Talent Clinic helps participants build practical skills in digital tools, creative production, and sales. The six-week programme offers free training with a registration fee of UGX 100,000. Choose a Digital, Creative, or Sales clinic and contact our team for the next intake and available places.',
+      'Mariz Business Consultancy & Advisory helps leadership teams make confident decisions. We map internal workflows, remove operational redundancies, structure governance and internal controls, test feasibility, and advise on HR and payroll so growth is planned rather than improvised.',
+    icon: 'Briefcase',
+    image: '/services/business-consultancy.jpg',
+    objective: 'Actionable insight and structural frameworks for growth and compliance',
+    targetMetric: 'Productivity gains, cost reduction, audit-ready governance',
+    targetAudience: 'Growing SMEs, corporate boards, family businesses, and expansion-stage firms',
+    workflow: [
+      'Discovery interviews and operational diagnostics',
+      'Workflow mapping and redundancy elimination',
+      'Governance, policy, and internal control design',
+      'Feasibility studies, risk assessment, and market analysis',
+      'Growth strategy and diversification roadmaps',
+      'HR, payroll, and compliance advisory',
+    ],
+    features: [
+      'Business process optimization and operational audits',
+      'Corporate governance and compliance advisory',
+      'Policy guidelines and internal control frameworks',
+      'Feasibility studies and growth strategy',
+      'Market analysis and operational expansion roadmaps',
+      'HR and payroll advisory',
+      'Labor law and employment contract guidance',
+      'Performance management metrics and outsourced payroll infrastructure',
+    ],
+  },
+  {
+    slug: 'digital-marketing',
+    title: 'Digital Marketing & SEO',
+    shortTitle: 'Digital Marketing',
+    short: 'Technical SEO, social media management, paid ads, and content strategy.',
+    description:
+      'Mariz Digital Marketing builds brand visibility and drives qualified leads through performance-driven campaigns and organic search strategy. From technical SEO and localized keyword work to platform-native social media management, paid media, and content strategy, every channel is measured against qualified enquiries.',
+    icon: 'Globe',
+    image: '/services/digital-marketing.jpg',
+    objective: 'Brand visibility and qualified lead generation',
+    targetMetric: 'Organic traffic, engagement, cost per lead, qualified enquiries',
+    targetAudience: 'B2B teams, consumer brands, and businesses scaling their digital presence',
+    workflow: [
+      'Technical SEO audit and keyword mapping',
+      'Content calendar and channel strategy',
+      'Social media management and community engagement',
+      'Paid campaign setup across Google, Meta, and LinkedIn',
+      'Copywriting, creative production, and conversion tracking',
+      'Monthly performance reporting and optimization',
+    ],
+    features: [
+      'Technical SEO audits and on-page optimization',
+      'Keyword research and localized SEO strategy',
+      'Link-building and search authority development',
+      'Social media management across LinkedIn, Facebook, Instagram, X, and TikTok',
+      'Content calendars, audience engagement, and community building',
+      'Pay-per-click and paid social campaign strategy',
+      'Ad copywriting, creative design, and conversion tracking',
+      'Corporate content strategy and brand storytelling',
+    ],
+  },
+  {
+    slug: 'sales-outsourcing',
+    title: 'Sales & Marketing Outsourcing',
+    shortTitle: 'Sales & Marketing',
+    short: 'Dedicated sales teams, B2B lead generation, research, and brand activations.',
+    description:
+      'Mariz Sales & Marketing Outsourcing extends your commercial reach without adding fixed headcount. We deploy trained sales professionals, run structured B2B outreach, produce market and competitor intelligence, and execute awareness campaigns and on-ground brand activations.',
+    icon: 'Target',
+    image: '/services/sales-outsourcing.jpg',
+    objective: 'Extend commercial reach with dedicated, trained sales capacity',
+    targetMetric: 'Qualified leads, meetings booked, revenue growth, market coverage',
+    targetAudience: 'B2B firms, product launches, FMCG brands, and teams entering new markets',
+    workflow: [
+      'Market research and competitor intelligence',
+      'Target account and territory mapping',
+      'Deployment of trained telesales and field agents',
+      'Multi-channel outbound outreach',
+      'Product launches, roadshows, and brand activations',
+      'Pipeline reporting and sales performance reviews',
+    ],
+    features: [
+      'Market research and competitive intelligence',
+      'Consumer behavior, pricing, and target market analysis',
+      'Dedicated outsourced telesales agents',
+      'B2B lead generation and appointment setting',
+      'Business development executives and door-to-door sales teams',
+      'Multi-channel awareness and promotional campaigns',
+      'Product launch strategies and public relations rollouts',
+      'Product sampling, roadshows, and experiential brand activations',
+    ],
+  },
+  {
+    slug: 'community-skilling',
+    title: 'Community Skilling',
+    shortTitle: 'Community Skilling',
+    short: 'Six weeks of practical digital, creative, and sales training through the Mariz Talent Clinic.',
+    description:
+      'Community Skilling is delivered through the Mariz Talent Clinic, equipping youth and professionals with practical, market-ready skills. The six-week programme covers digital tools, creative production, and sales, with free training and a registration fee of UGX 100,000. Choose a Digital, Creative, or Sales clinic and contact our team for the next intake and available places.',
     icon: 'Users',
     image: '/services/mariz-talent-clinic.jpeg',
-    objective: 'Build practical skills for work and income opportunities',
+    objective: 'Community empowerment and market-ready workforce skills',
     targetMetric: 'Practical digital, creative, and sales skills',
-    targetAudience: 'Learners, job seekers, and people looking to develop practical skills during the holidays',
+    targetAudience: 'Youth, job seekers, professionals, and students looking for practical skills during the holidays',
     workflow: [
-      'Contact the Talent Clinic team to confirm the next intake and available places',
+      'Contact the Community Skilling team to confirm the next intake and available places',
       'Choose the Digital, Creative, or Sales clinic',
       'Register for the six-week training programme; registration fee: UGX 100,000',
       'Attend practical training at Level 3 Rm HC3 Honora Plaza, Opposite Be Energy Fuels, Zzana, Kampala',
@@ -329,13 +442,13 @@ export const WORK_CYCLE = [
 export const TESTIMONIALS = [
   {
     quote:
-      'MOA transformed our customer support operations. Their 24/7 team handles our entire inbound flow with a 95% first-call resolution rate — we have not looked back.',
+      'Mariz transformed our customer support operations. Their 24/7 team handles our entire inbound flow with a 95% first-call resolution rate — we have not looked back.',
     author: 'Director of Operations',
     company: 'Regional Hospitality Group',
   },
   {
     quote:
-      'The custom ERP MOA built replaced three disconnected systems. Our inventory reconciliation that used to take a week now runs in real time.',
+      'The custom ERP Mariz built replaced three disconnected systems. Our inventory reconciliation that used to take a week now runs in real time.',
     author: 'CFO',
     company: 'Manufacturing Firm',
   },
@@ -350,7 +463,7 @@ export const TESTIMONIALS = [
 export const PORTFOLIO_ITEMS = [
   {
     title: 'Omnichannel Support Center Launch',
-    category: 'Call Center',
+    category: 'Call Support',
     description:
       'Designed and launched a 120-seat omnichannel support operation handling voice, email, and chat for a regional telecom client.',
     image:
@@ -439,7 +552,7 @@ export const BLOG_POSTS = [
 
 export const JOB_LISTINGS = [
   {
-    title: 'Call Center Agent — Night Shift',
+    title: 'Call Support Agent — Night Shift',
     department: 'Operations',
     location: 'On-site, Kampala',
     type: 'Full-time',
@@ -481,12 +594,6 @@ export const JOB_LISTINGS = [
 ];
 
 export const SERVICE_OPTIONS = [
-  'Revenue Operations & Outsourced Sales',
-  'Strategic Recruitment & Talent Acquisition',
-  'Call Center & Customer Support Operations',
-  'Software Development & IT Solutions',
-  'Strategic Branding & Corporate Identity',
-  'Professional Photography & Cinematic Videography',
-  'Mariz Talent Clinic',
+  ...SERVICES.map((service) => service.title),
   'General Inquiry',
 ];

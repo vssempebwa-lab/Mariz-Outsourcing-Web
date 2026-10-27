@@ -39,6 +39,16 @@ module.exports = (phase) => ({
         destination: '/services/media',
         permanent: true,
       },
+      {
+        source: '/services/call-center',
+        destination: '/services/call-support-audio',
+        permanent: true,
+      },
+      {
+        source: '/services/talent-clinic',
+        destination: '/services/community-skilling',
+        permanent: true,
+      },
     ];
   },
 });

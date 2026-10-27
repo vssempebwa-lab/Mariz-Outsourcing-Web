@@ -49,7 +49,7 @@ export function OpsSidebar({
         <div className={cn(collapsed && !mobile && 'sr-only')}>
           <p className="font-display text-lg font-semibold">Mariz Operations</p>
           <p className="text-xs text-muted-foreground">
-            {isEmployee ? 'Employee Workspace' : 'MOA Management Dashboard'}
+            {isEmployee ? 'Employee Workspace' : 'Mariz Management Dashboard'}
           </p>
         </div>
       </div>

@@ -1,9 +1,10 @@
+import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { SectionHeading } from '@/components/site/section-heading';
 import { Icon } from '@/components/site/icon';
 import { LeadForm } from '@/components/site/lead-form';
 import { SITE } from '@/lib/data';
-import { Phone, Mail, MapPin, Clock } from 'lucide-react';
+import { Phone, Mail, MapPin, Clock, Navigation } from 'lucide-react';
 
 export const metadata = {
   title: 'Contact Us',
@@ -28,6 +29,8 @@ const CONTACT_INFO = [
     icon: 'MapPin',
     label: 'Address',
     value: SITE.address,
+    href: SITE.mapDirectionsUrl,
+    external: true,
   },
   {
     icon: 'Clock',
@@ -89,7 +92,12 @@ export default function ContactPage() {
                     </Card>
                   );
                   return info.href ? (
-                    <a key={info.label} href={info.href} className="block">
+                    <a
+                      key={info.label}
+                      href={info.href}
+                      className="block"
+                      {...(info.external ? { target: '_blank', rel: 'noreferrer' } : {})}
+                    >
                       {content}
                     </a>
                   ) : (
@@ -136,18 +144,49 @@ export default function ContactPage() {
 
       <section className="pb-20 lg:pb-24">
         <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <div className="rounded-2xl overflow-hidden border border-border bg-muted/30 h-80 flex items-center justify-center">
-            <div className="text-center">
-              <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-primary mx-auto mb-4">
-                <MapPin className="h-8 w-8" />
+          <SectionHeading
+            eyebrow="Visit Us"
+            title="Find our office in Zzana, Kampala"
+            description="We are on Level 3 of Honora Plaza, opposite Be Energy Fuels. Free consultation visits are available by appointment."
+          />
+          <div className="mt-10 overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
+            <div className="flex flex-col gap-4 border-b border-border p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
+              <div className="flex items-start gap-3">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                  <MapPin className="h-5 w-5" />
+                </div>
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                    Head Office
+                  </p>
+                  <p className="mt-1 text-sm font-medium leading-relaxed text-foreground">
+                    {SITE.address}
+                  </p>
+                </div>
               </div>
-              <p className="font-display font-semibold text-lg text-foreground">
-                {SITE.address}
-              </p>
-              <p className="text-sm text-muted-foreground mt-1">
-                {SITE.website}
-              </p>
+              <div className="flex shrink-0 flex-col gap-2 sm:flex-row">
+                <Button asChild className="min-h-[44px]">
+                  <a href={SITE.mapDirectionsUrl} target="_blank" rel="noreferrer">
+                    <Navigation className="mr-2 h-4 w-4" />
+                    Get Directions
+                  </a>
+                </Button>
+                <Button asChild variant="outline" className="min-h-[44px]">
+                  <a href={`tel:${SITE.phoneHref}`}>
+                    <Phone className="mr-2 h-4 w-4" />
+                    Call Us
+                  </a>
+                </Button>
+              </div>
             </div>
+            <iframe
+              src={SITE.mapEmbedUrl}
+              title={`Google Map showing ${SITE.name} at ${SITE.address}`}
+              className="h-[320px] w-full sm:h-[400px] lg:h-[440px]"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              allowFullScreen
+            />
           </div>
         </div>
       </section>
