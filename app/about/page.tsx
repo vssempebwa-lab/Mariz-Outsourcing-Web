@@ -10,7 +10,7 @@ import { Target, Eye, Heart, ArrowRight, Award, Handshake, Lightbulb, Activity }
 export const metadata = {
   title: 'About Us',
   description:
-    'Mariz Outsourcing Agency (SMC) Ltd is a professional BPO and strategic consulting firm headquartered in Uganda, delivering revenue operations, talent acquisition, call support and audio services, software development, branding, and media production.',
+    'Mariz Outsourcing (U) SMC Ltd is a strategic BPO and corporate growth enterprise headquartered in Uganda, delivering revenue operations, talent acquisition, call support and audio services, software development, consultancy, branding, media production, and community skills development.',
 };
 
 const VALUES = [
@@ -56,11 +56,12 @@ export default function AboutPage() {
               Your strategic outsourcing partner in East Africa
             </h1>
             <p className="mt-6 text-lg text-muted-foreground leading-relaxed max-w-2xl text-balance">
-              {SITE.legalName} is a professional Business Process Outsourcing and
-              strategic consulting firm delivering revenue operations, talent
-              acquisition, 24/7 call support and audio services, software development,
-              business consultancy, digital marketing, sales outsourcing, corporate
-              branding, and media production.
+              {SITE.legalName} is a strategic Business Process Outsourcing (BPO)
+              and corporate growth enterprise delivering revenue operations,
+              talent acquisition, 24/7 call support and audio services, software
+              development, business consultancy, digital marketing, sales
+              outsourcing, corporate branding, media production, and community
+              skills development.
             </p>
           </div>
         </div>
@@ -138,7 +139,7 @@ export default function AboutPage() {
             <div>
               <SectionHeading
                 eyebrow="Who We Are"
-                title="A full-service outsourcing agency built for scale"
+                title="A full-service BPO and corporate growth partner built for scale"
                 description="Headquartered at Level 3 Rm HC3 Honora Plaza, Opposite Be Energy Fuels, Zzana, Kampala, Mariz serves corporate enterprises, hospitality groups, construction firms, healthcare providers, retailers, and manufacturers — delivering integrated solutions that span talent, technology, and brand."
                 align="left"
               />

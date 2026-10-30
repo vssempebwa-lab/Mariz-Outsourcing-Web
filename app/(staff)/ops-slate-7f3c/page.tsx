@@ -10,7 +10,7 @@ import { staffAuthEnabled } from '@/lib/staff-auth-mode';
 
 export const metadata: Metadata = {
   title: 'Admin Sign In',
-  description: 'Authorized staff access for Mariz Outsourcing Agency.',
+  description: 'Authorized staff access for Mariz Outsourcing (U) SMC Ltd.',
   robots: {
     index: false,
     follow: false,

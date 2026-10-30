@@ -9,7 +9,7 @@ import { Phone, Mail, MapPin, Clock, Navigation } from 'lucide-react';
 export const metadata = {
   title: 'Contact Us',
   description:
-    'Get in touch with Mariz Outsourcing Agency. Request a consultation, explore our services, or ask a question — our team responds within one business day.',
+    'Get in touch with Mariz Outsourcing (U) SMC Ltd. Request a consultation, explore our services, or ask a question — our team responds within one business day.',
 };
 
 const CONTACT_INFO = [

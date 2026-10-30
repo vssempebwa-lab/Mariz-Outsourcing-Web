@@ -71,7 +71,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
               {post.excerpt}
             </p>
             <p className="text-foreground leading-relaxed mb-4">
-              At Mariz Outsourcing Agency, we have spent years refining the
+              At Mariz Outsourcing (U) SMC Ltd, we have spent years refining the
               practices that make outsourcing engagements successful. The
               principles outlined in this article come directly from our work with
               clients across corporate enterprise, hospitality, construction,

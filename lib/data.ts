@@ -1,8 +1,8 @@
 export const SITE = {
-  name: 'Mariz Outsourcing Agency',
+  name: 'Mariz Outsourcing (U) SMC Ltd',
   shortName: 'Mariz',
-  legalName: 'Mariz Outsourcing (U) - SMC Ltd',
-  tagline: 'Streamline your business with strategic outsourcing.',
+  legalName: 'Mariz Outsourcing (U) SMC Ltd',
+  tagline: 'Your strategic BPO and corporate growth partner.',
   phone: '+256 766 630 248',
   phoneHref: '+256766630248',
   website: 'www.moa.co.ug',
@@ -14,15 +14,16 @@ export const SITE = {
     'https://www.google.com/maps/dir/?api=1&destination=Honora%20Plaza%2C%20Zzana%2C%20Kampala%2C%20Uganda',
   email: 'info@moa.co.ug',
   mission:
-    'To help businesses operate more efficiently and profitably by providing reliable outsourcing solutions that reduce operational stress, enhance productivity, and improve overall business performance.',
+    'To help organizations operate lean, adopt modern digital technology, and stay agile by delivering reliable, end-to-end outsourcing across human capital, technology, brand, call support, multimedia, and community skills development.',
   vision:
-    'To become a globally trusted outsourcing partner, recognized for service excellence, operational transparency, and the ability to build long-term, mutually beneficial client relationships.',
+    'To become a globally trusted BPO and corporate growth partner, recognized for service excellence, operational transparency, and long-term, mutually beneficial client relationships.',
 };
 
 export const NAV_LINKS = [
   { label: 'Home', href: '/' },
   { label: 'About', href: '/about' },
   { label: 'Services', href: '/services' },
+  { label: 'Programs', href: '/programs' },
   { label: 'Projects', href: '/projects' },
   { label: 'Clients', href: '/clients' },
   { label: 'Careers', href: '/careers' },
@@ -320,6 +321,9 @@ export const SERVICES = [
       'Product sampling, roadshows, and experiential brand activations',
     ],
   },
+];
+
+export const PROGRAMS = [
   {
     slug: 'community-skilling',
     title: 'Community Skilling',
@@ -332,8 +336,25 @@ export const SERVICES = [
     objective: 'Community empowerment and market-ready workforce skills',
     targetMetric: 'Practical digital, creative, and sales skills',
     targetAudience: 'Youth, job seekers, professionals, and students looking for practical skills during the holidays',
+    clinics: [
+      {
+        title: 'Digital Clinic',
+        description:
+          'Computer literacy, Microsoft Office and enterprise software suites, front-office management, customer reception, and professional administrative support.',
+      },
+      {
+        title: 'Creative Clinic',
+        description:
+          'Graphic design fundamentals, Adobe Creative Suite, camera operations, studio lighting, and post-production editing.',
+      },
+      {
+        title: 'Sales Clinic',
+        description:
+          'Direct selling, high-converting call scripts, lead management, negotiation tactics, and affiliate marketing strategies.',
+      },
+    ],
     workflow: [
-      'Contact the Community Skilling team to confirm the next intake and available places',
+      'Contact the Programs team to confirm the next intake and available places',
       'Choose the Digital, Creative, or Sales clinic',
       'Register for the six-week training programme; registration fee: UGX 100,000',
       'Attend practical training at Level 3 Rm HC3 Honora Plaza, Opposite Be Energy Fuels, Zzana, Kampala',
@@ -595,5 +616,6 @@ export const JOB_LISTINGS = [
 
 export const SERVICE_OPTIONS = [
   ...SERVICES.map((service) => service.title),
+  ...PROGRAMS.map((program) => program.title),
   'General Inquiry',
 ];

@@ -13,15 +13,16 @@ export function SiteFooter() {
               <BrandLogo className="h-11 w-11 ring-border" />
               <div className="flex flex-col leading-none">
                 <span className="font-display font-bold text-lg">Mariz</span>
-                <span className="text-xs text-muted-foreground font-medium tracking-wide">
-                  Outsourcing Agency
+                <span className="whitespace-nowrap text-xs text-muted-foreground font-medium tracking-wide">
+                  Outsourcing (U) SMC Ltd
                 </span>
               </div>
             </Link>
             <p className="text-sm text-muted-foreground leading-relaxed max-w-sm mb-6">
               {SITE.tagline} We deliver revenue operations, talent acquisition,
               24/7 call support, custom software, consultancy, digital
-              marketing, branding, and media production.
+              marketing, branding, media production, and community skills
+              development.
             </p>
             <div className="space-y-1 text-sm">
               <a
@@ -59,6 +60,7 @@ export function SiteFooter() {
                 { label: 'About Us', href: '/about' },
                 { label: 'Clients', href: '/clients' },
                 { label: 'Projects', href: '/projects' },
+                { label: 'Programs', href: '/programs' },
                 { label: 'Careers', href: '/careers' },
                 { label: 'Blog', href: '/blog' },
                 { label: 'Contact', href: '/contact' },

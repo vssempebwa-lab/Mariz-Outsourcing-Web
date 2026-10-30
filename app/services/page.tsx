@@ -9,7 +9,7 @@ import { ArrowRight, CheckCircle2 } from 'lucide-react';
 export const metadata = {
   title: 'Our Services',
   description:
-    'Revenue operations, strategic recruitment, 24/7 call support and audio services, custom software development, business consultancy, digital marketing, sales outsourcing, corporate branding, cinematic media production, and community skilling from Mariz Outsourcing Agency.',
+    'Revenue operations, strategic recruitment, 24/7 call support and audio services, custom software development, business consultancy, digital marketing, sales outsourcing, corporate branding, and cinematic media production from Mariz Outsourcing (U) SMC Ltd.',
 };
 
 export default function ServicesPage() {
@@ -31,8 +31,14 @@ export default function ServicesPage() {
               Our services bring specialist teams together as one partner. From
               revenue operations and talent acquisition to call support and audio,
               software, consultancy, digital marketing, sales outsourcing, branding,
-              media, and community skilling, we support your business and skills
-              development needs.
+              and media, we support every operational need.
+            </p>
+            <p className="mt-4 text-sm text-muted-foreground">
+              Looking for practical skills training?{' '}
+              <Link href="/programs" className="font-semibold text-primary hover:text-navy">
+                Explore our Programs
+              </Link>
+              .
             </p>
           </div>
         </div>

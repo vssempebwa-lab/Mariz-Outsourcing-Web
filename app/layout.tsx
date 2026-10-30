@@ -11,14 +11,15 @@ export const metadata: Metadata = {
     apple: '/brand/moa-logo.png',
   },
   title: {
-    default: 'Mariz Outsourcing Agency — Streamline Your Business With Strategic Outsourcing',
-    template: '%s | Mariz Outsourcing Agency',
+    default: 'Mariz Outsourcing (U) SMC Ltd — Strategic BPO & Corporate Growth',
+    template: '%s | Mariz Outsourcing (U) SMC Ltd',
   },
   description:
-    'Mariz Outsourcing Agency (SMC) Ltd delivers revenue operations, talent acquisition, 24/7 call support and audio services, custom software development, corporate branding, and media production across East Africa and beyond.',
+    'Mariz Outsourcing (U) SMC Ltd is a strategic BPO and corporate growth enterprise delivering revenue operations, talent acquisition, 24/7 call support and audio services, software development, consultancy, digital marketing, branding, media production, and community skills development across East Africa and beyond.',
   keywords: [
     'BPO Uganda',
-    'outsourcing agency',
+    'business process outsourcing Uganda',
+    'outsourcing company Uganda',
     'revenue operations',
     'outsourced sales',
     'call support',
@@ -28,11 +29,11 @@ export const metadata: Metadata = {
     'corporate branding',
     'media production',
     'community skilling',
-    'Mariz Outsourcing Agency',
+    'Mariz Outsourcing (U) SMC Ltd',
   ],
   metadataBase: new URL('https://www.moa.co.ug'),
   openGraph: {
-    title: 'Mariz Outsourcing Agency — Strategic Outsourcing',
+    title: 'Mariz Outsourcing (U) SMC Ltd — Strategic BPO Partner',
     description:
       'Revenue operations, talent acquisition, 24/7 call support and audio services, and custom software development built to scale your business.',
     type: 'website',
@@ -40,7 +41,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Mariz Outsourcing Agency — Strategic Outsourcing',
+    title: 'Mariz Outsourcing (U) SMC Ltd — Strategic BPO Partner',
     description:
       'Revenue operations, talent acquisition, 24/7 call support and audio services, and custom software development built to scale your business.',
   },

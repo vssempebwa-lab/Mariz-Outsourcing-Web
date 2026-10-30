@@ -90,7 +90,7 @@ function Hero({ content, blocks }: { content?: PageSection['content']; blocks: R
           </div>
 
           <h1 className="font-display text-3xl font-normal leading-tight text-balance sm:text-4xl lg:text-5xl">
-            {blockString(blocks.headline, 'text') || content?.heading || 'One agency for the services that keep your business moving.'}
+            {blockString(blocks.headline, 'text') || content?.heading || 'One partner for the services that keep your business moving.'}
           </h1>
 
           <p className="mt-4 max-w-xl text-sm leading-relaxed text-white/95 text-balance sm:text-base">

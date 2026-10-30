@@ -7,7 +7,7 @@ import { ClientLogoWall } from '@/components/site/client-logo-wall';
 export const metadata = {
   title: 'Our Clients',
   description:
-    'Meet the organizations that trust Mariz Outsourcing Agency with their revenue operations, recruitment, customer support, software, branding, and media projects.',
+    'Meet the organizations that trust Mariz with their revenue operations, recruitment, customer support, software, branding, and media projects.',
 };
 
 export default function ClientsPage() {

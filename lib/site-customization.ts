@@ -68,6 +68,7 @@ export const editablePages = [
   'home',
   'about',
   'services',
+  'programs',
   'projects',
   'clients',
   'portfolio',
@@ -94,7 +95,7 @@ const defaultSections = [
     enabled: true,
     content: {
       eyebrow: 'Trusted BPO Partner in East Africa',
-      heading: 'One agency for the services that keep your business moving.',
+      heading: 'One partner for the services that keep your business moving.',
       body:
         'Revenue operations, recruitment, customer support, software, consultancy, digital marketing, branding, and media production delivered through one coordinated outsourcing partner.',
       buttonLabel: 'Request Consultation',

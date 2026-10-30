@@ -2,7 +2,7 @@ import { SITE } from '@/lib/data';
 
 export const metadata = {
   title: 'Privacy Policy',
-  description: 'Privacy policy for Mariz Outsourcing Agency.',
+  description: 'Privacy policy for Mariz Outsourcing (U) SMC Ltd.',
 };
 
 export default function PrivacyPage() {

@@ -8,7 +8,7 @@ import { ArrowRight, Calendar, Clock } from 'lucide-react';
 export const metadata = {
   title: 'Blog & Insights',
   description:
-    'Insights, analysis, and perspectives on outsourcing, BPO operations, software development, branding, and workforce strategy from Mariz Outsourcing Agency.',
+    'Insights, analysis, and perspectives on outsourcing, BPO operations, software development, branding, and workforce strategy from Mariz Outsourcing (U) SMC Ltd.',
 };
 
 export default function BlogPage() {

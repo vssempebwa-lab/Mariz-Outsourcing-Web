@@ -46,7 +46,12 @@ module.exports = (phase) => ({
       },
       {
         source: '/services/talent-clinic',
-        destination: '/services/community-skilling',
+        destination: '/programs',
+        permanent: true,
+      },
+      {
+        source: '/services/community-skilling',
+        destination: '/programs',
         permanent: true,
       },
     ];

@@ -9,7 +9,7 @@ import { PROJECTS } from '@/lib/projects';
 export const metadata = {
   title: 'Projects Executed',
   description:
-    'Explore completed Mariz Outsourcing Agency projects across revenue operations, call support operations, software development, branding, talent acquisition, and media production.',
+    'Explore completed Mariz projects across revenue operations, call support operations, software development, branding, talent acquisition, and media production.',
 };
 
 export default function ProjectsPage() {

@@ -18,7 +18,7 @@ export function BrandLogo({
     >
       <img
         src={logoSrc}
-        alt="Mariz Outsourcing Agency logo"
+        alt="Mariz Outsourcing (U) SMC Ltd logo"
         className={cn('h-full w-full object-contain', imageClassName)}
       />
     </span>

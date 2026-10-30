@@ -9,7 +9,7 @@ import { Briefcase, MapPin, Clock, ArrowRight, CheckCircle2, Users, Heart, Award
 export const metadata = {
   title: 'Careers',
   description:
-    'Join Mariz Outsourcing Agency. Explore open roles across operations, software, recruitment, creative, and media divisions in Kampala, Uganda.',
+    'Join Mariz Outsourcing (U) SMC Ltd. Explore open roles across operations, software, recruitment, creative, and media divisions in Kampala, Uganda.',
 };
 
 const PERKS = [

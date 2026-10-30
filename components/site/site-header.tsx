@@ -34,8 +34,8 @@ export function SiteHeader() {
               <span className="font-display font-bold text-base lg:text-lg text-foreground">
                 Mariz
               </span>
-              <span className="text-[11px] sm:text-xs text-muted-foreground font-medium tracking-wide">
-                Outsourcing Agency
+              <span className="whitespace-nowrap text-[11px] sm:text-xs text-muted-foreground font-medium tracking-wide">
+                Outsourcing (U) SMC Ltd
               </span>
             </div>
           </Link>

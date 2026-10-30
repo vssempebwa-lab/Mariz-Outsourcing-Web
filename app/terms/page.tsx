@@ -2,7 +2,7 @@ import { SITE } from '@/lib/data';
 
 export const metadata = {
   title: 'Terms of Service',
-  description: 'Terms of service for Mariz Outsourcing Agency.',
+  description: 'Terms of service for Mariz Outsourcing (U) SMC Ltd.',
 };
 
 export default function TermsPage() {
