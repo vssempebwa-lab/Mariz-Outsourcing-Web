@@ -47,9 +47,11 @@ export function OpsSidebar({
       >
         <BrandLogo className="h-10 w-10 ring-border" />
         <div className={cn(collapsed && !mobile && 'sr-only')}>
-          <p className="font-display text-lg font-semibold">Mariz Operations</p>
+          <p className="font-display text-lg font-semibold">
+            {isEmployee ? 'Mariz Operations' : 'Mariz Website Admin'}
+          </p>
           <p className="text-xs text-muted-foreground">
-            {isEmployee ? 'Employee Workspace' : 'Mariz Management Dashboard'}
+            {isEmployee ? 'Employee Workspace' : 'Website Manager'}
           </p>
         </div>
       </div>

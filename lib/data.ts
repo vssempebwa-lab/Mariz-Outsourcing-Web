@@ -5,8 +5,8 @@ export const SITE = {
   tagline: 'Your strategic BPO and corporate growth partner.',
   phone: '+256 766 630 248',
   phoneHref: '+256766630248',
-  website: 'www.moa.co.ug',
-  websiteUrl: 'https://www.moa.co.ug',
+  website: 'www.marizgroup.com',
+  websiteUrl: 'https://www.marizgroup.com',
   address: 'Level 3 Rm HC3 Honora Plaza, Opposite Be Energy Fuels, Zzana, Kampala',
   mapEmbedUrl:
     'https://www.google.com/maps?q=Honora%20Plaza%2C%20Zzana%2C%20Kampala%2C%20Uganda&output=embed',
@@ -26,7 +26,6 @@ export const NAV_LINKS = [
   { label: 'Programs', href: '/programs' },
   { label: 'Projects', href: '/projects' },
   { label: 'Clients', href: '/clients' },
-  { label: 'Careers', href: '/careers' },
   { label: 'Blog', href: '/blog' },
   { label: 'Contact', href: '/contact' },
 ];

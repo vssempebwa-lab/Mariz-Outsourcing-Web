@@ -11,7 +11,10 @@ const employeeRestrictedPaths = [
   'employees',
   'pipeline',
   'site-customization',
+  'feedback',
 ];
+
+const adminWorkspaceModules = ['site-customization', 'feedback'];
 
 function isStaticAsset(pathname: string) {
   return (
@@ -51,6 +54,22 @@ export async function middleware(request: NextRequest) {
 
   if (employeeEnteredAdminModule) {
     return NextResponse.redirect(new URL(staffWorkspacePath, request.url));
+  }
+
+  const previewRoleCookie = request.cookies.get('moa_staff_preview_role')?.value;
+  const isSuperAdminSession =
+    token?.role === 'super_admin' ||
+    (!staffAuthEnabled && previewRole !== 'employee' && previewRoleCookie !== 'employee');
+
+  const superAdminEnteredRetiredModule =
+    isSuperAdminSession &&
+    pathname.startsWith(`${staffWorkspacePath}/`) &&
+    !adminWorkspaceModules.some((segment) =>
+      pathname.startsWith(`${staffWorkspacePath}/${segment}`)
+    );
+
+  if (superAdminEnteredRetiredModule) {
+    return NextResponse.redirect(new URL(`${staffWorkspacePath}/feedback`, request.url));
   }
 
   if (pathname === '/admin' || pathname.startsWith('/admin/')) {

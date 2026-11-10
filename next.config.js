@@ -54,6 +54,11 @@ module.exports = (phase) => ({
         destination: '/programs',
         permanent: true,
       },
+      {
+        source: '/careers',
+        destination: '/services/recruitment#careers',
+        permanent: true,
+      },
     ];
   },
 });

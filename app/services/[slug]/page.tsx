@@ -5,8 +5,8 @@ import { Card, CardContent } from '@/components/ui/card';
 import { SectionHeading } from '@/components/site/section-heading';
 import { Icon } from '@/components/site/icon';
 import { LeadForm } from '@/components/site/lead-form';
-import { SERVICES } from '@/lib/data';
-import { CheckCircle2, ArrowRight, ArrowLeft } from 'lucide-react';
+import { JOB_LISTINGS, SERVICES } from '@/lib/data';
+import { CheckCircle2, ArrowRight, ArrowLeft, Briefcase, MapPin, Clock } from 'lucide-react';
 
 export function generateStaticParams() {
   return SERVICES.map((s) => ({ slug: s.slug }));
@@ -155,6 +155,54 @@ export default function ServiceDetailPage({
           </div>
         </div>
       </section>
+
+      {service.slug === 'recruitment' && (
+        <section id="careers" className="scroll-mt-24 border-y border-border bg-secondary py-20 lg:py-24">
+          <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+            <SectionHeading
+              eyebrow="Careers at Mariz"
+              title="Open roles in our talent and delivery teams"
+              description="Join the team behind our recruitment and outsourcing work in Kampala. Don't see a fit? Send us your CV and we will keep you in mind."
+            />
+            <div className="mt-12 grid gap-4 lg:grid-cols-2">
+              {JOB_LISTINGS.map((job) => (
+                <Card key={job.title} className="border-border bg-background">
+                  <CardContent className="flex h-full flex-col gap-4 p-6">
+                    <div className="flex items-center gap-3">
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                        <Briefcase className="h-5 w-5" />
+                      </div>
+                      <h3 className="font-display text-lg font-bold text-foreground">
+                        {job.title}
+                      </h3>
+                    </div>
+                    <p className="text-sm leading-relaxed text-muted-foreground">
+                      {job.description}
+                    </p>
+                    <div className="mt-auto flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-muted-foreground">
+                      <span className="inline-flex items-center gap-1.5">
+                        <span className="h-2 w-2 rounded-full bg-accent" />
+                        {job.department}
+                      </span>
+                      <span className="inline-flex items-center gap-1.5">
+                        <MapPin className="h-3.5 w-3.5" />
+                        {job.location}
+                      </span>
+                      <span className="inline-flex items-center gap-1.5">
+                        <Clock className="h-3.5 w-3.5" />
+                        {job.type}
+                      </span>
+                    </div>
+                    <Button asChild size="sm" variant="outline" className="self-start">
+                      <Link href="/contact">Apply Now</Link>
+                    </Button>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       <section className="py-20 lg:py-24 bg-muted/30 border-y border-border">
         <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">

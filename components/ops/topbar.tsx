@@ -67,35 +67,45 @@ export function OpsTopbar({
             <PanelLeftClose className="h-4 w-4" />
           )}
         </Button>
-        <div className="relative order-last min-w-0 basis-full sm:order-none sm:max-w-xl sm:flex-1 sm:basis-auto">
-          <Search className="pointer-events-none absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
-          <Input
-            className="h-10 pl-9"
-            placeholder={isEmployee ? 'Search my leads, tasks, meetings...' : 'Search leads, accounts, meetings...'}
-          />
-        </div>
         {isEmployee ? (
-          <Select defaultValue="available">
-            <SelectTrigger className="hidden h-10 w-32 shrink-0 md:flex" aria-label="Work status">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="available">Available</SelectItem>
-              <SelectItem value="in-call">In a Call</SelectItem>
-              <SelectItem value="away">Away</SelectItem>
-            </SelectContent>
-          </Select>
-        ) : null}
-        <Button variant="outline" size="icon" className="ml-auto shrink-0 sm:ml-0" aria-label="Notifications">
-          <Bell className="h-4 w-4" />
-        </Button>
-        <Link href={`${staffWorkspacePath}/settings`} className="flex shrink-0 items-center gap-2 rounded-md border p-2 text-sm hover:bg-muted" aria-label="Open account settings">
-          <Avatar className="h-8 w-8">
-            <AvatarImage src={staff.profile_photo_url || undefined} alt="" className="object-cover" />
-            <AvatarFallback>{staff.name.slice(0, 1).toUpperCase()}</AvatarFallback>
-          </Avatar>
-          <span className="hidden max-w-28 truncate md:block">{staff.name}</span>
-        </Link>
+          <>
+            <div className="relative order-last min-w-0 basis-full sm:order-none sm:max-w-xl sm:flex-1 sm:basis-auto">
+              <Search className="pointer-events-none absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
+              <Input
+                className="h-10 pl-9"
+                placeholder="Search my leads, tasks, meetings..."
+              />
+            </div>
+            <Select defaultValue="available">
+              <SelectTrigger className="hidden h-10 w-32 shrink-0 md:flex" aria-label="Work status">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="available">Available</SelectItem>
+                <SelectItem value="in-call">In a Call</SelectItem>
+                <SelectItem value="away">Away</SelectItem>
+              </SelectContent>
+            </Select>
+            <Button variant="outline" size="icon" className="ml-auto shrink-0 sm:ml-0" aria-label="Notifications">
+              <Bell className="h-4 w-4" />
+            </Button>
+            <Link href={`${staffWorkspacePath}/settings`} className="flex shrink-0 items-center gap-2 rounded-md border p-2 text-sm hover:bg-muted" aria-label="Open account settings">
+              <Avatar className="h-8 w-8">
+                <AvatarImage src={staff.profile_photo_url || undefined} alt="" className="object-cover" />
+                <AvatarFallback>{staff.name.slice(0, 1).toUpperCase()}</AvatarFallback>
+              </Avatar>
+              <span className="hidden max-w-28 truncate md:block">{staff.name}</span>
+            </Link>
+          </>
+        ) : (
+          <div className="ml-auto flex shrink-0 items-center gap-2 rounded-md border p-2 text-sm">
+            <Avatar className="h-8 w-8">
+              <AvatarImage src={staff.profile_photo_url || undefined} alt="" className="object-cover" />
+              <AvatarFallback>{staff.name.slice(0, 1).toUpperCase()}</AvatarFallback>
+            </Avatar>
+            <span className="hidden max-w-40 truncate md:block">{staff.name}</span>
+          </div>
+        )}
         {authEnabled || isEmployee || staff.id ? (
           <SignOutButton callbackUrl={isEmployee ? employeeLoginPath : undefined} />
         ) : null}

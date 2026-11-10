@@ -61,7 +61,6 @@ export function SiteFooter() {
                 { label: 'Clients', href: '/clients' },
                 { label: 'Projects', href: '/projects' },
                 { label: 'Programs', href: '/programs' },
-                { label: 'Careers', href: '/careers' },
                 { label: 'Blog', href: '/blog' },
                 { label: 'Contact', href: '/contact' },
               ].map((l) => (

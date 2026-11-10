@@ -72,7 +72,6 @@ export const editablePages = [
   'projects',
   'clients',
   'portfolio',
-  'careers',
   'blog',
   'contact',
 ] as const;
