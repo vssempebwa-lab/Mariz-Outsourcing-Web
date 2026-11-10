@@ -8,10 +8,10 @@ export const LOGO_URL = `${SITE_URL}/brand/moa-logo.png`;
 export const OG_IMAGE_URL = `${SITE_URL}/brand/og-image.jpg`;
 
 export const HOME_TITLE =
-  'Mariz Outsourcing (U) SMC Ltd | BPO Kampala, Uganda';
+  'Outsourcing Companies in Uganda | Mariz Outsourcing';
 
 export const HOME_DESCRIPTION =
-  'Mariz Outsourcing (U) SMC Ltd in Kampala, Uganda delivers BPO, revenue operations, recruitment, 24/7 call support, software, branding and marketing.';
+  'Mariz Outsourcing (U) SMC Ltd is an outsourcing company in Kampala, Uganda delivering BPO, recruitment, 24/7 call support, software and marketing.';
 
 export const BRAND_ALTERNATES = [
   'Mariz',
@@ -89,7 +89,12 @@ const ORGANIZATION_SCHEMA = {
   hasMap: SITE.mapDirectionsUrl,
   telephone: SITE.phone,
   areaServed: AREA_SERVED,
-  knowsAbout: SERVICES.map((service) => service.title),
+  knowsAbout: [
+    'Outsourcing companies',
+    'Business process outsourcing (BPO)',
+    'Outsourcing services Uganda',
+    ...SERVICES.map((service) => service.title),
+  ],
   contactPoint: [
     {
       '@type': 'ContactPoint',

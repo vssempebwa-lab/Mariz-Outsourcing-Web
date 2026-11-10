@@ -15,6 +15,10 @@ export const metadata: Metadata = {
   },
   description: HOME_DESCRIPTION,
   keywords: [
+    'outsourcing companies',
+    'outsourcing companies in Uganda',
+    'outsourcing company Kampala',
+    'BPO companies Uganda',
     'Mariz Outsourcing (U) SMC Ltd',
     'Mariz Group',
     'Mariz Outsourcing',
@@ -39,6 +43,9 @@ export const metadata: Metadata = {
     'sales and marketing outsourcing Uganda',
   ],
   category: 'Business Services',
+  verification: process.env.GOOGLE_SITE_VERIFICATION
+    ? { google: process.env.GOOGLE_SITE_VERIFICATION }
+    : undefined,
   icons: {
     icon: { url: '/brand/moa-logo.png', type: 'image/png' },
     shortcut: '/brand/moa-logo.png',

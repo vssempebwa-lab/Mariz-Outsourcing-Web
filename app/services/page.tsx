@@ -7,9 +7,9 @@ import { SERVICES, WORK_CYCLE } from '@/lib/data';
 import { ArrowRight, CheckCircle2 } from 'lucide-react';
 
 export const metadata = {
-  title: 'Our Services',
+  title: 'Outsourcing Services in Uganda',
   description:
-    'Revenue operations, strategic recruitment, 24/7 call support and audio services, custom software development, business consultancy, digital marketing, sales outsourcing, corporate branding, and cinematic media production from Mariz Outsourcing (U) SMC Ltd.',
+    'Mariz Outsourcing (U) SMC Ltd is an outsourcing company in Kampala, Uganda offering revenue operations, strategic recruitment, 24/7 call support and audio, custom software, consultancy, digital marketing, sales outsourcing, corporate branding, and media production.',
 };
 
 export default function ServicesPage() {
@@ -28,9 +28,10 @@ export default function ServicesPage() {
               Integrated outsourcing solutions for every operational need
             </h1>
             <p className="mt-6 text-lg text-muted-foreground leading-relaxed max-w-2xl text-balance">
-              Our services bring specialist teams together as one partner. From
-              revenue operations and talent acquisition to call support and audio,
-              software, consultancy, digital marketing, sales outsourcing, branding,
+              As an outsourcing company in Kampala, Uganda, Mariz brings
+              specialist teams together as one partner. From revenue operations
+              and talent acquisition to call support and audio, software,
+              consultancy, digital marketing, sales outsourcing, branding,
               and media, we support every operational need.
             </p>
             <p className="mt-4 text-sm text-muted-foreground">
@@ -178,6 +179,46 @@ export default function ServicesPage() {
                 </CardContent>
               </Card>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 lg:py-24 border-t border-border">
+        <div className="container mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+          <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+            <div>
+              <h2 className="font-display font-bold text-3xl sm:text-4xl text-foreground text-balance">
+                A Ugandan outsourcing company built for measurable outcomes
+              </h2>
+              <p className="mt-4 text-muted-foreground leading-relaxed">
+                Businesses searching for outsourcing companies in Uganda need a
+                partner that can carry real operational load, not just add
+                headcount. Mariz Outsourcing (U) SMC Ltd combines revenue
+                operations, talent acquisition, call support, technology, and
+                creative delivery in one accountable team based in Kampala.
+              </p>
+              <p className="mt-4 text-muted-foreground leading-relaxed">
+                Every engagement runs on documented SLAs, transparent reporting,
+                and a named delivery lead, so you can compare results against the
+                cost of building the same capability in-house.
+              </p>
+            </div>
+            <ul className="grid gap-3">
+              {[
+                'One partner across sales, support, hiring, software, and brand',
+                'Kampala-based delivery teams with East Africa and global coverage',
+                'Documented SLAs, reporting, and a named delivery lead per account',
+                'Flexible engagement models that scale with your workload',
+              ].map((item) => (
+                <li
+                  key={item}
+                  className="flex items-start gap-3 rounded-lg border border-border bg-card px-4 py-3 text-sm text-foreground/80"
+                >
+                  <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                  {item}
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </section>

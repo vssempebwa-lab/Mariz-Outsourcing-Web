@@ -121,12 +121,12 @@ function Hero({ content, blocks }: { content?: PageSection['content']; blocks: R
           <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-ocean-sky/40 bg-ocean-deep/40 px-3 py-1.5 sm:mb-4">
             <span className="flex h-2 w-2 rounded-full bg-ocean-cyan animate-pulse" />
             <span className="text-xs font-semibold text-white/80">
-              {blockString(blocks.eyebrow, 'text') || content?.eyebrow || 'Trusted BPO Partner in East Africa'}
+              {blockString(blocks.eyebrow, 'text') || content?.eyebrow || 'Trusted Outsourcing Company in East Africa'}
             </span>
           </div>
 
           <h1 className="font-display text-[26px] font-normal leading-snug text-balance sm:text-4xl sm:leading-tight lg:text-5xl">
-            <span className="sr-only">Mariz Outsourcing (U) SMC Ltd, Kampala, Uganda. </span>
+            <span className="sr-only">Mariz Outsourcing (U) SMC Ltd is an outsourcing company in Kampala, Uganda. </span>
             {blockString(blocks.headline, 'text') || content?.heading || 'One partner for the services that keep your business moving.'}
           </h1>
 

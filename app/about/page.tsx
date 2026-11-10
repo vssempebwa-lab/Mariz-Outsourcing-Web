@@ -8,9 +8,9 @@ import { SITE, METRICS } from '@/lib/data';
 import { Target, Eye, Heart, ArrowRight, Award, Handshake, Lightbulb, Activity } from 'lucide-react';
 
 export const metadata = {
-  title: 'About Us',
+  title: 'Outsourcing Company in Uganda',
   description:
-    'Mariz Outsourcing (U) SMC Ltd is a strategic BPO and corporate growth enterprise headquartered in Uganda, delivering revenue operations, talent acquisition, call support and audio services, software development, consultancy, branding, media production, and community skills development.',
+    'Mariz Outsourcing (U) SMC Ltd is a strategic BPO and corporate growth enterprise in Kampala, Uganda delivering revenue operations, talent acquisition, call support and audio services, software development, consultancy, branding, media production, and community skills development.',
 };
 
 const VALUES = [
@@ -53,15 +53,15 @@ export default function AboutPage() {
               </span>
             </div>
             <h1 className="font-display font-bold text-4xl sm:text-5xl lg:text-6xl leading-tight text-balance text-foreground">
-              Your strategic outsourcing partner in East Africa
+              Your outsourcing company in Uganda and East Africa
             </h1>
             <p className="mt-6 text-lg text-muted-foreground leading-relaxed max-w-2xl text-balance">
-              {SITE.legalName} is a strategic Business Process Outsourcing (BPO)
-              and corporate growth enterprise delivering revenue operations,
-              talent acquisition, 24/7 call support and audio services, software
-              development, business consultancy, digital marketing, sales
-              outsourcing, corporate branding, media production, and community
-              skills development.
+              {SITE.legalName} is an outsourcing company in Kampala, Uganda and a
+              strategic Business Process Outsourcing (BPO) and corporate growth
+              enterprise delivering revenue operations, talent acquisition, 24/7
+              call support and audio services, software development, business
+              consultancy, digital marketing, sales outsourcing, corporate
+              branding, media production, and community skills development.
             </p>
           </div>
         </div>

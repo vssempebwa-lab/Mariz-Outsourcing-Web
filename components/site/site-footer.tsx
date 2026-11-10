@@ -19,7 +19,8 @@ export function SiteFooter() {
               </div>
             </Link>
             <p className="text-sm text-muted-foreground leading-relaxed max-w-sm mb-6">
-              {SITE.tagline} We deliver revenue operations, talent acquisition,
+              Mariz Outsourcing (U) SMC Ltd is an outsourcing company in Kampala,
+              Uganda. We deliver revenue operations, talent acquisition,
               24/7 call support, custom software, consultancy, digital
               marketing, branding, media production, and community skills
               development.
