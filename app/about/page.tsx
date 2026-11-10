@@ -9,6 +9,7 @@ import { Target, Eye, Heart, ArrowRight, Award, Handshake, Lightbulb, Activity }
 
 export const metadata = {
   title: 'Outsourcing Company in Uganda',
+  alternates: { canonical: '/about' },
   description:
     'Mariz Outsourcing (U) SMC Ltd is a strategic BPO and corporate growth enterprise in Kampala, Uganda delivering revenue operations, talent acquisition, call support and audio services, software development, consultancy, branding, media production, and community skills development.',
 };

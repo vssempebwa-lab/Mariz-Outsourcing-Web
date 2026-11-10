@@ -8,6 +8,7 @@ import { ArrowRight, CheckCircle2 } from 'lucide-react';
 
 export const metadata = {
   title: 'Outsourcing Services in Uganda',
+  alternates: { canonical: '/services' },
   description:
     'Mariz Outsourcing (U) SMC Ltd is an outsourcing company in Kampala, Uganda offering revenue operations, strategic recruitment, 24/7 call support and audio, custom software, consultancy, digital marketing, sales outsourcing, corporate branding, and media production.',
 };
