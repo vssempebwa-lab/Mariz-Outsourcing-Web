@@ -7,6 +7,10 @@ export const WEBSITE_ID = `${SITE_URL}/#website`;
 export const LOGO_URL = `${SITE_URL}/brand/moa-logo.png`;
 export const OG_IMAGE_URL = `${SITE_URL}/brand/og-image.jpg`;
 
+export const GOOGLE_SITE_VERIFICATION =
+  process.env.GOOGLE_SITE_VERIFICATION ||
+  'bjVUWlX9V-J8NTxIRR7PsRqndTz0Zaqi09Kbso0Th7A';
+
 export const HOME_TITLE =
   'Outsourcing Companies in Uganda | Mariz Outsourcing';
 

@@ -4,7 +4,7 @@ import { SiteChrome } from '@/components/site/site-chrome';
 import { StructuredData } from '@/components/site/structured-data';
 import { Toaster } from '@/components/ui/sonner';
 import { defaultSiteTheme, getPublishedSiteTheme, siteThemeToCssVars } from '@/lib/site-customization';
-import { HOME_DESCRIPTION, HOME_TITLE, OG_IMAGE_URL, SITE_URL, SOCIAL_IMAGE } from '@/lib/seo';
+import { GOOGLE_SITE_VERIFICATION, HOME_DESCRIPTION, HOME_TITLE, OG_IMAGE_URL, SITE_URL, SOCIAL_IMAGE } from '@/lib/seo';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -43,9 +43,7 @@ export const metadata: Metadata = {
     'sales and marketing outsourcing Uganda',
   ],
   category: 'Business Services',
-  verification: process.env.GOOGLE_SITE_VERIFICATION
-    ? { google: process.env.GOOGLE_SITE_VERIFICATION }
-    : undefined,
+  verification: { google: GOOGLE_SITE_VERIFICATION },
   icons: {
     icon: { url: '/brand/moa-logo.png', type: 'image/png' },
     shortcut: '/brand/moa-logo.png',
