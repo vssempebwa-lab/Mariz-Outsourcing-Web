@@ -84,6 +84,11 @@ const config: Config = {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
       },
+      minHeight: {
+        11: '2.75rem',
+        12: '3rem',
+        24: '6rem',
+      },
       fontFamily: {
         sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
         display: ['var(--font-jakarta)', 'var(--font-inter)', 'system-ui', 'sans-serif'],

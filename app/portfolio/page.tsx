@@ -1,9 +1,7 @@
-import Link from 'next/link';
-import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { SectionHeading } from '@/components/site/section-heading';
 import { PORTFOLIO_ITEMS } from '@/lib/data';
-import { ArrowRight } from 'lucide-react';
+import { PageHero } from '@/components/site/page-hero';
+import { CtaBand } from '@/components/site/cta-band';
 
 export const metadata = {
   title: 'Portfolio & Work',
@@ -16,26 +14,11 @@ const CATEGORIES = ['All', 'Call Center', 'Software', 'Branding', 'Media', 'Recr
 export default function PortfolioPage() {
   return (
     <>
-      <section className="relative overflow-hidden bg-gradient-to-b from-primary/5 to-background pt-16 lg:pt-24 pb-16 lg:pb-20">
-        <div className="absolute inset-0 bg-grid opacity-30" />
-        <div className="container relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-accent/10 border border-accent/20 mb-6">
-              <span className="text-xs font-semibold text-primary uppercase tracking-wider">
-                Portfolio
-              </span>
-            </div>
-            <h1 className="font-display font-bold text-4xl sm:text-5xl lg:text-6xl leading-tight text-balance text-foreground">
-              Selected work across our service divisions
-            </h1>
-            <p className="mt-6 text-lg text-muted-foreground leading-relaxed max-w-2xl text-balance">
-              A snapshot of projects we have delivered for clients across
-              industries — from omnichannel support launches to custom software and
-              cinematic brand films.
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Portfolio"
+        title="Selected work across our service divisions"
+        description="A snapshot of projects we have delivered for clients across industries — from omnichannel support launches to custom software and cinematic brand films."
+      />
 
       <section className="py-20 lg:py-24">
         <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
@@ -87,22 +70,11 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      <section className="py-20 lg:py-24 bg-muted/30 border-y border-border">
-        <div className="container mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
-          <SectionHeading
-            title="Have a project in mind?"
-            description="Tell us what you are looking to build, scale, or outsource. Our team will help you scope the right approach."
-          />
-          <div className="mt-8">
-            <Button asChild size="lg">
-              <Link href="/contact">
-                Start a Conversation
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
-          </div>
-        </div>
-      </section>
+      <CtaBand
+        title="Have a project in mind?"
+        description="Tell us what you are looking to build, scale, or outsource. Our team will help you scope the right approach."
+        primary={{ label: 'Start a Conversation', href: '/contact' }}
+      />
     </>
   );
 }

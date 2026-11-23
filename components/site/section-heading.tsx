@@ -8,6 +8,20 @@ interface SectionHeadingProps {
   className?: string;
 }
 
+export function Eyebrow({ children, className }: { children: React.ReactNode; className?: string }) {
+  return (
+    <span
+      className={cn(
+        'inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-primary',
+        className
+      )}
+    >
+      <span className="h-1.5 w-1.5 rounded-full bg-ocean-cyan" />
+      {children}
+    </span>
+  );
+}
+
 export function SectionHeading({
   eyebrow,
   title,
@@ -23,25 +37,12 @@ export function SectionHeading({
         className
       )}
     >
-      {eyebrow && (
-        <div
-          className={cn(
-            'inline-flex items-center gap-2 mb-4',
-            align === 'center' && 'justify-center'
-          )}
-        >
-          <span className="h-px w-8 bg-ocean-cyan" />
-          <span className="text-xs font-semibold uppercase tracking-wider text-primary">
-            {eyebrow}
-          </span>
-          <span className="h-px w-8 bg-ocean-cyan" />
-        </div>
-      )}
-      <h2 className="font-display text-4xl font-normal leading-none text-balance text-foreground sm:text-5xl lg:text-[4.75rem]">
+      {eyebrow && <Eyebrow className="mb-4">{eyebrow}</Eyebrow>}
+      <h2 className="font-display text-3xl font-bold leading-[1.1] text-balance text-foreground sm:text-4xl lg:text-[2.75rem]">
         {title}
       </h2>
       {description && (
-        <p className="mt-5 text-base leading-relaxed text-muted-foreground text-balance sm:text-lg">
+        <p className="mt-4 text-base leading-relaxed text-muted-foreground text-balance sm:text-lg">
           {description}
         </p>
       )}

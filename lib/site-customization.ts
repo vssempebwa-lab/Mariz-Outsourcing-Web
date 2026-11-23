@@ -57,11 +57,11 @@ export type MediaAsset = {
 };
 
 export const defaultSiteTheme: SiteTheme = {
-  primary: '#0077b6',
-  secondary: '#caf0f8',
-  accent: '#90e0ef',
-  background: '#f4fcfe',
-  text: '#03045e',
+  primary: '#0b62cc',
+  secondary: '#eef4fc',
+  accent: '#7dd3fc',
+  background: '#fcfdfe',
+  text: '#0b1a33',
 };
 
 export const editablePages = [

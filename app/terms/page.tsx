@@ -1,3 +1,4 @@
+import { PageHero } from '@/components/site/page-hero';
 import { SITE } from '@/lib/data';
 
 export const metadata = {
@@ -7,11 +8,10 @@ export const metadata = {
 
 export default function TermsPage() {
   return (
-    <section className="py-20 lg:py-24">
+    <>
+      <PageHero narrow eyebrow="Legal" title="Terms of Service" />
+    <section className="py-16 lg:py-20">
       <div className="container mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-        <h1 className="font-display font-bold text-3xl sm:text-4xl text-foreground mb-8">
-          Terms of Service
-        </h1>
         <div className="prose prose-lg max-w-none text-muted-foreground">
           <p className="text-foreground leading-relaxed mb-4">
             These terms govern your use of the {SITE.legalName} website. By accessing
@@ -50,5 +50,6 @@ export default function TermsPage() {
         </div>
       </div>
     </section>
+    </>
   );
 }

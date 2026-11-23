@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { BLOG_POSTS } from '@/lib/data';
 import { ArrowLeft, ArrowRight, Calendar, Clock } from 'lucide-react';
+import { PageHero } from '@/components/site/page-hero';
 
 export function generateStaticParams() {
   return BLOG_POSTS.map((p) => ({ slug: p.slug }));
@@ -23,42 +24,39 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
 
   return (
     <>
-      <section className="relative overflow-hidden bg-gradient-to-b from-primary/5 to-background pt-16 lg:pt-24 pb-12 lg:pb-16">
-        <div className="absolute inset-0 bg-grid opacity-30" />
-        <div className="container relative mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <PageHero
+        narrow
+        top={
           <Link
             href="/blog"
-            className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-primary transition-colors mb-8"
+            className="inline-flex items-center gap-1.5 text-sm font-medium text-slate-300 transition-colors hover:text-white"
           >
             <ArrowLeft className="h-4 w-4" />
             All Articles
           </Link>
-          <span className="inline-flex items-center px-3 py-1 rounded-full bg-accent/10 text-xs font-semibold text-primary mb-4">
-            {post.category}
+        }
+        eyebrow={post.category}
+        title={post.title}
+      >
+        <div className="flex items-center gap-4 text-sm text-slate-300">
+          <span className="inline-flex items-center gap-1.5">
+            <Calendar className="h-4 w-4" />
+            {new Date(post.date).toLocaleDateString('en-US', {
+              month: 'long',
+              day: 'numeric',
+              year: 'numeric',
+            })}
           </span>
-          <h1 className="font-display font-bold text-3xl sm:text-4xl lg:text-5xl leading-tight text-balance text-foreground">
-            {post.title}
-          </h1>
-          <div className="mt-6 flex items-center gap-4 text-sm text-muted-foreground">
-            <span className="inline-flex items-center gap-1.5">
-              <Calendar className="h-4 w-4" />
-              {new Date(post.date).toLocaleDateString('en-US', {
-                month: 'long',
-                day: 'numeric',
-                year: 'numeric',
-              })}
-            </span>
-            <span className="inline-flex items-center gap-1.5">
-              <Clock className="h-4 w-4" />
-              {post.readTime}
-            </span>
-          </div>
+          <span className="inline-flex items-center gap-1.5">
+            <Clock className="h-4 w-4" />
+            {post.readTime}
+          </span>
         </div>
-      </section>
+      </PageHero>
 
       <section className="pb-20 lg:pb-24">
         <div className="container mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-          <div className="overflow-hidden rounded-2xl shadow-xl aspect-[16/9] mb-10">
+          <div className="relative z-10 -mt-10 mb-12 aspect-[16/9] overflow-hidden rounded-2xl shadow-lift ring-1 ring-border">
             <img
               src="https://images.pexels.com/photos/577195/pexels-photo-577195.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
               alt={post.title}

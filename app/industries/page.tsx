@@ -1,9 +1,7 @@
-import Link from 'next/link';
-import { Button } from '@/components/ui/button';
-import { SectionHeading } from '@/components/site/section-heading';
 import { Icon } from '@/components/site/icon';
 import { INDUSTRIES } from '@/lib/data';
-import { ArrowRight } from 'lucide-react';
+import { PageHero } from '@/components/site/page-hero';
+import { CtaBand } from '@/components/site/cta-band';
 
 export const metadata = {
   title: 'Industries We Serve',
@@ -23,25 +21,11 @@ const ICON_MAP: Record<string, string> = {
 export default function IndustriesPage() {
   return (
     <>
-      <section className="relative overflow-hidden bg-gradient-to-b from-primary/5 to-background pt-16 lg:pt-24 pb-16 lg:pb-20">
-        <div className="absolute inset-0 bg-grid opacity-30" />
-        <div className="container relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-accent/10 border border-accent/20 mb-6">
-              <span className="text-xs font-semibold text-primary uppercase tracking-wider">
-                Industries
-              </span>
-            </div>
-            <h1 className="font-display font-bold text-4xl sm:text-5xl lg:text-6xl leading-tight text-balance text-foreground">
-              Sector expertise across six core industries
-            </h1>
-            <p className="mt-6 text-lg text-muted-foreground leading-relaxed max-w-2xl text-balance">
-              We bring domain-specific knowledge to every engagement, tailoring our
-              outsourcing solutions to the operational realities of your sector.
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Industries"
+        title="Sector expertise across six core industries"
+        description="We bring domain-specific knowledge to every engagement, tailoring our outsourcing solutions to the operational realities of your sector."
+      />
 
       <section className="py-20 lg:py-24">
         <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
@@ -78,22 +62,11 @@ export default function IndustriesPage() {
         </div>
       </section>
 
-      <section className="py-20 lg:py-24 bg-secondary">
-        <div className="container mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="font-display font-bold text-3xl sm:text-4xl text-foreground text-balance">
-            Don&apos;t see your industry listed?
-          </h2>
-          <p className="mt-4 text-muted-foreground text-lg text-balance">
-            We work with organizations across many sectors. If you have an
-            outsourcing need, we can design a solution for it.
-          </p>
-          <div className="mt-8">
-            <Button asChild size="lg">
-              <Link href="/contact">Talk to Our Team</Link>
-            </Button>
-          </div>
-        </div>
-      </section>
+      <CtaBand
+        title="Don't see your industry listed?"
+        description="We work with organizations across many sectors. If you have an outsourcing need, we can design a solution for it."
+        primary={{ label: 'Talk to Our Team', href: '/contact' }}
+      />
     </>
   );
 }

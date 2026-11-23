@@ -1,8 +1,17 @@
 import './globals.css';
 import type { Metadata } from 'next';
+import { Inter, Plus_Jakarta_Sans } from 'next/font/google';
 import { SiteChrome } from '@/components/site/site-chrome';
 import { Toaster } from '@/components/ui/sonner';
 import { defaultSiteTheme, getPublishedSiteTheme, siteThemeToCssVars } from '@/lib/site-customization';
+
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' });
+const jakarta = Plus_Jakarta_Sans({
+  subsets: ['latin'],
+  variable: '--font-jakarta',
+  weight: ['500', '600', '700', '800'],
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   icons: {
@@ -52,7 +61,7 @@ export default async function RootLayout({
   const theme = await getPublishedSiteTheme();
 
   return (
-    <html lang="en" className="font-local" suppressHydrationWarning>
+    <html lang="en" className={`${inter.variable} ${jakarta.variable}`} suppressHydrationWarning>
       <body className="font-sans antialiased min-h-screen flex flex-col">
         <SiteChrome publicThemeStyle={siteThemeToCssVars({
           ...theme,

@@ -4,7 +4,9 @@ import { Card, CardContent } from '@/components/ui/card';
 import { SectionHeading } from '@/components/site/section-heading';
 import { Icon } from '@/components/site/icon';
 import { SITE, METRICS } from '@/lib/data';
-import { Target, Eye, Heart, ArrowRight, Award, Handshake, Lightbulb, Activity } from 'lucide-react';
+import { Target, Eye, Heart, ArrowRight } from 'lucide-react';
+import { PageHero } from '@/components/site/page-hero';
+import { CtaBand } from '@/components/site/cta-band';
 
 export const metadata = {
   title: 'About Us',
@@ -42,27 +44,11 @@ const VALUES = [
 export default function AboutPage() {
   return (
     <>
-      <section className="relative overflow-hidden bg-gradient-to-b from-primary/5 to-background pt-16 lg:pt-24 pb-16 lg:pb-20">
-        <div className="absolute inset-0 bg-grid opacity-30" />
-        <div className="container relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-accent/10 border border-accent/20 mb-6">
-              <span className="text-xs font-semibold text-primary uppercase tracking-wider">
-                About MOA
-              </span>
-            </div>
-            <h1 className="font-display font-bold text-4xl sm:text-5xl lg:text-6xl leading-tight text-balance text-foreground">
-              Your strategic outsourcing partner in East Africa
-            </h1>
-            <p className="mt-6 text-lg text-muted-foreground leading-relaxed max-w-2xl text-balance">
-              {SITE.legalName} is a professional Business Process Outsourcing and
-              strategic consulting firm delivering revenue operations, talent
-              acquisition, 24/7 call center support, software development,
-              corporate branding, and media production.
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="About MOA"
+        title="Your strategic outsourcing partner in East Africa"
+        description={`${SITE.legalName} is a professional Business Process Outsourcing and strategic consulting firm delivering revenue operations, talent acquisition, 24/7 call center support, software development, corporate branding, and media production.`}
+      />
 
       <section className="py-20 lg:py-24 border-y border-border bg-secondary">
         <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
@@ -229,25 +215,11 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="py-20 lg:py-24 bg-secondary">
-        <div className="container mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="font-display font-bold text-3xl sm:text-4xl text-foreground text-balance">
-            Let&apos;s build something efficient together
-          </h2>
-          <p className="mt-4 text-muted-foreground text-lg text-balance">
-            Whether you need a single service or an integrated outsourcing solution,
-            our team is ready to help you scale.
-          </p>
-          <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
-            <Button asChild size="lg">
-              <Link href="/contact">Request Consultation</Link>
-            </Button>
-            <Button asChild size="lg" variant="outline" className="bg-transparent border-border text-foreground hover:bg-primary/10 hover:text-foreground">
-              <Link href="/services">View Services</Link>
-            </Button>
-          </div>
-        </div>
-      </section>
+      <CtaBand
+        title="Let's build something efficient together"
+        description="Whether you need a single service or an integrated outsourcing solution, our team is ready to help you scale."
+        secondary={{ label: 'View Services', href: '/services' }}
+      />
     </>
   );
 }

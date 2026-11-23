@@ -1,10 +1,11 @@
 import Link from 'next/link';
-import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { SectionHeading } from '@/components/site/section-heading';
 import { Icon } from '@/components/site/icon';
 import { SERVICES, WORK_CYCLE } from '@/lib/data';
 import { ArrowRight, CheckCircle2 } from 'lucide-react';
+import { PageHero } from '@/components/site/page-hero';
+import { CtaBand } from '@/components/site/cta-band';
 
 export const metadata = {
   title: 'Our Services',
@@ -15,27 +16,11 @@ export const metadata = {
 export default function ServicesPage() {
   return (
     <>
-      <section className="relative overflow-hidden bg-gradient-to-b from-primary/5 to-background pt-16 lg:pt-24 pb-16 lg:pb-20">
-        <div className="absolute inset-0 bg-grid opacity-30" />
-        <div className="container relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-accent/10 border border-accent/20 mb-6">
-              <span className="text-xs font-semibold text-primary uppercase tracking-wider">
-                Our Services
-              </span>
-            </div>
-            <h1 className="font-display font-bold text-4xl sm:text-5xl lg:text-6xl leading-tight text-balance text-foreground">
-              Integrated outsourcing solutions for every operational need
-            </h1>
-            <p className="mt-6 text-lg text-muted-foreground leading-relaxed max-w-2xl text-balance">
-              Our services bring specialist teams together as one partner. From
-              revenue operations and talent acquisition to customer support,
-              software, branding, media, and Mariz Talent Clinic training, we support
-              your business and skills development needs.
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Our Services"
+        title="Integrated outsourcing solutions for every operational need"
+        description="Our services bring specialist teams together as one partner. From revenue operations and talent acquisition to customer support, software, branding, media, and Mariz Talent Clinic training, we support your business and skills development needs."
+      />
 
       <section className="py-20 lg:py-24">
         <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
@@ -43,21 +28,21 @@ export default function ServicesPage() {
             {SERVICES.map((s, i) => (
               <Card
                 key={s.slug}
-                className="group h-full min-w-0 overflow-hidden border-border transition-colors hover:border-primary/30"
+                className="group h-full min-w-0 overflow-hidden border-border transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-lift"
               >
                 <CardContent className="flex h-full flex-col p-0">
-                  <Link href={`/services/${s.slug}`} className="relative block aspect-[4/3] shrink-0 bg-muted/40" aria-label={`View ${s.title}`}>
+                  <Link href={`/services/${s.slug}`} className="relative block aspect-[16/10] shrink-0 overflow-hidden bg-muted" aria-label={`View ${s.title}`}>
                     <img
                       src={s.image}
                       alt={s.title}
-                      className="absolute inset-0 h-full w-full object-contain"
+                      className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                       loading="lazy"
                       decoding="async"
                     />
                   </Link>
-                  <div className="flex min-w-0 flex-1 flex-col border-t border-border p-5 sm:p-6">
+                  <div className="flex min-w-0 flex-1 flex-col p-5 sm:p-6">
                     <div className="mb-4 flex items-center justify-between gap-3">
-                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
                         <Icon name={s.icon} className="h-5 w-5" />
                       </div>
                       <span className="text-xs font-medium tracking-wider text-muted-foreground">
@@ -175,22 +160,10 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <section className="py-20 lg:py-24 bg-secondary">
-        <div className="container mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="font-display font-bold text-3xl sm:text-4xl text-foreground text-balance">
-            Not sure which service you need?
-          </h2>
-          <p className="mt-4 text-muted-foreground text-lg text-balance">
-            Our team will help you identify the right combination of services for
-            your operational goals. Request a free consultation today.
-          </p>
-          <div className="mt-8">
-            <Button asChild size="lg">
-              <Link href="/contact">Request Consultation</Link>
-            </Button>
-          </div>
-        </div>
-      </section>
+      <CtaBand
+        title="Not sure which service you need?"
+        description="Our team will help you identify the right combination of services for your operational goals. Request a free consultation today."
+      />
     </>
   );
 }

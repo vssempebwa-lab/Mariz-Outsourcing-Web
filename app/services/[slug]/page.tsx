@@ -7,6 +7,7 @@ import { Icon } from '@/components/site/icon';
 import { LeadForm } from '@/components/site/lead-form';
 import { SERVICES, SITE } from '@/lib/data';
 import { CheckCircle2, ArrowRight, ArrowLeft } from 'lucide-react';
+import { PageHero } from '@/components/site/page-hero';
 
 export function generateStaticParams() {
   return SERVICES.map((s) => ({ slug: s.slug }));
@@ -33,74 +34,60 @@ export default function ServiceDetailPage({
 
   return (
     <>
-      <section className="relative overflow-hidden bg-gradient-to-b from-primary/5 to-background pt-16 lg:pt-24 pb-16 lg:pb-20">
-        <div className="absolute inset-0 bg-grid opacity-30" />
-        <div className="container relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <PageHero
+        top={
           <Link
             href="/services"
-            className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-primary transition-colors mb-8"
+            className="inline-flex items-center gap-1.5 text-sm font-medium text-slate-300 transition-colors hover:text-white"
           >
             <ArrowLeft className="h-4 w-4" />
             All Services
           </Link>
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary text-primary-foreground mb-6 shadow-lg">
-                <Icon name={service.icon} className="h-7 w-7" />
-              </div>
-              <h1 className="font-display font-bold text-4xl sm:text-5xl leading-tight text-balance text-foreground">
-                {service.title}
-              </h1>
-              <p className="mt-5 text-lg text-muted-foreground leading-relaxed text-balance">
-                {service.description}
-              </p>
-              <div className="mt-6 grid gap-3 sm:grid-cols-3">
-                {[
-                  ['Objective', service.objective],
-                  ['Target metric', service.targetMetric],
-                  ['Best fit', service.targetAudience],
-                ].map(([label, value]) => (
-                  <div
-                    key={label}
-                    className="rounded-xl border border-border bg-background/80 p-4"
-                  >
-                    <p className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
-                      {label}
-                    </p>
-                    <p className="mt-2 text-xs font-medium leading-relaxed text-foreground">
-                      {value}
-                    </p>
-                  </div>
-                ))}
-              </div>
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-                <Button asChild size="lg">
-                  <Link href="/contact">{service.slug === 'talent-clinic' ? 'Ask About Training' : 'Request Consultation'}</Link>
-                </Button>
-                <Button asChild size="lg" variant="outline">
-                  <Link href="/projects">View Projects</Link>
-                </Button>
-              </div>
+        }
+        eyebrow="Service"
+        title={service.title}
+        description={service.description}
+        aside={
+          <>
+            <div className="pointer-events-none absolute -inset-6 -z-10 rounded-[2rem] bg-gradient-to-tr from-primary/40 via-ocean-cyan/20 to-transparent blur-2xl" />
+            <div className="overflow-hidden rounded-3xl bg-navy shadow-2xl ring-1 ring-white/15">
+              <img
+                src={service.image}
+                alt={service.title}
+                className="block h-auto max-h-[560px] w-full object-cover"
+              />
             </div>
-            <div className="relative">
-              <div className="overflow-hidden rounded-2xl border border-border bg-muted/40">
-                <img
-                  src={service.image}
-                  alt={service.title}
-                  className="block h-auto max-h-[640px] w-full object-contain"
-                />
-              </div>
+          </>
+        }
+      >
+        <div className="grid gap-3 sm:grid-cols-3">
+          {[
+            ['Objective', service.objective],
+            ['Target metric', service.targetMetric],
+            ['Best fit', service.targetAudience],
+          ].map(([label, value]) => (
+            <div key={label} className="rounded-xl border border-white/10 bg-white/5 p-4 backdrop-blur">
+              <p className="text-[11px] font-semibold uppercase tracking-wider text-sky-200">{label}</p>
+              <p className="mt-2 text-xs font-medium leading-relaxed text-white/90">{value}</p>
             </div>
-          </div>
+          ))}
         </div>
-      </section>
+        <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+          <Button asChild size="lg" className="bg-white text-navy hover:bg-white/90">
+            <Link href="/contact">{service.slug === 'talent-clinic' ? 'Ask About Training' : 'Request Consultation'}</Link>
+          </Button>
+          <Button asChild size="lg" variant="outline" className="border-white/20 bg-white/5 text-white shadow-none hover:border-white/50 hover:bg-white/10">
+            <Link href="/projects">View Projects</Link>
+          </Button>
+        </div>
+      </PageHero>
 
       {service.slug === 'talent-clinic' ? (
         <section className="border-y border-border bg-muted/30 py-8">
           <div className="container mx-auto flex max-w-6xl flex-col gap-4 px-4 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
             <div className="min-w-0">
               <h2 className="font-display text-xl font-semibold">Join Mariz Talent Clinic</h2>
-              <p className="mt-2 text-sm text-muted-foreground">Six weeks of free training ? Registration fee: UGX 100,000</p>
+              <p className="mt-2 text-sm text-muted-foreground">Six weeks of free training · Registration fee: UGX 100,000</p>
               <p className="mt-2 text-sm text-muted-foreground">{SITE.address}</p>
               <p className="mt-2 text-sm text-muted-foreground">Contact us to confirm intake dates and available places.</p>
             </div>
@@ -125,9 +112,9 @@ export default function ServiceDetailPage({
                 {service.workflow.map((item, index) => (
                   <div
                     key={item}
-                    className="flex items-start gap-4 rounded-xl border border-border bg-background p-4"
+                    className="flex items-start gap-4 rounded-xl border border-border bg-card p-4 shadow-soft"
                   >
-                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-xs font-bold text-navy">
+                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-navy text-xs font-bold text-white">
                       {String(index + 1).padStart(2, '0')}
                     </span>
                     <span className="pt-1 text-sm font-medium leading-relaxed text-foreground">
@@ -144,7 +131,7 @@ export default function ServiceDetailPage({
                 {service.features.map((f) => (
                   <div
                     key={f}
-                    className="flex items-start gap-3 p-4 rounded-xl border border-border bg-background"
+                    className="flex items-start gap-3 rounded-xl border border-border bg-card p-4"
                   >
                     <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
                     <span className="text-sm font-medium text-foreground">
@@ -155,7 +142,7 @@ export default function ServiceDetailPage({
               </div>
             </div>
             <div>
-              <Card className="border-border sticky top-24">
+              <Card className="sticky top-24 border-border shadow-lift">
                 <CardContent className="p-6">
                   <h3 className="font-display font-bold text-lg text-foreground mb-2">
                     Request This Service

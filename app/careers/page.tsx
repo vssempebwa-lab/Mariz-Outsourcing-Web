@@ -4,7 +4,9 @@ import { Card, CardContent } from '@/components/ui/card';
 import { SectionHeading } from '@/components/site/section-heading';
 import { Icon } from '@/components/site/icon';
 import { JOB_LISTINGS } from '@/lib/data';
-import { Briefcase, MapPin, Clock, ArrowRight, CheckCircle2, Users, Heart, Award } from 'lucide-react';
+import { Briefcase, MapPin, Clock } from 'lucide-react';
+import { PageHero } from '@/components/site/page-hero';
+import { CtaBand } from '@/components/site/cta-band';
 
 export const metadata = {
   title: 'Careers',
@@ -22,26 +24,11 @@ const PERKS = [
 export default function CareersPage() {
   return (
     <>
-      <section className="relative overflow-hidden bg-gradient-to-b from-primary/5 to-background pt-16 lg:pt-24 pb-16 lg:pb-20">
-        <div className="absolute inset-0 bg-grid opacity-30" />
-        <div className="container relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-accent/10 border border-accent/20 mb-6">
-              <span className="text-xs font-semibold text-primary uppercase tracking-wider">
-                Careers at MOA
-              </span>
-            </div>
-            <h1 className="font-display font-bold text-4xl sm:text-5xl lg:text-6xl leading-tight text-balance text-foreground">
-              Build your career at East Africa&apos;s growing outsourcing partner
-            </h1>
-            <p className="mt-6 text-lg text-muted-foreground leading-relaxed max-w-2xl text-balance">
-              We are always looking for talented professionals to join our team —
-              across operations, software, recruitment, creative, and media
-              divisions.
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Careers at MOA"
+        title={<>Build your career at East Africa&apos;s growing outsourcing partner</>}
+        description="We are always looking for talented professionals to join our team — across operations, software, recruitment, creative, and media divisions."
+      />
 
       <section className="py-20 lg:py-24 bg-muted/30 border-y border-border">
         <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
@@ -119,22 +106,11 @@ export default function CareersPage() {
         </div>
       </section>
 
-      <section className="py-20 lg:py-24 bg-secondary">
-        <div className="container mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="font-display font-bold text-3xl sm:text-4xl text-foreground text-balance">
-            Ready to join the MOA team?
-          </h2>
-          <p className="mt-4 text-muted-foreground text-lg text-balance">
-            Send us your CV and a brief note about your experience. We review every
-            application carefully.
-          </p>
-          <div className="mt-8">
-            <Button asChild size="lg">
-              <Link href="/contact">Submit Your Application</Link>
-            </Button>
-          </div>
-        </div>
-      </section>
+      <CtaBand
+        title="Ready to join the MOA team?"
+        description="Send us your CV and a brief note about your experience. We review every application carefully."
+        primary={{ label: 'Submit Your Application', href: '/contact' }}
+      />
     </>
   );
 }
