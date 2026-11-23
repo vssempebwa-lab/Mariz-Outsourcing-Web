@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import { isStaffPath } from '@/lib/portal-routes';
 import { SiteFooter } from '@/components/site/site-footer';
 import { SiteHeader } from '@/components/site/site-header';
+import { WhatsAppFloat } from '@/components/site/whatsapp';
 
 export function SiteChrome({
   children,
@@ -26,6 +27,7 @@ export function SiteChrome({
           <SiteHeader />
           <main className="flex-1">{children}</main>
           <SiteFooter />
+          <WhatsAppFloat />
         </div>
       ) : (
         <main className="staff-theme min-h-screen flex-1 bg-background text-foreground">{children}</main>

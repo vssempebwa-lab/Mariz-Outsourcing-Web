@@ -1,10 +1,12 @@
+import Link from 'next/link';
+import { ChevronRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface PageHeroProps {
   eyebrow?: string;
   title: React.ReactNode;
   description?: React.ReactNode;
-  /** Content shown above the eyebrow, e.g. a back link. */
+  /** Content shown above the eyebrow, e.g. a back link. Replaces the breadcrumb. */
   top?: React.ReactNode;
   /** Buttons or extra content under the description. */
   children?: React.ReactNode;
@@ -14,7 +16,10 @@ interface PageHeroProps {
   className?: string;
 }
 
-/** Dark, branded hero band used at the top of every inner page. */
+/**
+ * Light, branded hero used at the top of inner pages. The two overlapping
+ * circles echo the MOA logo mark.
+ */
 export function PageHero({
   eyebrow,
   title,
@@ -26,28 +31,46 @@ export function PageHero({
   className,
 }: PageHeroProps) {
   return (
-    <section className={cn('ocean-inverse relative isolate overflow-hidden', className)}>
-      <div className="pointer-events-none absolute inset-0 -z-10 opacity-[0.35] [background-image:linear-gradient(to_right,hsl(0_0%_100%/0.06)_1px,transparent_1px),linear-gradient(to_bottom,hsl(0_0%_100%/0.06)_1px,transparent_1px)] [background-size:56px_56px] [mask-image:radial-gradient(ellipse_80%_70%_at_30%_0%,#000_30%,transparent_100%)]" />
+    <section className={cn('relative isolate overflow-hidden border-b border-border bg-brand-cream', className)}>
+      <div className="bg-dots pointer-events-none absolute inset-0 -z-10 [mask-image:linear-gradient(to_bottom,#000,transparent_85%)]" />
+      {!aside && (
+        <div aria-hidden="true" className="pointer-events-none absolute -right-24 top-1/2 -z-10 hidden -translate-y-1/2 lg:block">
+          <div className="relative h-[420px] w-[560px]">
+            <span className="absolute left-0 top-6 h-[340px] w-[340px] rounded-full bg-brand-navy/[0.06]" />
+            <span className="absolute right-0 top-0 h-[380px] w-[380px] rounded-full bg-brand-blue/[0.10]" />
+          </div>
+        </div>
+      )}
       <div
         className={cn(
-          'container relative mx-auto px-4 pb-16 pt-14 sm:px-6 lg:px-8 lg:pb-24 lg:pt-20',
-          narrow ? 'max-w-3xl' : 'max-w-6xl'
+          'container relative mx-auto px-4 pb-14 pt-10 sm:px-6 lg:px-8 lg:pb-20 lg:pt-14',
+          narrow ? 'max-w-3xl' : 'max-w-7xl'
         )}
       >
-        {top && <div className="mb-8">{top}</div>}
-        <div className={cn(aside && 'grid items-center gap-12 lg:grid-cols-2 lg:gap-16')}>
+        <div className="mb-8 text-sm">
+          {top ?? (
+            <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 text-muted-foreground">
+              <Link href="/" className="transition-colors hover:text-brand-navy">
+                Home
+              </Link>
+              <ChevronRight className="h-3.5 w-3.5" />
+              <span className="font-medium text-brand-navy">{eyebrow}</span>
+            </nav>
+          )}
+        </div>
+        <div className={cn(aside && 'grid items-center gap-12 lg:grid-cols-[1.05fr_1fr] lg:gap-16')}>
           <div className={cn(!aside && !narrow && 'max-w-3xl')}>
             {eyebrow && (
-              <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-sky-200 backdrop-blur">
-                <span className="h-1.5 w-1.5 rounded-full bg-ocean-cyan" />
+              <span className="mb-5 inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-primary shadow-sm ring-1 ring-border">
+                <span className="h-1.5 w-1.5 rounded-full bg-sun" />
                 {eyebrow}
               </span>
             )}
-            <h1 className="font-display text-4xl font-bold leading-[1.05] text-balance text-white sm:text-5xl lg:text-6xl">
+            <h1 className="font-display text-4xl font-bold leading-[1.05] text-balance text-brand-navy sm:text-5xl lg:text-[3.6rem]">
               {title}
             </h1>
             {description && (
-              <p className="mt-6 max-w-2xl text-lg leading-relaxed text-balance text-slate-300">
+              <p className="mt-6 max-w-2xl text-lg leading-relaxed text-balance text-muted-foreground">
                 {description}
               </p>
             )}

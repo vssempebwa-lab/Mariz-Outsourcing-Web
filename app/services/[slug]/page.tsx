@@ -38,7 +38,7 @@ export default function ServiceDetailPage({
         top={
           <Link
             href="/services"
-            className="inline-flex items-center gap-1.5 text-sm font-medium text-slate-300 transition-colors hover:text-white"
+            className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-brand-navy"
           >
             <ArrowLeft className="h-4 w-4" />
             All Services
@@ -49,8 +49,8 @@ export default function ServiceDetailPage({
         description={service.description}
         aside={
           <>
-            <div className="pointer-events-none absolute -inset-6 -z-10 rounded-[2rem] bg-gradient-to-tr from-primary/40 via-ocean-cyan/20 to-transparent blur-2xl" />
-            <div className="overflow-hidden rounded-3xl bg-navy shadow-2xl ring-1 ring-white/15">
+            <div aria-hidden="true" className="pointer-events-none absolute -right-8 -top-8 -z-10 h-48 w-48 rounded-full bg-brand-blue/15" />
+            <div className="overflow-hidden rounded-[2rem] bg-muted shadow-lift ring-1 ring-border">
               <img
                 src={service.image}
                 alt={service.title}
@@ -66,17 +66,17 @@ export default function ServiceDetailPage({
             ['Target metric', service.targetMetric],
             ['Best fit', service.targetAudience],
           ].map(([label, value]) => (
-            <div key={label} className="rounded-xl border border-white/10 bg-white/5 p-4 backdrop-blur">
-              <p className="text-[11px] font-semibold uppercase tracking-wider text-sky-200">{label}</p>
-              <p className="mt-2 text-xs font-medium leading-relaxed text-white/90">{value}</p>
+            <div key={label} className="rounded-xl border border-border bg-white p-4 shadow-sm">
+              <p className="text-[11px] font-semibold uppercase tracking-wider text-primary">{label}</p>
+              <p className="mt-2 text-xs font-medium leading-relaxed text-brand-navy">{value}</p>
             </div>
           ))}
         </div>
         <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-          <Button asChild size="lg" className="bg-white text-navy hover:bg-white/90">
+          <Button asChild size="lg" className="rounded-full bg-brand-navy hover:bg-brand-navy/90">
             <Link href="/contact">{service.slug === 'talent-clinic' ? 'Ask About Training' : 'Request Consultation'}</Link>
           </Button>
-          <Button asChild size="lg" variant="outline" className="border-white/20 bg-white/5 text-white shadow-none hover:border-white/50 hover:bg-white/10">
+          <Button asChild size="lg" variant="outline" className="rounded-full">
             <Link href="/projects">View Projects</Link>
           </Button>
         </div>

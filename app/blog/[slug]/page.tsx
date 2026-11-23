@@ -29,7 +29,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
         top={
           <Link
             href="/blog"
-            className="inline-flex items-center gap-1.5 text-sm font-medium text-slate-300 transition-colors hover:text-white"
+            className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-brand-navy"
           >
             <ArrowLeft className="h-4 w-4" />
             All Articles
@@ -38,7 +38,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
         eyebrow={post.category}
         title={post.title}
       >
-        <div className="flex items-center gap-4 text-sm text-slate-300">
+        <div className="flex items-center gap-4 text-sm text-muted-foreground">
           <span className="inline-flex items-center gap-1.5">
             <Calendar className="h-4 w-4" />
             {new Date(post.date).toLocaleDateString('en-US', {

@@ -5,6 +5,8 @@ export const SITE = {
   tagline: 'Streamline your business with strategic outsourcing.',
   phone: '+256 705 285 709',
   phoneHref: '+256705285709',
+  // WhatsApp number in international format without '+'. Confirm this line is on WhatsApp.
+  whatsapp: '256705285709',
   website: 'www.moa.co.ug',
   websiteUrl: 'https://www.moa.co.ug',
   address: 'Level 3 Rm HC3 Honora Plaza, Opposite Be Energy Fuels, Zzana, Kampala',

@@ -61,6 +61,13 @@ const config: Config = {
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
         gold: 'hsl(var(--gold))',
+        sun: 'hsl(var(--sun) / <alpha-value>)',
+        brand: {
+          navy: 'hsl(var(--brand-navy) / <alpha-value>)',
+          blue: 'hsl(var(--brand-blue) / <alpha-value>)',
+          sky: 'hsl(var(--brand-sky) / <alpha-value>)',
+          cream: 'hsl(var(--brand-cream) / <alpha-value>)',
+        },
         navy: 'hsl(var(--navy))',
         chart: {
           '1': 'hsl(var(--chart-1))',
@@ -81,6 +88,7 @@ const config: Config = {
         },
       },
       animation: {
+        marquee: 'marquee 40s linear infinite',
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
       },
@@ -92,6 +100,7 @@ const config: Config = {
       fontFamily: {
         sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
         display: ['var(--font-jakarta)', 'var(--font-inter)', 'system-ui', 'sans-serif'],
+        serif: ['var(--font-serif)', 'Georgia', 'serif'],
       },
     },
   },

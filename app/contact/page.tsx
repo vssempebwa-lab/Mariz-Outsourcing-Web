@@ -2,7 +2,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { SectionHeading } from '@/components/site/section-heading';
 import { Icon } from '@/components/site/icon';
 import { LeadForm } from '@/components/site/lead-form';
-import { SITE } from '@/lib/data';
+import { SERVICE_OPTIONS, SITE } from '@/lib/data';
 import { Phone, MapPin } from 'lucide-react';
 import { PageHero } from '@/components/site/page-hero';
 
@@ -37,7 +37,10 @@ const CONTACT_INFO = [
   },
 ];
 
-export default function ContactPage() {
+export default function ContactPage({ searchParams }: { searchParams?: { service?: string } }) {
+  const requested = searchParams?.service;
+  const defaultService = requested && SERVICE_OPTIONS.includes(requested) ? requested : undefined;
+
   return (
     <>
       <PageHero
@@ -112,7 +115,7 @@ export default function ContactPage() {
                     Fill out the form below and our team will reach out within one
                     business day.
                   </p>
-                  <LeadForm />
+                  <LeadForm defaultService={defaultService} />
                 </CardContent>
               </Card>
             </div>

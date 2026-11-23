@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Mail, Phone, MapPin, ArrowRight } from 'lucide-react';
+import { Mail, Phone, MapPin } from 'lucide-react';
 import { BrandLogo } from '@/components/site/brand-logo';
 import { SITE, SERVICES } from '@/lib/data';
 
@@ -7,7 +7,6 @@ const footerPhone = '+256766630248';
 
 const COMPANY_LINKS = [
   { label: 'About Us', href: '/about' },
-  { label: 'Our Team', href: '/team' },
   { label: 'Industries', href: '/industries' },
   { label: 'Projects', href: '/projects' },
   { label: 'Careers', href: '/careers' },
@@ -17,26 +16,8 @@ const COMPANY_LINKS = [
 
 export function SiteFooter() {
   return (
-    <footer className="ocean-inverse relative overflow-hidden text-foreground">
+    <footer className="ocean-inverse relative overflow-hidden border-t border-white/10 text-foreground">
       <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col items-start justify-between gap-6 border-b border-border py-12 lg:flex-row lg:items-center">
-          <div>
-            <p className="font-display text-2xl font-bold text-white sm:text-3xl">
-              Ready to scale your operations?
-            </p>
-            <p className="mt-2 text-sm text-muted-foreground">
-              Request a consultation and our team will respond within one business day.
-            </p>
-          </div>
-          <Link
-            href="/contact"
-            className="group inline-flex h-12 shrink-0 items-center gap-2 rounded-xl bg-white px-6 text-[15px] font-semibold text-navy shadow-lg transition-all hover:-translate-y-px hover:bg-white/90"
-          >
-            Request Consultation
-            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-          </Link>
-        </div>
-
         <div className="grid gap-12 py-14 sm:grid-cols-2 lg:grid-cols-12">
           <div className="sm:col-span-2 lg:col-span-5">
             <Link href="/" className="mb-5 inline-flex items-center gap-3">
